@@ -1,0 +1,43 @@
+{
+  "name": "game-analyzer",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "packageManager": "pnpm@10.28.2",
+  "scripts": {
+    "dev": "wrangler dev --port 8787",
+    "dev:web": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "check": "tsc --noEmit",
+    "test": "vitest run",
+    "db:migrate": "wrangler d1 migrations apply game-analyzer --local",
+    "verify": "pnpm check && pnpm test && pnpm build",
+    "deploy:preview": "pnpm build && wrangler deploy --env preview",
+    "deploy:production": "pnpm verify && wrangler deploy --env production",
+    "format": "prettier --write \"{apps,worker,packages,tests,fixtures}/**/*.{ts,tsx,css,html}\"",
+    "format:check": "prettier --check \"{apps,worker,packages,tests,fixtures}/**/*.{ts,tsx,css,html}\""
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.90.0",
+    "hono": "^4.9.0",
+    "jose": "^6.1.0",
+    "lucide-react": "^0.468.0",
+    "obscenity": "^0.4.6",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20261005.1",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "happy-dom": "^20.14.5",
+    "prettier": "^3.9.9",
+    "typescript": "^5.9.0",
+    "vite": "^7.1.0",
+    "vitest": "^3.2.0",
+    "wrangler": "^4.40.0"
+  }
+}

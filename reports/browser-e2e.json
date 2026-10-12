@@ -1,0 +1,35 @@
+{
+  "origin": "https://trashtalk-preview.berkleym.workers.dev",
+  "startedAt": "2026-10-12T11:14:43.413Z",
+  "results": [
+    {
+      "league": "nfl",
+      "date": "2026-10-11",
+      "photos": 2,
+      "text": "Jaguars fluke win reeks of banana excuses",
+      "src": "/api/generations/c4973dff-0288-43d2-afa9-ad3277d8bf2b/image",
+      "balance": "2 free · 0 credits"
+    },
+    {
+      "league": "nba",
+      "date": "2026-10-13",
+      "photos": 0,
+      "text": "Magic's banana squad gets squashed by Cavs!",
+      "src": "/api/generations/3fd2bebd-111c-453a-9dce-c8c1185bd21e/image",
+      "balance": "1 free · 0 credits"
+    },
+    {
+      "league": "epl",
+      "date": "2026-09-19",
+      "photos": 0,
+      "text": "Spurs devoured by our banana blast",
+      "src": "/api/generations/e944e52b-7222-42a3-bc33-fb6e4a4ba0c0/image",
+      "balance": "0 free · 0 credits"
+    }
+  ],
+  "downloaded": true,
+  "afterThreeGate": "Sign in with Google to buy five image credits for $1.\n×",
+  "resume": true,
+  "privateHistoryCount": 3,
+  "errors": []
+}

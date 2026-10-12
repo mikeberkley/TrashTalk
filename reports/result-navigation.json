@@ -1,0 +1,30 @@
+[
+  {
+    "engine": "chrome",
+    "menuDestinations": 4,
+    "outsideDismiss": true,
+    "shareOnly": true,
+    "sharePayload": true,
+    "resultLinks": true,
+    "collectionBackLink": true,
+    "overflow": false,
+    "resultFixture": true,
+    "logoResetsFlow": true,
+    "menuResetsFlowFromImage": true,
+    "collectionShareAndDelete": true
+  },
+  {
+    "engine": "webkit",
+    "menuDestinations": 4,
+    "outsideDismiss": true,
+    "shareOnly": true,
+    "sharePayload": true,
+    "resultLinks": true,
+    "collectionBackLink": true,
+    "overflow": false,
+    "resultFixture": true,
+    "logoResetsFlow": true,
+    "menuResetsFlowFromImage": true,
+    "collectionShareAndDelete": true
+  }
+]

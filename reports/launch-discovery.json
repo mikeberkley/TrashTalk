@@ -1,0 +1,79 @@
+{
+  "checkedAt": "2026-10-12T13:03:56.168Z",
+  "date": "2026-10-12",
+  "results": [
+    {
+      "league": "nfl",
+      "count": 1,
+      "live": [],
+      "passed": true
+    },
+    {
+      "league": "nba",
+      "count": 5,
+      "live": [],
+      "passed": true
+    },
+    {
+      "league": "mlb",
+      "count": 2,
+      "live": [],
+      "passed": true
+    },
+    {
+      "league": "nhl",
+      "count": 3,
+      "live": [],
+      "passed": true
+    },
+    {
+      "league": "epl",
+      "count": 1,
+      "live": [],
+      "passed": true
+    },
+    {
+      "league": "laliga",
+      "count": 1,
+      "live": [],
+      "passed": true
+    },
+    {
+      "league": "bundesliga",
+      "count": 0,
+      "live": [],
+      "passed": true
+    },
+    {
+      "league": "seriea",
+      "count": 2,
+      "live": [],
+      "passed": true
+    },
+    {
+      "league": "ligue1",
+      "count": 0,
+      "live": [],
+      "passed": true
+    },
+    {
+      "league": "mls",
+      "count": 0,
+      "live": [],
+      "passed": true
+    },
+    {
+      "league": "nwsl",
+      "count": 0,
+      "live": [],
+      "passed": true
+    },
+    {
+      "league": "ucl",
+      "count": 0,
+      "live": [],
+      "passed": true
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "source": "User physical iPhone Safari report",
+  "nativeShare": true,
+  "downloadAsFile": true,
+  "saveToPhotos": "User reports both buttons work after deployed native PNG sharing fix",
+  "checkedAt": "2026-10-12T13:05:59.977237+00:00",
+  "userFeedback": "The buttons work, but we only need Save and Share."
+}

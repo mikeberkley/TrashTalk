@@ -1,0 +1,64 @@
+[
+  {
+    "metadata": {
+      "id": "espn:football:30",
+      "name": "Jaguars",
+      "city": "Jacksonville",
+      "displayName": "Jacksonville Jaguars",
+      "abbr": "JAX",
+      "aliases": [
+        "Jaguars",
+        "jacksonville-jaguars"
+      ],
+      "primary": "#007487",
+      "secondary": "#D7A22A",
+      "paletteSource": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/30",
+      "sourceUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/jax.png",
+      "sourceHash": "15cb9a1c77ebfaea885d0d3a34f33dabc4e6a00eb7d5462148fceed641d49397",
+      "checkedAt": "2026-10-12T11:00:44.945Z",
+      "retrievedAt": "2026-10-12T11:00:44.945Z",
+      "mime": "image/png",
+      "width": 512,
+      "height": 512,
+      "transparent": true,
+      "attribution": "Team/league trademarks; ESPN-distributed branding. Rights review required for commercial use.",
+      "version": "469b2a2a4a767a036352b75401d07d12ec9317304d584fc2706cffd03967d308",
+      "logoKey": "branding/espn:football:30/469b2a2a4a767a036352b75401d07d12ec9317304d584fc2706cffd03967d308.png",
+      "logoHash": "805170cbd1bedaa89e34ab944871a606bc4a3e57e991a9824e8f46614e36ddb0",
+      "paletteHash": "58c588b0fb8316c8d57602b3b08417f8d6028469145f05f98bb2dff1a1203a97",
+      "originalKey": "originals/espn:football:30/15cb9a1c77ebfaea885d0d3a34f33dabc4e6a00eb7d5462148fceed641d49397"
+    },
+    "pngPath": "tests/fixtures/logo-JAX.png"
+  },
+  {
+    "metadata": {
+      "id": "espn:football:21",
+      "name": "Eagles",
+      "city": "Philadelphia",
+      "displayName": "Philadelphia Eagles",
+      "abbr": "PHI",
+      "aliases": [
+        "Eagles",
+        "philadelphia-eagles"
+      ],
+      "primary": "#06424D",
+      "secondary": "#000000",
+      "paletteSource": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/21",
+      "sourceUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/phi.png",
+      "sourceHash": "2875f50f8b756ed5ea3866105b4683f5c603aa542e2c7f7870287e1d3d006100",
+      "checkedAt": "2026-10-12T11:00:44.945Z",
+      "retrievedAt": "2026-10-12T11:00:44.945Z",
+      "mime": "image/png",
+      "width": 512,
+      "height": 512,
+      "transparent": true,
+      "attribution": "Team/league trademarks; ESPN-distributed branding. Rights review required for commercial use.",
+      "version": "e62280e82a60ff667509e5dcf043e1a0c37f23ba50eb9eb0ed8d2b45bcfc6af9",
+      "logoKey": "branding/espn:football:21/e62280e82a60ff667509e5dcf043e1a0c37f23ba50eb9eb0ed8d2b45bcfc6af9.png",
+      "logoHash": "b3dc057320ffffb61d6c3491b3fdd0a89ac6d7eb5f56050ba19209e33c06e033",
+      "paletteHash": "e1f2527d0a5ecc90c4f96ec8a08d07ba5b974999da6643697e09814c79f1e56e",
+      "originalKey": "originals/espn:football:21/2875f50f8b756ed5ea3866105b4683f5c603aa542e2c7f7870287e1d3d006100"
+    },
+    "pngPath": "tests/fixtures/logo-PHI.png"
+  }
+]

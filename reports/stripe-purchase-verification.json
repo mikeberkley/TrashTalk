@@ -1,0 +1,60 @@
+{
+  "checkedAt": "2026-10-12T13:02:18.815Z",
+  "environment": "preview",
+  "source": "Cloudflare D1 remote read-only queries",
+  "purchases": [
+    {
+      "checkout_suffix": "RoSazW7TD7Hb",
+      "stripe_test_session": 1,
+      "status": "paid",
+      "amount_cents": 99,
+      "credits": 4,
+      "has_payment_intent": 1,
+      "created_at_utc": "2026-10-12 12:53:52",
+      "google_account_linked": 1,
+      "grant_count": 1,
+      "credits_granted": 4,
+      "current_paid_balance": 9
+    },
+    {
+      "checkout_suffix": "P9jmTt8WqiFo",
+      "stripe_test_session": 1,
+      "status": "pending",
+      "amount_cents": 99,
+      "credits": 4,
+      "has_payment_intent": 0,
+      "created_at_utc": "2026-10-12 12:52:59",
+      "google_account_linked": 1,
+      "grant_count": 0,
+      "credits_granted": 0,
+      "current_paid_balance": 9
+    },
+    {
+      "checkout_suffix": "kPgDBKNW5PBI",
+      "stripe_test_session": 1,
+      "status": "paid",
+      "amount_cents": 99,
+      "credits": 5,
+      "has_payment_intent": 1,
+      "created_at_utc": "2026-10-12 12:04:00",
+      "google_account_linked": 1,
+      "grant_count": 1,
+      "credits_granted": 5,
+      "current_paid_balance": 9
+    }
+  ],
+  "processedWebhookEvents": [
+    {
+      "event_suffix": "6KQKJDjJ3Hiw",
+      "type": "checkout.session.completed",
+      "processed_at_utc": "2026-10-12 12:54:57"
+    },
+    {
+      "event_suffix": "6KQKPd3T2W2Q",
+      "type": "checkout.session.completed",
+      "processed_at_utc": "2026-10-12 12:05:28"
+    }
+  ],
+  "latestPaidPurchaseVerified": true,
+  "limitations": "Stripe Dashboard sandbox delivery and manual replay inspected separately during launch checks. Webhook event records contain event ID/type/time, not a Checkout session foreign key."
+}

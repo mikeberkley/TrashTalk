@@ -1,0 +1,1407 @@
+[
+  {
+    "id": "espn:football:33",
+    "hash": "bfcb1d5f36f3e1be7609c99574753cb3e04f55c957996f3ed29caef0b0ddd4f5",
+    "verified": true
+  },
+  {
+    "id": "espn:football:22",
+    "hash": "cc844f58dc9db13e399b5fed68121adad3addfb12cf8026f7af9fc4262e0d7f9",
+    "verified": true
+  },
+  {
+    "id": "espn:football:1",
+    "hash": "eca877087b98ecbb5291c0b4a8846cdbd363e93ca8040bb75f2629fbc9928c46",
+    "verified": true
+  },
+  {
+    "id": "espn:football:2",
+    "hash": "e8ad574bc8b70cdfb86c78490aaac33790f4c734809dd05e9ecd9757612a475c",
+    "verified": true
+  },
+  {
+    "id": "espn:football:3",
+    "hash": "d8917565ae0c05a4279db14e531f326d7f451ad3b5017a1d46ddd1f768b554a4",
+    "verified": true
+  },
+  {
+    "id": "espn:football:29",
+    "hash": "452ee0f84763aecb49dc760530119a53efb2c670d74283e013a23803d4b73a03",
+    "verified": true
+  },
+  {
+    "id": "espn:football:4",
+    "hash": "b452e2522b435cc280b235de9e76778258f64f427e884d05091db134f594c614",
+    "verified": true
+  },
+  {
+    "id": "espn:football:6",
+    "hash": "40fdcd66fed78e7df3db2d076ac3fa03c7bc168a75c60497e86004a7ca29e22d",
+    "verified": true
+  },
+  {
+    "id": "espn:football:7",
+    "hash": "786fba2b26a3cc7febed9a7808081be1ce0249e650ebc0c9a7197d7cf59cf31c",
+    "verified": true
+  },
+  {
+    "id": "espn:football:5",
+    "hash": "d53d57e5e60b3cd65af544f53e079e1afc45b94409f21a36df3af185b4341280",
+    "verified": true
+  },
+  {
+    "id": "espn:football:8",
+    "hash": "8936648c6171cfafa990c48de9bd8d70474031bdd4fbdeca52ed296905b9cc72",
+    "verified": true
+  },
+  {
+    "id": "espn:football:9",
+    "hash": "b622edd4e7d46a3169b35dfb172c3e4efe5fc7b4aa7d9f8a8009a3b3ac956499",
+    "verified": true
+  },
+  {
+    "id": "espn:football:11",
+    "hash": "cd9ddacfebfffd29fcb2c3723227734b48a511fcb6b3714193b58fb20fd618ba",
+    "verified": true
+  },
+  {
+    "id": "espn:football:34",
+    "hash": "726d81b84831bb9e0561fb091d0c2946e67bea1690db1217112f5e28f7e3d44b",
+    "verified": true
+  },
+  {
+    "id": "espn:football:30",
+    "hash": "805170cbd1bedaa89e34ab944871a606bc4a3e57e991a9824e8f46614e36ddb0",
+    "verified": true
+  },
+  {
+    "id": "espn:football:12",
+    "hash": "c30f51c949fbd34817fe9214f3bfd52b702bd3281aca45052e35f335590b166b",
+    "verified": true
+  },
+  {
+    "id": "espn:football:13",
+    "hash": "b9724228ec7896d258076945e10ccbac05726b95155c74ab2c537f02a6a51a9e",
+    "verified": true
+  },
+  {
+    "id": "espn:football:24",
+    "hash": "8082cb3aef7d96570018749f082d70d0dc42df737b9661d146c22082cb2cd27b",
+    "verified": true
+  },
+  {
+    "id": "espn:football:15",
+    "hash": "42b0c8c23abf7d61e957803d0299c4c2dc1adf2de7c67d4ee14d46e2c94ecc40",
+    "verified": true
+  },
+  {
+    "id": "espn:football:14",
+    "hash": "8c41a92a23d94bc7fb47f9f6e7707cfc4f1065e7a7f065937d7fcab0e687baa7",
+    "verified": true
+  },
+  {
+    "id": "espn:football:17",
+    "hash": "98e5008ee9f37f767211b62b88bf9b8624f40acb178bb69eb86d08e124490982",
+    "verified": true
+  },
+  {
+    "id": "espn:football:16",
+    "hash": "b15a25e44eb5d36f88a2399da98271980c2fb2cf6c975de9cff5d249344805e3",
+    "verified": true
+  },
+  {
+    "id": "espn:football:18",
+    "hash": "0bc27bb773bafeaade8b4f9d6d35ad982d5cbcba49f26ceb4798df2f1639e792",
+    "verified": true
+  },
+  {
+    "id": "espn:football:19",
+    "hash": "c23b0005eadc8f05005cc0654f5f2fc30adebf336e1c88d2e6adb0b7437f2df9",
+    "verified": true
+  },
+  {
+    "id": "espn:football:23",
+    "hash": "8f80cc6bd9b3f3d324a7550465dbcc00b84b3096cb3fc191815663ee1e794c73",
+    "verified": true
+  },
+  {
+    "id": "espn:football:21",
+    "hash": "b3dc057320ffffb61d6c3491b3fdd0a89ac6d7eb5f56050ba19209e33c06e033",
+    "verified": true
+  },
+  {
+    "id": "espn:football:25",
+    "hash": "0dddf19d36f24eb9d2bda9314544c821716f34b73c659e0cc66a432d4a46a203",
+    "verified": true
+  },
+  {
+    "id": "espn:football:20",
+    "hash": "46ddf22288758aa914d43b81e74291b2df47bae71c1a9603b675d0ff932065ab",
+    "verified": true
+  },
+  {
+    "id": "espn:football:26",
+    "hash": "cfef9a97a5cfbe60de43ab1c0c3d17e3bc26a744f7cc6e18e8499284cc1e9d8f",
+    "verified": true
+  },
+  {
+    "id": "espn:football:27",
+    "hash": "1b286b29c04fe0ae4849871a11196bd9908d953c29664b45564fe987f544a5f5",
+    "verified": true
+  },
+  {
+    "id": "espn:football:28",
+    "hash": "38a007301dffc29d7233a66675bfa2c79af8c60a0874902f214c44b809ef04c2",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:1",
+    "hash": "bf8c4c1d5d8a33450981fca2f1af68c36f40b025214ff415fdab03bd1e1f1e0e",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:2",
+    "hash": "fe9d2f643f48a8777840fd8d796998800251221088ce3fdbfad3a9ea548f65f8",
+    "verified": true
+  },
+  {
+    "id": "espn:football:10",
+    "hash": "f86e5af90607a9dc21ab7a6b0409302a40bea359e42e3d04921c536699b2f1f4",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:17",
+    "hash": "0061e1eaa470b8952c9617aaf419e23bb4868baabc31c7c39cee36075637583d",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:30",
+    "hash": "32217a9277bc03a84c93040fb3b28c571ec605aa7db74b052dd42c3f4cbc7b45",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:4",
+    "hash": "f2067df32a65b90ece90142b09d9202e435c3d2305dec3d24a373d8eba184ce4",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:8",
+    "hash": "64779f57c44df58f020dc859aaa213f43f0fe09cae0af3b62d08191a0b9c9e20",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:5",
+    "hash": "adb64d3ad80f470685fe9ce33590684e35eeb773fa0b327d0263b89f68f48054",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:6",
+    "hash": "41b044fd6a23cb715b6c63c1e96f584f0e52dd88e78e7c87457e931a217efc85",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:7",
+    "hash": "74abe4429891f70c92746d5f93d5eb5fbd0d5aa672eea856d2f2f50d25467dde",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:9",
+    "hash": "bcde69a9a50edc3918c8456be557a35f603cdd60ffdc97037dd1116fd50df330",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:10",
+    "hash": "2a6ed2ded09beba6c2778adc021acaa21c66f280e0c53dff58cc126e91e25e35",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:13",
+    "hash": "6bb6a14d056b3544ae9869aabce173196184633ef4acc4ec26df50eca6b187b8",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:12",
+    "hash": "24ec0b9318d33ee0dbd200637b598a71a147f77c6203650f1a41f953464031c1",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:11",
+    "hash": "1b66a566c50964584854fbedb87dc8c62307e004647583e8307ca62032f9ed98",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:29",
+    "hash": "e21dc17b025674cfb6df86a3b4037eb990695c1abce48643a190520261cd0d99",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:14",
+    "hash": "8d289765226a61e2a94e232d1dba9a23eafa65c46e1195d5c95094a3c289c14f",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:15",
+    "hash": "97e990dc42f0627dd6ad8ca3cf5e01ee9f1df66ed99c5a0815e7f092aba55358",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:16",
+    "hash": "4fd8dd21103180c36c5da96f7f154d54f3d076fd9dad9b20ceadcc2c13ef469a",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:18",
+    "hash": "48f149b8ed3b3a916c96a936820dd497c192e45d44690f158b794cfe45951bc3",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:3",
+    "hash": "c723fb71c45cf66afc961aeb37f1a57f2e3bde1e8c2f4948d0bf907b36284c7f",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:25",
+    "hash": "77559657e7876eeb7de243abb5acd2c2c9b25e7bcf5d1138198d2a89a7fb1a31",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:20",
+    "hash": "18643e1c334e6e94a6f5b0957448d5d549b1d29bad3b7b720df1a97da79c91eb",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:19",
+    "hash": "2fb8960ffd81d62d77fec43c6d43b77e76b8f41c85fe30d48f5eceeefffe7bf4",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:22",
+    "hash": "b4585ab65ecf7525949acd931ad0dbaea9e92c78e147b64645abbe5d65054468",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:21",
+    "hash": "178db60b2eedfe20188b0c6cd084e382639fea9b48c00f69d651b5692c4b0a6c",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:24",
+    "hash": "2a3c254663dd3512253128c9fd3ebcf882aeed711cb72193d354f8c601407ee5",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:23",
+    "hash": "97c697538455dc6f00d263428e1677780ea0678ce73c2a7e2948eaf41370f78d",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:28",
+    "hash": "3b9def8b67f4f01e32f632718ac9b16a483072b12e93a27791c4e0407711b972",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:26",
+    "hash": "0858e3079b213b4b43f89dcf3bbe266a33e9f9c114356ef3dbf9421b0e30ea68",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:29",
+    "hash": "bdeadc070ae8b379d05d2cdb817fb0f02607d796799a40ef9f50c2b72afbd728",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:15",
+    "hash": "2a2f91ac0413557116bdaae600080d9c2c4acf54d207d673a85b419b57c336f3",
+    "verified": true
+  },
+  {
+    "id": "espn:basketball:27",
+    "hash": "c2c79f70005141e904f94df3db5762402108596371c8becef82e2c53aae171f7",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:11",
+    "hash": "d521c513290fb3972bf4a260f734ffeadd3441213a4f103d99bd61460aacec98",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:1",
+    "hash": "49407552b2e5e0dec2c8c8f13b41c3e94ce32abeebe60b9fd64b57ecf91b1ba2",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:2",
+    "hash": "03d502fe92a68f35d3643fd1cbf71f7ca22edfe2da14e22fd4496a50a36f3c3b",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:16",
+    "hash": "f517bf541b8b6f38f85294188eacad8f305306980b122b4f07c2be5d4d2f6f79",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:5",
+    "hash": "9297ef56f255054a1dc6634390c5dbe2d09ca94cec1c39c721b4f810f69d1ae3",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:17",
+    "hash": "25979dc009971ae184f1e22b78b879e91ca0f508b2f672c63285720b39545995",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:4",
+    "hash": "a71d4618afa948a83856e459ab5defa372db9fcc967ba6d13f6bf0ec5e934800",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:6",
+    "hash": "91fb72f3bf3382c80bba9104a3cb35c3fa95137c2542a4b8ee49c4cbf0df7216",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:27",
+    "hash": "35f049b9eef753f2f4249c725825cb7a9d7eeb3d619a0fed220f0ea6208d595e",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:7",
+    "hash": "a4e627ba4f6e2d64cbff3e58d932c7b2f65b8b4af3ffb4cacf5ef56751a4b022",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:3",
+    "hash": "a2763ca4756bad8855d6e22c017d2cf686add266d5de1276e03476cae329face",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:18",
+    "hash": "f2e8c27c750d791ad08c493a6c6f261241149c2d8c81e820d791e43a67fe2243",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:19",
+    "hash": "5fadcf6bc1505c36688f193c41da55acbba3e02e69819b6b41d779a7d5b6bd05",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:28",
+    "hash": "eed641e7d717f9103f71b569927824ba264eda17bcbf6e18fc3741f6cfaaf0c8",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:21",
+    "hash": "f277b8d75e1cebbb8997dec5f65a5789cbbe831503ebd02591d1c34a8f12c65d",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:9",
+    "hash": "7aadb16507ad9f0883292824ab3a3438ee727fa4bfd4ddd9799b10836726bffd",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:8",
+    "hash": "7f0e9f00625655aa5fcac619c403f8567f1588cd1eda0d22e6d785f225f83b67",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:10",
+    "hash": "668c4e58f4f6239d3696c5872f74cb00fab1421209e4c7cb886693ca41e59376",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:22",
+    "hash": "8f88d2162d356d048c8a16c3dd4ce478f7b9eb949bd8f05ca436d54f5c9c0ed0",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:23",
+    "hash": "f54e5908827ed6bd2970eee2f4e0878ca3c65f7b2183dbfec5882fae9400ae8e",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:25",
+    "hash": "b22cdfb638704fcfa2eb87b79bede70d0a4f058f4169b4f91eac67a98ec42a22",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:26",
+    "hash": "1b30c461e84f7a2400c8cf87f6e1083410fc01b6bbe640328f3c8ce9ab4b5ea1",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:12",
+    "hash": "2ba6e83e2f66f8a4a0efabc00757a4ff6027f281a5e5693b61a80a7fb814edf2",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:30",
+    "hash": "dad70ef41c989579b93652aa7d0ff0a952f39121959f1693f76bc250337ab39d",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:14",
+    "hash": "2151bd43c7ccda2136a7b19ac9d8c9a4fb2f9c698090fc78e6ed6b1208e89f20",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:1",
+    "hash": "ee6f15e0b18e9783e70b73d91e6514f7864dcd8481b99e3bdbac328c6ad80934",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:13",
+    "hash": "eee3bb0fd870054a0f66d4c5cd3ee4e8e0e532bfbe0226fd45e9895c3f65587c",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:25",
+    "hash": "85894d394b4da02ac508e6f9b8f8bd184c5215e2630a5a02ecc65add0f62d993",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:20",
+    "hash": "b2aaf61f04a1b9bde0c642382a3deecfccaffd18e384aaca6650412123ee6d58",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:2",
+    "hash": "1b80dd81e5067d12340a0f3661701d55d99fe71e4fa33da968a84ac11c66a3f3",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:7",
+    "hash": "a288d40d119726ee188d9fffa3a6661e9b9f1f93ef4c9324174fa8921050ccff",
+    "verified": true
+  },
+  {
+    "id": "espn:baseball:24",
+    "hash": "ebd002eaf896c44e2663242893cd8779374d60d05aca513a32ac4fc87e93ad40",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:4",
+    "hash": "65eed9505e8d2ea6f9f22e73a6c53a6db13d98271c0d8c9bde2c42f97176584c",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:17",
+    "hash": "596ae4045b8b4d804f08314fb124bfa23c9a53be6ea373ce95e3c269343c170e",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:3",
+    "hash": "d5c8e6f490c5e697a012b7ac39a84d503f53bc5d6ae6385c0514886f54d7ae2c",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:29",
+    "hash": "ca06559eaf09430bb6bb1012be1881385db5c50819d4164ad31653a6aea1d15a",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:9",
+    "hash": "e8222b43182388d34b96aa4aafb22665d42a81cba7a83c9fd0ac176519bdacbf",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:5",
+    "hash": "1f4c877f125bffa7967de0437ada97c4dea52470cbd68847bdc91b84ba09a697",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:6",
+    "hash": "5c8ad56f8472591113add918f20ea964dd15885682cc9326ed6334e8ad09b085",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:8",
+    "hash": "10eb50eb9fe04f97ff07bc1e8c51a69ea4a9bda5209b18d60ee8e09f16ce9994",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:30",
+    "hash": "0b59189b6155393198415346c188af314263ddfb4d3e04435ffcad11aec2cd62",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:10",
+    "hash": "2d611fd4cb287124b14f166d7e79d7abebaa8e8c884131976edcb2fe49613355",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:27",
+    "hash": "30c3e648fd778572546794cefa59b91eee541ec14f364be4d3e7851f55a462e0",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:13",
+    "hash": "9e5316451001467f8a54e13976d857354109d0f74dfedb1a274c7b5ecfe80c17",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:11",
+    "hash": "f2ebbf10c8f22fe1681003f16e35dbd77e86c9bf38b7719ffa7ce972a8ceb910",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:12",
+    "hash": "ac23d3513cde663ec61cbab11e92dbdde486376ddce4d04f81666315732cfd8a",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:14",
+    "hash": "0c2370adfbb14fc7c4159df0c4b4cf3615ee902206958fa5825dfe259f87a411",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:15",
+    "hash": "a024fa36ca8750312a31055628f4282131f5fef31626f2f6a6629f21eb67f260",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:16",
+    "hash": "045648f823c19466615759333fe72cea49606ca863bf196b4b02f22af941dd36",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:19",
+    "hash": "fe53cfff18b6e9078d9f74ce05f31a9b963b94350830fdb7b7beb2b3c1b51ab5",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:20",
+    "hash": "203788d8349029a5ecc4966591d73c46006a0ae84c3cff66f22834b718c5c8b5",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:124292",
+    "hash": "ccd2f5a091163728001e55b5bfa51fb9dfb24a1616955cf982236a70d74bad5a",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:21",
+    "hash": "741933f4fa184121054b4f5a6dd2328fe4e374f6eb62ee47cf4129d45b30530f",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:22",
+    "hash": "ac6b092d83a5bc38524e4808c1490cb7c83953ddd55baff65a53990e5a0e2093",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:129764",
+    "hash": "3389c7d632c4eb18fbec1a4f7adfe4077e3c1b07bb0e0163993cd9bdf25b4dca",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:37",
+    "hash": "49f0a914018422b2432326f2c721af9af9f7f4d128e3c3176851ff61ad9f2492",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:23",
+    "hash": "8e68c531d931cbf5c4d9191003d46ce3fbd7a90bb6f6666952830cc9dc38e66e",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:18",
+    "hash": "6fdedec750be82d4b0e6c99348e658e3f932afc26ec47f9a6b2add3d145b1552",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:28",
+    "hash": "6aa7001c370690d0822a4abb68ed0d6d17c6a22979fa00bfd543d22800cabb08",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:349",
+    "hash": "33d8ff94e60c0ade57d8569e8d6dfe3ee61917b828d7238969329371074b1167",
+    "verified": true
+  },
+  {
+    "id": "espn:hockey:26",
+    "hash": "8acd08d70b372349a55911e751f8fc3f845e4dd454e18f19ed609b5d36b493d8",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:362",
+    "hash": "26d9833db05946fb9a385f7f867560605e5081d99d56afc7444e41bb3828527f",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:337",
+    "hash": "e6d934ac8b45190baee6b1ff8d3dee7b127a2d6650366a02962128e5fa7e6b0e",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:331",
+    "hash": "8901c5a6b7ad280ee6ab0d3ed9879cec4402f8b09b536b7273d8b94bf4aba5df",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:359",
+    "hash": "84658d6b3d9780d4ac5687a1076205c2e34cfae186006e81de23e8410d8f6459",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:363",
+    "hash": "851fece51b25a4a23458b8151b8bd4c8d97037e8607aa1618732afaef8d8fc75",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:368",
+    "hash": "610c3ba9ce615ca731d0cd2eb492a885d0c87789499f5e4524a7c89ab9da8cb6",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:388",
+    "hash": "10d9de1a983664442fd0b7d8a6994d96147f4d67b93768b6b09ae17dc3ea4693",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:384",
+    "hash": "4c78fe906feafaeaed6fe5521a36039fb58b2f8fbe60d8e952851dc126da8d0e",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:306",
+    "hash": "fe8549e38561a96a8c38b615cc24808a2a312a917b60913f92d7e3fcbe936fb3",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:373",
+    "hash": "d1754b0a1f05083fdc669864dfa979898ee6d1d6a07c74d4866e6d4ff87f62b8",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:370",
+    "hash": "e589a68e45a89ec25c591956e01dd92a018fd25bd2b1427646e5cfcb75675f58",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:364",
+    "hash": "fe79ac4718e322156ccc94f86ff9d43fe91a908b6e01d095014b75641e05cf7e",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:357",
+    "hash": "c9ca88e3f1cb09a6fa671617dd83d4329e4ca11833ca416bf8a77663ab12b093",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:382",
+    "hash": "565a24bd627d33e297e5c485dbc591c7b52f48b8a2587c1fda3ee0a1f8e17c72",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:393",
+    "hash": "f544f5d3f66d3d37b4808ff5b652301e83517612dd940a49a2d4e9c3f5111494",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:360",
+    "hash": "df4b14408fef08e1bf77860b06571b86f8781802732f7771dcca7ca3bd32fdd4",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:361",
+    "hash": "69796e47a2e190f3923d72cc336a353e72edeccdd607fe1f99dd53a57d56e884",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:366",
+    "hash": "df23078f2a241cee706644088669515e4eefc75be781fb7b1debf6066ed325da",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:367",
+    "hash": "d9ef90efb8b7bc2aed48d60df8af0a830ad1cfbe631e71a04158f4cac14ed15b",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:96",
+    "hash": "244ee0077560454a38d7309cac72009a790824d5003b4e85c288c740cc7c79cd",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:1068",
+    "hash": "5c1659723d9d2122df896b451cb32b95cbca2297ec3ab07114191d4c262ddb0f",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:93",
+    "hash": "d19b810f059bc45b35d5d5ca433fd4310498e685d115646425353aa80cbb9b2e",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:83",
+    "hash": "b39678f5802ea1e526b8febb7dc24dede78a4f1bf58a94d89ed95a10b51e1efa",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:85",
+    "hash": "f555dddad80d2c18ffe973def4e9a7d69d4d3576225784463e8b06d59302747e",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:90",
+    "hash": "a04368ddc90832e45145f227d4c8f534e192b5314474380d9a4fc68539a04826",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:3751",
+    "hash": "e9fd435e36a5c241bbf3329b5bf98087969fb033c8e3d001ef3cdf3455a9a545",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:88",
+    "hash": "af6b7ee9470dccf92092d904c98a4d9bcc55a85cfc3f77496b7058ea6e4f5754",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:1538",
+    "hash": "78b1e7be47d4e391fa5994d82d24e728e204c1193ef804595ddd5146203dc1af",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:2922",
+    "hash": "dbd7caa2358386efba489b04a9d40932889bae4c4866cfe29f9b2256ac28599f",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:97",
+    "hash": "7441aa7c73f7775dd2bf863d386959b1a84a5d0873f6c089f79a8b2d13f3aa2a",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:99",
+    "hash": "9ca8b1d5b3c226ea6101f402c9b678e7a683b3832e0be2d3ce79a104a87832f1",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:101",
+    "hash": "7bee562e691e661444403cbd3e3e07984098fc5906511b3c32510080193765c5",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:87",
+    "hash": "035e2d44dc2a5b9af7173d013e14dc717c702dc4cdb2dad4b457460e9f196494",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:244",
+    "hash": "bd62e3530a98bdd4bba2e065b360d4c1fff98a65daf9c690f066df030b437cfb",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:86",
+    "hash": "8e8a7ff10a37967f7f869a2494b6855861868117f88909833dbf93c8da8e5f4c",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:89",
+    "hash": "410c6814efd16affab30a03c2a6534441f518ce9f70bc3b02654dd706c6d6a23",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:243",
+    "hash": "cc3c98bddbdd96236986756e865ca8a8ee4db808d010bed43cfe6e7170270b3f",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:94",
+    "hash": "1d9ce6a24bdf210d0a4654f82da34ade84186a9959ef2000c35f5c4c5f8deba6",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:598",
+    "hash": "7ec9ea3a93cdcf116091a685aaca55cbf4c37d26f56e939fa181713295685031",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:102",
+    "hash": "2296b66e4e4997b4721f713afe430d4b96fbf3fa81262ceb65354a51d3ca8c78",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:131",
+    "hash": "3b3cb4269f1f02ddd55faa9111e381b6794ce999b91bb9e0f08f58b295e3ec73",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:132",
+    "hash": "1642bf9fdb5c35704a57d7a52e6c2d52c6bdf96c829559453fea502454bb868c",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:124",
+    "hash": "7fa5583805c4aa7f30cfb0eb760bedab264a6158442098cefa1bc4b7fbc3f85b",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:268",
+    "hash": "43fed902de2cba917af944a06b1410107cf8c6a077773c146bba733fcb071ada",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:125",
+    "hash": "f7eccc5dc0a739214da59c74f4ba3b1dc757f70abe9a89afdac23734d20cc29c",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:3841",
+    "hash": "087a21e2784d715ebfa2ca0bf5d4a326e00fed2193ea9a39a090424765068ee6",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:127",
+    "hash": "7815c818d25a660093f0aae7eaa308a6f3bc7aea5ae0cbcb4ff0142dd9023745",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:122",
+    "hash": "6e1ac0566483585a2b2c084e371e837af2d3c65627df0ca336d411f481585d9b",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:2950",
+    "hash": "979c343f458ac9b5c0bd5a7022b0491ee727bbd2dadccd488c8c4f981f77a303",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:126",
+    "hash": "86d0a02f7c644bbdf3f5a6248820222d0e4d9f5217f5524dc5c73084a1c4aa08",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:11420",
+    "hash": "149071a819643150c2b09830d6955a9ed4a64ef71701492b5fbbf418a53bc896",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:3307",
+    "hash": "bcc00062e8153e42ffa2c9e89995883edc0fd3521de83c74d562cbc0588f11b5",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:133",
+    "hash": "c1e626681a4dcd8b35f6a8f2ce2538759774771ea61b0aa08df61eaf2cb713e2",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:10388",
+    "hash": "fdf8933d4ea1130d608269a50ad5d16baf59c234b0c3e4250eca1b4293fbd9a3",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:7911",
+    "hash": "e22e17b481ca097a747bb38faba32c57d2193db31dd54ed739e648b8c87835f2",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:137",
+    "hash": "168cdb450a4d3295c55130b2ae4f5f0a5909fc2bd52bc957b1cea2823b4d4669",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:134",
+    "hash": "ae94b75ab94453df1ffcd1e57c18f8f596d58ad8b61e4af280f9e4aa56843676",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:103",
+    "hash": "2e4bbb47ba95bab52e6faf22d2ba5b30ddda9c01f1b62c778beedd7eb9191f8b",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:105",
+    "hash": "076d7febb78c81e1cd5af028b028405aeb478899a1c98f63d362d32eab78d08a",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:104",
+    "hash": "413314a98b4459b72b72ac2613c79fbec5afe98d34f8060c70ea65fef15c6d8d",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:107",
+    "hash": "2623072ad211a41f3b58308b9676dd6e1c212877983c96a02d8b9b632f99891b",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:2925",
+    "hash": "6b07ea0dd21a19572ab235bd79cd4dc90b893fc74d0b09493834069036d4362a",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:109",
+    "hash": "cae4baf8de4b21a2c65d3566dadb92330be2592433bc099b4a9bfcdb31cd11da",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:2572",
+    "hash": "2aefc4fa0f17cf6177ad5e9bef991ca141c5cdc7cbe306adebbd6b18ddb9051e",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:110",
+    "hash": "8f4d93ab0b8477a56b4eb1ebcc43a71e55ffb24ceef0b58c9be7fa4784fa7365",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:3263",
+    "hash": "bb0550be543b34e35b82622c1e71da63269ea69944f6f51ee993f6c9167e8807",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:4057",
+    "hash": "0e57bb7fb26a88108ca540e38ede2a9701dfdc36b2056efe07dd2864cc657077",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:111",
+    "hash": "2cbf184bfa8e41a07758b2eaec3ccf86aacbc9a7301a3d913548d22e303d945e",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:112",
+    "hash": "d2e90a6555a621276b4ef4b8c7f59c14a21f961fe1e4c2d29f325b990c913ca2",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:113",
+    "hash": "25f8cf180fe315a62edfa0270b2af94d7edb8774d3eb3e50e3c79fd7aa257fc7",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:114",
+    "hash": "a074949c2a998f8860bcb57ebcac68610206ff2cfbce4a7c4bb20951ea048856",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:4007",
+    "hash": "41cc5a97c717c805d90d1badddbbfb4a61ad3cd6f5881068f7e9207931b770e3",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:115",
+    "hash": "b5009d6cfd4f0ced604aa1275126d4c6197ce640366e75b3c350791f4d4138a2",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:3997",
+    "hash": "f3212ab895a8f6aab8eb74b34c7a4bb9dcfb8f399a8a64e41c66efbc8175c1d0",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:239",
+    "hash": "3962f3f200454964db074575aea88ccbc794881010521da888582e43555b7583",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:172",
+    "hash": "9e2007eebb66ed6b4b303a58c22e241864acb10de8229d4e8340a61f435bb40d",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:17530",
+    "hash": "aa2397e69973a85435090d2d06ba9dee88d0b686c6b46140034bbff5cee6b033",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:118",
+    "hash": "9604ac71f18b2f927a5d7221b19f7b9785c1b8062f990b603f56d1ed84bb59ec",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:174",
+    "hash": "bc7073b25d07f6e2ed4a3978194390bba727375f22870fda070141be7e4a4875",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:7868",
+    "hash": "46b2f7a6ec91392c2953c1a3c221812f01b6cab508e64ca22706e606687691e3",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:6997",
+    "hash": "7d1572fa7178b3fd640b72d9c7c2e8f38078a4f01330d12260d1771811bbe3f9",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:3236",
+    "hash": "69c54ceab4190c1ae1efdd464811460fde1e0dfb223162b8d7c863c5aaf69352",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:175",
+    "hash": "37a02d40b03db005a8171d7c82a8f5b8d0e0d8d2a2a33105e2275898a0f4ec2b",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:166",
+    "hash": "b7ebf08495d10bf4041372a0125e300fd2f27a1dbecb2940d76d550de880cd4f",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:2697",
+    "hash": "3aa8bc90ca368829a5a525feda78f6cb481f55a34137479b54327c6c2c57d0ae",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:273",
+    "hash": "c4e422335a1c1ccbcb48a4d537a624db85db5b24b1c4f951f5ea1dcfdcc74975",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:167",
+    "hash": "89ad03ddb86c35b611db0c30d106ca5f8bf28e79284d7f3110707b4a599b1f42",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:176",
+    "hash": "d2265c190f0b07728f69095a8bf730927db789dff59c54f2dddea2d61112707e",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:2502",
+    "hash": "147758b9dab18fbaec8a96377447f92495780080ad1bdbf502d83d00ed100494",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:6851",
+    "hash": "a5b308dad0fab67d633437d16938f3250c939ccd11ba8d35913038fb1e140cac",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:160",
+    "hash": "0897ad1d87672ef5129ef9905c5116c09b74cf9236793067acd483597ca048c4",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:169",
+    "hash": "aa6045b51422eea4cc913a7af455e34b54003c840cf09f3901767f4555284a14",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:180",
+    "hash": "a071b9b76eed18139da2878cd4db93f3e27658996464d7454a17c19caa24ff35",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:179",
+    "hash": "64f132ff3c84174823ba3a886bca22ee910888ddeaee29c68cc5a317ca4315c2",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:170",
+    "hash": "01373d499c36fea0d735924b74261f0ac6411c52d240cec4273455660ce69b40",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:20906",
+    "hash": "8785fe07662e5b6ce1ac6f1946050c38156397b2a606e89a2166bce3683c6a39",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:18418",
+    "hash": "60e3ef89fec1ee0a3cd4424108f75d050ab2ef5f4862793412d07a04a9f43614",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:182",
+    "hash": "e16e581204e1845c9417433eb26c33df0851ba820754dc6422f6b55c50c60ea6",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:21300",
+    "hash": "1e1f1235b171fa905b914f834e40391db6ec5d62272f1427b68ebab98da5f4a7",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:184",
+    "hash": "0129a0cd19592adc5635d0a03238f0b20a177e5cf0cbbaaf0221265b8981954f",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:9720",
+    "hash": "a5302caf451cda1967f0581007dec39bff0fbe57e2f382e9281faa5cadcf87e5",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:193",
+    "hash": "87c8e3113e53c08ece3edf9664c29b6e25cafabdc1ff02caaab764f2bf9aebdf",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:183",
+    "hash": "69c9ceb651ea4cc6a5f98afaabff0b397900b046a1bab4f73632767e0a193bf1",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:18267",
+    "hash": "5222228003a5361b9eae965d6bbbb59c1a6baac42819f717ddce4e60d5af6cd2",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:185",
+    "hash": "0ca918fdcd616b1d3ba87e41bf86e4fc2ec6fca5d39929db947ab0d5752a7dec",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:6077",
+    "hash": "ed89407040b4255854f3032cb434f47ae919bcb326e7e437369063f9db0dec57",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:20232",
+    "hash": "a76ad5d901b977c37b1ab5b7aa1a1e17d0cdb54f1a8d884f925a7f3bc73f6cc4",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:187",
+    "hash": "b6e29ec5211781e9163c34916a4e100014b669cb4b8cd5ec32b044ee65b20e53",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:18966",
+    "hash": "c4d786461b0af949ba722f842c9422c9b513bc946115aad9433d11aedbbfde90",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:17362",
+    "hash": "928df8b4e03642b1720d39a7901942a2fbb246f57583142786ccae090f3f64db",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:18986",
+    "hash": "fd7de89c6112e1a55dc1d836eb6c0d57cd15677d94c79ba6688e913a3ebab176",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:189",
+    "hash": "a5e8cbafcc7b56211d7652d3dc656c1c28f90df366732f68654041f2931f8460",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:17606",
+    "hash": "010db1c6a672d4195b0676b3958071137e93388f56a9e6d591fb2c1fc896eb1e",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:12011",
+    "hash": "c97c12dc0a2be79b4737f8b4cae46b6b314d50bf14292389c20830a92b716ce7",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:10739",
+    "hash": "b181f6a39fd8d9176c6376890ac2cfb48b7fccad4de6206540efbada0502b5e1",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:9723",
+    "hash": "3f36729f19409097e28d72f0b29ef0fa1415501bbd568e531c494d443a94b1e3",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:4771",
+    "hash": "0dd12814476a9dd41637bc36829f6ea2d61434b94329a8177e0b63e133ee3835",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:190",
+    "hash": "c86a053b76cb267dd9d9305dedd3fb737014549428a464afb5fdbcaf38ff491e",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:9726",
+    "hash": "01846df84bcb82017277134814cc5e1698a376fe9c843f63fc00c4a12c86726b",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:22529",
+    "hash": "86d7efdfd476ec6b21e54e6d80e80d0441a153ea2d7f0d8aa9f0c6a5affcbfcf",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:191",
+    "hash": "85408c317a6a8abfbf7f55ad400a95f223d4b4e1577039ce05c51891af377828",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:21812",
+    "hash": "ec8042c8f3859a195d6060ee9e0265ed25f6d7e3ac7bf5496bac0748f7fc2c28",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:186",
+    "hash": "eae02688be93492d62f2f232b609ea70aa33c5b317716f19abb2d9ade146d816",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:9727",
+    "hash": "d2d9346ea043da66b2bc332c90f83859a358e1eb16aedbddc66e003742afecf2",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:7318",
+    "hash": "a1ca8b5300677bba03c7eaefad6fe2170b6e3ebf6d8cc8c039a5ee7b04dc8545",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:21422",
+    "hash": "1e2516edc1eb4d36f5a10b1cf496204358d4597ef754873209960044bd41aaa9",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:22187",
+    "hash": "3f7b371022aed8b6a5276876e9f43bb4efda5b87a25697baf97419c1911fdb46",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:131562",
+    "hash": "2c25aeb48eb23efce9b64ace6b2bbf6acde2781a78e02cdcdbc932c55a016071",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:15360",
+    "hash": "3ba629e6372ce49165fdc3374903d1517c2e19c2c1cd76088612be5169b67d8d",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:17346",
+    "hash": "20aa8603e4e8304c5d1f50b5d5d0b4c417d0d08423723e81fde873c8a22760ed",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:131563",
+    "hash": "fd4da7b724299a07865ec02ac4597874b27d2465f07c3fc73ef487033eed48fc",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:15364",
+    "hash": "5906bb7e8b9f038ead3cf3e350b7dc6e0cc904c95cd692d5b4c78d6bb193b1f6",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:18206",
+    "hash": "19d2af64c36544d0216bf9fd3935b3c72613ad8146888ca48ef69c47781215a8",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:20907",
+    "hash": "84d786db52c11e3919ac7c52cc165193c01e7e664e162a09043fd3ec64cdeb0a",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:21423",
+    "hash": "c6a0ee2f502d8243659ed687068619816cfa13fd5c7750a9722f335eead655fe",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:20905",
+    "hash": "34eaf06a1c75bbb7255d80a67f787272dce9965d4135d61020d3169d92791684",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:15362",
+    "hash": "83f9be43be4d4143838819c95fb6a690fb7094f56b77c88da9cac21f97b94a85",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:15366",
+    "hash": "273aadbbf091cf8d807d6b878eb3f352bea01d13c1a4c4b07777617a867fcec9",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:15363",
+    "hash": "c81db0ef81b60b52904ab91956b30b3642082f52bb0de7a1317bd7ce04c47cbb",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:19141",
+    "hash": "b3d277067353965eb0e7c67e5b6c14e690f2300612426b9418966085d846dc73",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:2980",
+    "hash": "f047e4c146d103d3b880422687e94319bd1373a88acd04c3b210d7807ffee90a",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:15365",
+    "hash": "88a1a69dc1069b4a911fdd3bc3397b73bc32ac5f7e5ea5eb2d8acbd4e56825c2",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:887",
+    "hash": "38822b9c02ca4f5251f61f323de2b348657f8a101bc209e438260ce269d95a9f",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:570",
+    "hash": "948e7b9150254636b1255f00f6ab145498f13ad02e9378c555824a2f04848b62",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:437",
+    "hash": "9c3d254529db5cd2580d768c3a7fd5b90193c84a44bce90ffd50a3ea6628fdaa",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:436",
+    "hash": "eca8d16838cc4d9d6c2b4b3e3e274cafc95f587e68559a964d2ba8f138079bfc",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:432",
+    "hash": "fe26d4df12c0c5593f10296eb3817d052ed726fbfdaf0642dbd19bd8bd9ce99c",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:142",
+    "hash": "1565452aa541c3e7acee362c9c0e3db320d7b8d19835dc68555be63e2d873005",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:4411",
+    "hash": "f1aeb2b4016c28472f9e857478f817a1f10552f6867b559ef175b0c5f4ab87dc",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:148",
+    "hash": "f6bd1cb19dfea823b12ff42d18157f6f9b2071b086e2fd80a0d05f7450d6b875",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:21922",
+    "hash": "ecbcee505c777e5f5ff76645398f427001af9df6cc73cbe663b1e1d9fb833d62",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:493",
+    "hash": "9ac7c74c3dae988acb0bcaa7780dbbd46f52c36035907cf5e926ac21115cbf7f",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:494",
+    "hash": "fcf1116c0ffe87223c7ed34965c3dee4e74484b0ee86cfa79adb86c1c2bcf700",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:521",
+    "hash": "f55169a0171ad53524f12f05232f00d13e339bd1bc14c5921e96981a3fafd295",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:2250",
+    "hash": "43ad0d35fa86c88f0b93dee0284d80813ef2ed2bf3543bc23c0f39d3d1dda469",
+    "verified": true
+  },
+  {
+    "id": "espn:soccer:510",
+    "hash": "84f94ae53b66524c68eb15574204c4efc7e64c95b8230706a82b44de01086bc7",
+    "verified": true
+  }
+]

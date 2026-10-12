@@ -1,0 +1,59 @@
+{
+  "checkedAt": "2026-10-12T13:14:18.901Z",
+  "results": [
+    {
+      "path": "/workers/scripts/trashtalk-production/schedules",
+      "result": {
+        "schedules": [
+          {
+            "cron": "0 8 * * *",
+            "created_on": "2026-10-12T12:24:09.125742Z",
+            "modified_on": "2026-10-12T13:09:29.077432Z"
+          },
+          {
+            "cron": "*/5 * * * *",
+            "created_on": "2026-10-12T12:24:09.125742Z",
+            "modified_on": "2026-10-12T13:09:29.077432Z"
+          }
+        ]
+      }
+    },
+    {
+      "path": "/workers/scripts/trashtalk-preview/schedules",
+      "result": {
+        "schedules": [
+          {
+            "cron": "0 8 * * *",
+            "created_on": "2026-10-12T11:06:55.767185Z",
+            "modified_on": "2026-10-12T13:06:29.071032Z"
+          },
+          {
+            "cron": "*/5 * * * *",
+            "created_on": "2026-10-12T11:06:55.767185Z",
+            "modified_on": "2026-10-12T13:06:29.071032Z"
+          }
+        ]
+      }
+    },
+    {
+      "path": "/queues/af3be00d643141f3a052d470cfbccf62/consumers",
+      "result": [
+        {
+          "script": "trashtalk-production",
+          "settings": {
+            "batch_size": 1,
+            "max_retries": 3,
+            "max_wait_time_ms": 5000,
+            "max_concurrency": 2,
+            "retry_delay": 0
+          },
+          "type": "worker",
+          "queue_name": "trashtalk-production-jobs",
+          "queue_id": "af3be00d643141f3a052d470cfbccf62",
+          "consumer_id": "71b7a3a54ba849d9a1ad8998725d1598",
+          "created_on": "2026-10-12T12:24:10.145234Z"
+        }
+      ]
+    }
+  ]
+}

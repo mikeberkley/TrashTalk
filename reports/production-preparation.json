@@ -1,0 +1,35 @@
+{
+  "checkedAt": "2026-10-12T12:34:25.239Z",
+  "origin": "https://trashtalk.fanlift.ai",
+  "dnsVerification": "Cloudflare public resolver; explicit address used because local resolver retained negative cache",
+  "checks": [
+    {
+      "path": "/",
+      "status": 503,
+      "noStore": true
+    },
+    {
+      "path": "/assets/index-BQROrKlB.js",
+      "status": 503,
+      "noStore": true
+    },
+    {
+      "path": "/api/me",
+      "status": 503,
+      "noStore": true
+    },
+    {
+      "path": "/api/billing/checkout",
+      "status": 503,
+      "noStore": true
+    },
+    {
+      "path": "/api/generations",
+      "status": 503,
+      "noStore": true
+    }
+  ],
+  "unsignedWebhookStatus": 400,
+  "publicLaunch": false,
+  "livePaymentsEnabled": false
+}

@@ -1,0 +1,390 @@
+{
+  "id": "nfl:401872981",
+  "providerId": "401872981",
+  "league": "nfl",
+  "sport": "football",
+  "leagueLabel": "NFL",
+  "date": "2026-10-11T13:30Z",
+  "status": "final",
+  "statusText": "Final",
+  "period": 0,
+  "clock": "",
+  "periodDisplay": "Q0 · ",
+  "neutral": true,
+  "home": {
+    "id": "espn:football:30",
+    "name": "Jaguars",
+    "city": "Jacksonville",
+    "displayName": "Jacksonville Jaguars",
+    "abbr": "JAX"
+  },
+  "away": {
+    "id": "espn:football:21",
+    "name": "Eagles",
+    "city": "Philadelphia",
+    "displayName": "Philadelphia Eagles",
+    "abbr": "PHI"
+  },
+  "score": {
+    "home": 19,
+    "away": 17
+  },
+  "penalties": {
+    "home": null,
+    "away": null
+  },
+  "capturedAt": "2026-10-12T11:01:20.047Z",
+  "source": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872981",
+  "recentMoment": {
+    "id": "4018729814967",
+    "text": "Cam Little 57 Yd Field Goal ",
+    "period": {
+      "number": 4
+    },
+    "clock": {
+      "value": 0,
+      "displayValue": "0:00"
+    }
+  },
+  "statistics": [
+    {
+      "team": {
+        "id": "21",
+        "uid": "s:20~l:28~t:21",
+        "slug": "philadelphia-eagles",
+        "location": "Philadelphia",
+        "name": "Eagles",
+        "abbreviation": "PHI",
+        "displayName": "Philadelphia Eagles",
+        "shortDisplayName": "Eagles",
+        "color": "06424d",
+        "alternateColor": "000000",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/phi.png"
+      },
+      "statistics": [
+        {
+          "name": "firstDowns",
+          "displayValue": "13",
+          "value": 13,
+          "label": "1st Downs"
+        },
+        {
+          "name": "firstDownsPassing",
+          "displayValue": "10",
+          "value": 10,
+          "label": "Passing 1st downs"
+        },
+        {
+          "name": "firstDownsRushing",
+          "displayValue": "1",
+          "value": 1,
+          "label": "Rushing 1st downs"
+        },
+        {
+          "name": "firstDownsPenalty",
+          "displayValue": "2",
+          "value": 2,
+          "label": "1st downs from penalties"
+        },
+        {
+          "name": "thirdDownEff",
+          "displayValue": "6-15",
+          "value": 0.4,
+          "label": "3rd down efficiency"
+        },
+        {
+          "name": "fourthDownEff",
+          "displayValue": "0-2",
+          "value": 0,
+          "label": "4th down efficiency"
+        },
+        {
+          "name": "totalOffensivePlays",
+          "displayValue": "59",
+          "value": 59,
+          "label": "Total Plays"
+        },
+        {
+          "name": "totalYards",
+          "displayValue": "232",
+          "value": "-",
+          "label": "Total Yards"
+        },
+        {
+          "name": "yardsPerPlay",
+          "displayValue": "3.9",
+          "value": 3.9322033898,
+          "label": "Yards per Play"
+        },
+        {
+          "name": "totalDrives",
+          "displayValue": "11",
+          "value": 11,
+          "label": "Total Drives"
+        },
+        {
+          "name": "netPassingYards",
+          "displayValue": "210",
+          "value": 210,
+          "label": "Passing"
+        },
+        {
+          "name": "completionAttempts",
+          "displayValue": "21/40",
+          "value": "-",
+          "label": "Comp/Att"
+        },
+        {
+          "name": "yardsPerPass",
+          "displayValue": "5.1",
+          "value": 5.121951219512195,
+          "label": "Yards per pass"
+        },
+        {
+          "name": "interceptions",
+          "displayValue": "0",
+          "value": 0,
+          "label": "Interceptions thrown"
+        },
+        {
+          "name": "sacksYardsLost",
+          "displayValue": "1-10",
+          "value": "-",
+          "label": "Sacks-Yards Lost"
+        },
+        {
+          "name": "rushingYards",
+          "displayValue": "22",
+          "value": 22,
+          "label": "Rushing"
+        },
+        {
+          "name": "rushingAttempts",
+          "displayValue": "18",
+          "value": 18,
+          "label": "Rushing Attempts"
+        },
+        {
+          "name": "yardsPerRushAttempt",
+          "displayValue": "1.2",
+          "value": 1.222,
+          "label": "Yards per rush"
+        },
+        {
+          "name": "redZoneAttempts",
+          "displayValue": "1-1",
+          "value": 1,
+          "label": "Red Zone (Made-Att)"
+        },
+        {
+          "name": "totalPenaltiesYards",
+          "displayValue": "7-43",
+          "value": "-",
+          "label": "Penalties"
+        },
+        {
+          "name": "turnovers",
+          "displayValue": "0",
+          "value": "-",
+          "label": "Turnovers"
+        },
+        {
+          "name": "fumblesLost",
+          "displayValue": "0",
+          "value": 0,
+          "label": "Fumbles lost"
+        },
+        {
+          "name": "interceptions",
+          "displayValue": "0",
+          "value": 0,
+          "label": "Interceptions thrown"
+        },
+        {
+          "name": "defensiveTouchdowns",
+          "displayValue": "0",
+          "value": 0,
+          "label": "Defensive / Special Teams TDs"
+        },
+        {
+          "name": "possessionTime",
+          "displayValue": "24:58",
+          "value": 1498,
+          "label": "Possession"
+        }
+      ],
+      "displayOrder": 1,
+      "homeAway": "away"
+    },
+    {
+      "team": {
+        "id": "30",
+        "uid": "s:20~l:28~t:30",
+        "slug": "jacksonville-jaguars",
+        "location": "Jacksonville",
+        "name": "Jaguars",
+        "abbreviation": "JAX",
+        "displayName": "Jacksonville Jaguars",
+        "shortDisplayName": "Jaguars",
+        "color": "007487",
+        "alternateColor": "d7a22a",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/jax.png"
+      },
+      "statistics": [
+        {
+          "name": "firstDowns",
+          "displayValue": "18",
+          "value": 18,
+          "label": "1st Downs"
+        },
+        {
+          "name": "firstDownsPassing",
+          "displayValue": "12",
+          "value": 12,
+          "label": "Passing 1st downs"
+        },
+        {
+          "name": "firstDownsRushing",
+          "displayValue": "6",
+          "value": 6,
+          "label": "Rushing 1st downs"
+        },
+        {
+          "name": "firstDownsPenalty",
+          "displayValue": "0",
+          "value": 0,
+          "label": "1st downs from penalties"
+        },
+        {
+          "name": "thirdDownEff",
+          "displayValue": "5-16",
+          "value": 0.3125,
+          "label": "3rd down efficiency"
+        },
+        {
+          "name": "fourthDownEff",
+          "displayValue": "2-4",
+          "value": 0.5,
+          "label": "4th down efficiency"
+        },
+        {
+          "name": "totalOffensivePlays",
+          "displayValue": "68",
+          "value": 68,
+          "label": "Total Plays"
+        },
+        {
+          "name": "totalYards",
+          "displayValue": "408",
+          "value": "-",
+          "label": "Total Yards"
+        },
+        {
+          "name": "yardsPerPlay",
+          "displayValue": "6.0",
+          "value": 6,
+          "label": "Yards per Play"
+        },
+        {
+          "name": "totalDrives",
+          "displayValue": "12",
+          "value": 12,
+          "label": "Total Drives"
+        },
+        {
+          "name": "netPassingYards",
+          "displayValue": "306",
+          "value": 306,
+          "label": "Passing"
+        },
+        {
+          "name": "completionAttempts",
+          "displayValue": "24/39",
+          "value": "-",
+          "label": "Comp/Att"
+        },
+        {
+          "name": "yardsPerPass",
+          "displayValue": "7.5",
+          "value": 7.463414634146342,
+          "label": "Yards per pass"
+        },
+        {
+          "name": "interceptions",
+          "displayValue": "1",
+          "value": 1,
+          "label": "Interceptions thrown"
+        },
+        {
+          "name": "sacksYardsLost",
+          "displayValue": "2-25",
+          "value": "-",
+          "label": "Sacks-Yards Lost"
+        },
+        {
+          "name": "rushingYards",
+          "displayValue": "102",
+          "value": 102,
+          "label": "Rushing"
+        },
+        {
+          "name": "rushingAttempts",
+          "displayValue": "27",
+          "value": 27,
+          "label": "Rushing Attempts"
+        },
+        {
+          "name": "yardsPerRushAttempt",
+          "displayValue": "3.8",
+          "value": 3.778,
+          "label": "Yards per rush"
+        },
+        {
+          "name": "redZoneAttempts",
+          "displayValue": "0-3",
+          "value": 0,
+          "label": "Red Zone (Made-Att)"
+        },
+        {
+          "name": "totalPenaltiesYards",
+          "displayValue": "13-100",
+          "value": "-",
+          "label": "Penalties"
+        },
+        {
+          "name": "turnovers",
+          "displayValue": "1",
+          "value": "-",
+          "label": "Turnovers"
+        },
+        {
+          "name": "fumblesLost",
+          "displayValue": "0",
+          "value": 0,
+          "label": "Fumbles lost"
+        },
+        {
+          "name": "interceptions",
+          "displayValue": "1",
+          "value": 1,
+          "label": "Interceptions thrown"
+        },
+        {
+          "name": "defensiveTouchdowns",
+          "displayValue": "0",
+          "value": 0,
+          "label": "Defensive / Special Teams TDs"
+        },
+        {
+          "name": "possessionTime",
+          "displayValue": "35:02",
+          "value": 2102,
+          "label": "Possession"
+        }
+      ],
+      "displayOrder": 2,
+      "homeAway": "home"
+    }
+  ],
+  "revision": "[\"nfl:401872981\",\"final\",{\"home\":19,\"away\":17},{\"home\":null,\"away\":null},{\"id\":\"4018729814967\",\"text\":\"Cam Little 57 Yd Field Goal \",\"period\":{\"number\":4},\"clock\":{\"value\":0,\"displayValue\":\"0:00\"}},[{\"team\":{\"id\":\"21\",\"uid\":\"s:20~l:28~t:21\",\"slug\":\"philadelphia-eagles\",\"location\":\"Philadelphia\",\"name\":\"Eagles\",\"abbreviation\":\"PHI\",\"displayName\":\"Philadelphia Eagles\",\"shortDisplayName\":\"Eagles\",\"color\":\"06424d\",\"alternateColor\":\"000000\",\"logo\":\"https://a.espncdn.com/i/teamlogos/nfl/500/phi.png\"},\"statistics\":[{\"name\":\"firstDowns\",\"displayValue\":\"13\",\"value\":13,\"label\":\"1st Downs\"},{\"name\":\"firstDownsPassing\",\"displayValue\":\"10\",\"value\":10,\"label\":\"Passing 1st downs\"},{\"name\":\"firstDownsRushing\",\"displayValue\":\"1\",\"value\":1,\"label\":\"Rushing 1st downs\"},{\"name\":\"firstDownsPenalty\",\"displayValue\":\"2\",\"value\":2,\"label\":\"1st downs from penalties\"},{\"name\":\"thirdDownEff\",\"displayValue\":\"6-15\",\"value\":0.4,\"label\":\"3rd down efficiency\"},{\"name\":\"fourthDownEff\",\"displayValue\":\"0-2\",\"value\":0,\"label\":\"4th down efficiency\"},{\"name\":\"totalOffensivePlays\",\"displayValue\":\"59\",\"value\":59,\"label\":\"Total Plays\"},{\"name\":\"totalYards\",\"displayValue\":\"232\",\"value\":\"-\",\"label\":\"Total Yards\"},{\"name\":\"yardsPerPlay\",\"displayValue\":\"3.9\",\"value\":3.9322033898,\"label\":\"Yards per Play\"},{\"name\":\"totalDrives\",\"displayValue\":\"11\",\"value\":11,\"label\":\"Total Drives\"},{\"name\":\"netPassingYards\",\"displayValue\":\"210\",\"value\":210,\"label\":\"Passing\"},{\"name\":\"completionAttempts\",\"displayValue\":\"21/40\",\"value\":\"-\",\"label\":\"Comp/Att\"},{\"name\":\"yardsPerPass\",\"displayValue\":\"5.1\",\"value\":5.121951219512195,\"label\":\"Yards per pass\"},{\"name\":\"interceptions\",\"displayValue\":\"0\",\"value\":0,\"label\":\"Interceptions thrown\"},{\"name\":\"sacksYardsLost\",\"displayValue\":\"1-10\",\"value\":\"-\",\"label\":\"Sacks-Yards Lost\"},{\"name\":\"rushingYards\",\"displayValue\":\"22\",\"value\":22,\"label\":\"Rushing\"},{\"name\":\"rushingAttempts\",\"displayValue\":\"18\",\"value\":18,\"label\":\"Rushing Attempts\"},{\"name\":\"yardsPerRushAttempt\",\"displayValue\":\"1.2\",\"value\":1.222,\"label\":\"Yards per rush\"},{\"name\":\"redZoneAttempts\",\"displayValue\":\"1-1\",\"value\":1,\"label\":\"Red Zone (Made-Att)\"},{\"name\":\"totalPenaltiesYards\",\"displayValue\":\"7-43\",\"value\":\"-\",\"label\":\"Penalties\"},{\"name\":\"turnovers\",\"displayValue\":\"0\",\"value\":\"-\",\"label\":\"Turnovers\"},{\"name\":\"fumblesLost\",\"displayValue\":\"0\",\"value\":0,\"label\":\"Fumbles lost\"},{\"name\":\"interceptions\",\"displayValue\":\"0\",\"value\":0,\"label\":\"Interceptions thrown\"},{\"name\":\"defensiveTouchdowns\",\"displayValue\":\"0\",\"value\":0,\"label\":\"Defensive / Special Teams TDs\"},{\"name\":\"possessionTime\",\"displayValue\":\"24:58\",\"value\":1498,\"label\":\"Possession\"}],\"displayOrder\":1,\"homeAway\":\"away\"},{\"team\":{\"id\":\"30\",\"uid\":\"s:20~l:28~t:30\",\"slug\":\"jacksonville-jaguars\",\"location\":\"Jacksonville\",\"name\":\"Jaguars\",\"abbreviation\":\"JAX\",\"displayName\":\"Jacksonville Jaguars\",\"shortDisplayName\":\"Jaguars\",\"color\":\"007487\",\"alternateColor\":\"d7a22a\",\"logo\":\"https://a.espncdn.com/i/teamlogos/nfl/500/jax.png\"},\"statistics\":[{\"name\":\"firstDowns\",\"displayValue\":\"18\",\"value\":18,\"label\":\"1st Downs\"},{\"name\":\"firstDownsPassing\",\"displayValue\":\"12\",\"value\":12,\"label\":\"Passing 1st downs\"},{\"name\":\"firstDownsRushing\",\"displayValue\":\"6\",\"value\":6,\"label\":\"Rushing 1st downs\"},{\"name\":\"firstDownsPenalty\",\"displayValue\":\"0\",\"value\":0,\"label\":\"1st downs from penalties\"},{\"name\":\"thirdDownEff\",\"displayValue\":\"5-16\",\"value\":0.3125,\"label\":\"3rd down efficiency\"},{\"name\":\"fourthDownEff\",\"displayValue\":\"2-4\",\"value\":0.5,\"label\":\"4th down efficiency\"},{\"name\":\"totalOffensivePlays\",\"displayValue\":\"68\",\"value\":68,\"label\":\"Total Plays\"},{\"name\":\"totalYards\",\"displayValue\":\"408\",\"value\":\"-\",\"label\":\"Total Yards\"},{\"name\":\"yardsPerPlay\",\"displayValue\":\"6.0\",\"value\":6,\"label\":\"Yards per Play\"},{\"name\":\"totalDrives\",\"displayValue\":\"12\",\"value\":12,\"label\":\"Total Drives\"},{\"name\":\"netPassingYards\",\"displayValue\":\"306\",\"value\":306,\"label\":\"Passing\"},{\"name\":\"completionAttempts\",\"displayValue\":\"24/39\",\"value\":\"-\",\"label\":\"Comp/Att\"},{\"name\":\"yardsPerPass\",\"displayValue\":\"7.5\",\"value\":7.463414634146342,\"label\":\"Yards per pass\"},{\"name\":\"interceptions\",\"displayValue\":\"1\",\"value\":1,\"label\":\"Interceptions thrown\"},{\"name\":\"sacksYardsLost\",\"displayValue\":\"2-25\",\"value\":\"-\",\"label\":\"Sacks-Yards Lost\"},{\"name\":\"rushingYards\",\"displayValue\":\"102\",\"value\":102,\"label\":\"Rushing\"},{\"name\":\"rushingAttempts\",\"displayValue\":\"27\",\"value\":27,\"label\":\"Rushing Attempts\"},{\"name\":\"yardsPerRushAttempt\",\"displayValue\":\"3.8\",\"value\":3.778,\"label\":\"Yards per rush\"},{\"name\":\"redZoneAttempts\",\"displayValue\":\"0-3\",\"value\":0,\"label\":\"Red Zone (Made-Att)\"},{\"name\":\"totalPenaltiesYards\",\"displayValue\":\"13-100\",\"value\":\"-\",\"label\":\"Penalties\"},{\"name\":\"turnovers\",\"displayValue\":\"1\",\"value\":\"-\",\"label\":\"Turnovers\"},{\"name\":\"fumblesLost\",\"displayValue\":\"0\",\"value\":0,\"label\":\"Fumbles lost\"},{\"name\":\"interceptions\",\"displayValue\":\"1\",\"value\":1,\"label\":\"Interceptions thrown\"},{\"name\":\"defensiveTouchdowns\",\"displayValue\":\"0\",\"value\":0,\"label\":\"Defensive / Special Teams TDs\"},{\"name\":\"possessionTime\",\"displayValue\":\"35:02\",\"value\":2102,\"label\":\"Possession\"}],\"displayOrder\":2,\"homeAway\":\"home\"}]]"
+}

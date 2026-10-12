@@ -1,0 +1,69 @@
+@font-face {
+  font-family: Bangers;
+  src: url(/fonts/Bangers-Regular.ttf) format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: Barlow;
+  src: url(/fonts/Barlow-Regular.ttf) format("truetype");
+  font-display: swap;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: #101318;
+  color: #fff;
+  font:
+    16px Barlow,
+    Arial,
+    sans-serif;
+  color-scheme: dark;
+}
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 20px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+button {
+  font:
+    25px Bangers,
+    Impact,
+    sans-serif;
+  letter-spacing: 1.3px;
+  color: #101318;
+  background: #ccff66;
+  border: 1px solid #ccff66;
+  border-radius: 9px;
+  box-shadow: 3px 4px 0 #ff66bb;
+  padding: 15px 28px;
+  min-width: 180px;
+  cursor: pointer;
+}
+button:hover {
+  background: #b8ec4c;
+}
+a {
+  color: #aeb6c2;
+  text-underline-offset: 4px;
+  padding: 6px;
+}
+a:hover {
+  color: #ccff66;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #ccff66;
+  outline-offset: 6px;
+}

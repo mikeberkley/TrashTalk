@@ -1,0 +1,108 @@
+{
+  "id": "gen-1791802880-DBCx1zP3DYhfZ0fkLxw7",
+  "object": "chat.completion",
+  "created": 1791802880,
+  "model": "x-ai/grok-4.3",
+  "provider": "xAI",
+  "system_fingerprint": null,
+  "service_tier": null,
+  "choices": [
+    {
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"researchedAt\": \"2026-10-12T11:01:20.048Z\",\n  \"gameId\": \"nfl:401872981\",\n  \"cards\": [\n    {\n      \"title\": \"Dramatic London Finish\",\n      \"body\": \"Jaguars defeated Eagles 19-17 on Cam Little's 57-yard FG as time expired after Ameer Abdullah's 53-yard kickoff return. Eagles had taken 17-16 lead on Jake Elliott's 48-yard FG with 8 seconds left.\",\n      \"sourceUrls\": [\"https://www.espn.com/nfl/recap/_/gameId/401872981\"]\n    },\n    {\n      \"title\": \"Key Performances & Context\",\n      \"body\": \"Trevor Lawrence threw for 331 yards and two TDs (both to Parker Washington). Eagles played without Saquon Barkley and DeVonta Smith. Game at Tottenham Hotspur Stadium; JAX improved to 4-1, PHI fell to 2-3.\",\n      \"sourceUrls\": [\"https://www.espn.com/nfl/recap/_/gameId/401872981\", \"https://www.espn.com/nfl/story/_/id/50159690/sirianni-call-leads-dramatic-winning-kick-jaguars-little\"]\n    }\n  ],\n  \"sources\": [\n    {\n      \"url\": \"https://www.espn.com/nfl/recap/_/gameId/401872981\",\n      \"title\": \"Jaguars 19-17 Eagles (Oct 11, 2026) Game Recap - ESPN\",\n      \"publishedAt\": \"2026-10-11T14:09:00Z\",\n      \"retrievedAt\": \"2026-10-12T11:01:20.048Z\"\n    },\n    {\n      \"url\": \"https://www.espn.com/nfl/story/_/id/50159690/sirianni-call-leads-dramatic-winning-kick-jaguars-little\",\n      \"title\": \"Sirianni's call leads to dramatic winning kick by Jaguars' Little - ESPN\",\n      \"publishedAt\": \"2026-10-11T14:09:00Z\",\n      \"retrievedAt\": \"2026-10-12T11:01:20.048Z\"\n    }\n  ],\n  \"uncertainties\": []\n}",
+        "refusal": null,
+        "reasoning": "I will search the web once for the current story behind this exact sports matchup.",
+        "reasoning_details": [
+          {
+            "type": "reasoning.summary",
+            "summary": "I will search the web once for the current story behind this exact sports matchup.",
+            "index": 0
+          },
+          {
+            "type": "reasoning.encrypted",
+            "data": "k4pgBEHqYar85c7Lzu+H/exN417n2QMW45QAexlrxYrJ2WrM1T5yt7+uFfbE6Ma19mvPDbOE3lOBraZsPxk1Z3MJnqjv7VFSt8DVzd8d4wtrRsZRVDlvUgyXQOTLuKAat4k51U2XnuoXgzVIx3y2lnRuoyKXp5M2WlOtmfqqQoLD5iqNx0n+4JB+gl4Kl436C6krNSciDns7+7teYyucBVpBLQI/EKLpg67r6oI1XRIf6FCOslLtg/Pj3QZ+NCeHyBsDBQGu+CZCTRr2gP6LBI0JWNcMC5UArFW7UfkunJWACv928lUcTAqlMOaoSRTKC92EA4xqGcGnfCQmLQDMbc8h97c9EYrioLUp6YJIPQZJ+8BE8MO6iAZ311lLQSCBoiirYNIB7ZImMEnfvNMw8ifI1ef1TBNCx0d9w1svJgQrLrv1lzQli8yzLZLGeJYWt39YK6MZO7OoWL7+K2JOPETp3Duxg5apovxK5p2kPnppCmqQF5EPeX/vJ27807GgY5T7ytDKEqCMDAOeDW6+zM8ZpqgPFDODgAIH0qJF+QQ6dPIHCEe7peMNaH8NhhBsTr8vZAgg093okWkVqBkqqKl/ti2I6rpDX3ynpFKtt1Q9yriMJDGX+jE3jdr7C7utUeqothkoWpqfo5LtYz+4/CdyiXni0t3PFaw0QbbtRcNIRCm1mTMByMZbjiyaHLDAM6iDWvAqeOGxMw9yHX+DHPRFpaJXcx89Bb9OnMpCLfuaRFMR6ozZuloAbKlQCXdV0pkho0drvQEfaIyWkFQHuKIdNUF4UrChw7c1IKHb1A1sjw6I5EFf3zm+SC+CLgeBPsHi7mqZ2YpUEnNFVukEX+LNvZ08/GC/N4QBLUyIYIeuLotsZQfVWbflGVd5iWi5hHvWaulbNxfIPnnFMLuzIoWMPLHKphCkui+aza6SDZKfXHPpoJ7laqdYp0KQMVBaBANbJIbyiz4/olfG94QJt2ug04VKYT91T0FzpAElHhBEVmY27XD10msFn07N8aW4m+6uCk9IR3qonoO2QcEg6JuJJlXJVwDOqT/ATWA.eyJlbmRwb2ludF9zbHVnIjoieC1haS9ncm9rLTQuMy0yMDI2MDQzMHx4YWkifQ",
+            "format": "xai-responses-v1",
+            "id": "rs_c9058881-4c16-9540-8cdf-c2218cf6e25f",
+            "index": 1
+          },
+          {
+            "type": "reasoning.summary",
+            "summary": "The search results provide the story from ESPN.",
+            "index": 2
+          },
+          {
+            "type": "reasoning.encrypted",
+            "data": "FybUjeeJ09pIeoEAteucWWwz2BhHmUM/mbHRsEib4UqiG85D3IDWWu7NvHHWflJglGc133Akms7XA5OPBwVKnBCocERck9g0suzDQu3X2g9VrVh8EDHr986ffjJkJUKByoDafFLJnLJk2bkQZoY74e6agWhqUIDWkbLGmowjmak0EoB9sR3Xsc1FaDEaEbBKet4ep1Q7y+5qoQSQZDpWC5fSy8a3AXCnve7V/baE4DLWQWpYPS/UQO6fe1A+rRFk1/RnLfCsz+M+eMFyldSQS4c12voarDSCoXblAVKp6ShmCqdmEMLeIuMWyxPbkDTzT624gvb2Whi7X8cxRQyOfl8FyOPiCOKLXAztieIeePKxz49IcHF9mWGfAQl3JgP4XnY6NBz98owxifcEYN6aLDMSVrWhbXU0v++RJunl3Yalq49bbB1Dx+FbH2cBH2upvBMJbMP62B+WokMgz3+2tL4CSiGCX1stsFgP676UjeU6hBrLmPrBF4IKIzFANhoyWmV4GcwYeobEoWwjrNAGTp91pnnm5gBUM+Qd5IDH6NgtCBavNfEMq+f4Fltdi8Esa9PA7pIj6i0aa9MBKws1W6JFnYIwV3NAyEnPnIYugPcfC24NnHYznnpn6EfbaY0BXYjT43rcQBaLf9GU/F1eY9lB+BIlVIunsOl6EIGhWoYpiyks3UU/NLb85FT6nAWn5YePx4xxKxZh/GDyuULRKh+qrtkWe30k9b9/Lupl/e0INDoY/i3AYGZZayw/y+W9+/VA4gjzkRvPHg7LK9PeciyxcHIC7eUsCcawRtWSEqZX0XeGuniXKyXqxY2OQ6cq88+aRsIQze3hKUcT5bFqWMiBtD7igs8UuvyYwI2eRn2OjuLg1xDU9qQo3Q8OvVw6cnIWJ20Gz0XuLpiZRejZQ7LkYKiyRGBZqe3AAFObojBH/NiSboowbUO2jgI4G65qI5U6ZiHZZx43gwgGLcJzjdXdhjsAekHG5WiivsXPTQyLbXLCLRQCkK9QQ02TAxrgE4A0LyKfb/oHranzF7Rh9soHQwLbbwjuGbpzGwrSNRHVYiD1QwB6UFgZN3tqv7+kkfJtDXIZNLtCNGnUXBEiVmmo7FJFGTGb+fSJWejYhDfVRcp22ycpB/XjGCGtbo7ijuY4WePYNDk86FeDSExH8PI1w7BKuc8vXAitoqll02tuKM3J093ljubv7bOcN5OOUhvbwuqPgiRoOUnD6QWKiwn9uRgQCtF4UnCCA3HopUBsyTJeRR0YrqheBkerIl7SYA9m6jeilRvvo3SWqO7rMaQ0Q2h8mfl4QCXP0LFF3LkBFABZjpWu1XTaQITTb0Az3piLPR2bOknRiJ7NRwAIXdD1m4pIB09pwvGCAB9d2HEtdMXkuNEsSLUY0fowD706H2knpUfXYCOmBZDIzWcot6SJZItsWNa7m0yZBLY6vVhGPf8H4IU50mzUo2Mg48VjL6ZOeg32pLtoRA2fZxuQ1HQEqNHscSLtmoLlZ8VJUdiO+LnxvPyGDssJ/kr2jyUac667osHoPAx2D4IW+5bNMK9kb+vZrPj6SoLzoaMNdUpj4BtHSQ3mwayEKcGOGXRENJ/x/JoLcsP/AfHKnFCXkRNUsJNupI0d9yb0+mP4ZkW77DD6ZGGeaUzwmcACip3nmMtFi3JZ2xwTeseHs8Yy7PYINByCLk1gKtXswVCRIJd86czC4IueAr6ilvk.eyJlbmRwb2ludF9zbHVnIjoieC1haS9ncm9rLTQuMy0yMDI2MDQzMHx4YWkifQ",
+            "format": "xai-responses-v1",
+            "id": "rs_0c138f71-bb44-94fc-abb2-3ee494b1c832",
+            "index": 3
+          }
+        ],
+        "annotations": [
+          {
+            "type": "url_citation",
+            "url_citation": {
+              "url": "https://www.espn.com/nfl/recap/_/gameId/401872981",
+              "title": "Jaguars 19-17 Eagles (Oct 11, 2026) Game Recap - ESPN",
+              "start_index": 0,
+              "end_index": 0,
+              "content": "Jaguars 19-17 Eagles (Oct 11, 2026) Game Recap - ESPN\nPhiladelphia Eagles Eagles PHI\n2-3\n17\n2-3\nFinal\n||1|2|3|4|T|\n|Eagles PHI|0|14|0|3|17|\n|Jaguars JAX|7|0|3|9|19|\nJacksonville Jaguars Jaguars JAX\n4-1\n19\n# Cam Little's 57-yard FG gives Jaguars 19-17 win over Eagles in wild finish in London\nBy AP\nOct 11, 2026, 02:09 pm\nLONDON -- — Cam Little kicked a 57-yard field goal as time expired and the Jacksonville Jaguars beat the Philadelphia Eagles 19-17 after Ameer Abdullah's 53-yard kickoff return left 1 second left in a wild finish at Tottenham Hotspur Stadium on Sunday.\nThe Eagles had taken a 17-16 lead on Jake Elliott's 48-yard field goal with 8 seconds left — after Little's extra-point attempt was wide left following Parker Washington's 27-yard touchdown reception late in the fourth quarter.\nPhiladelphia, which slipped to 2/3 for the first time since 2021, played without leading rusher Saquon Barkley and receiver DeVonta Smith and with a makeshift offensive line.\nTrevor Lawrence completed 24 of 39 passes for 331 yards and two touchdowns — both to Washington — along with an interception for the Jaguars (4-1).\nEagles linebacker Zack Baun ensured his team went into halftime with a 14-7 lead by getting past Chris Rodriguez Jr. and tackling Bhayshul Tuten for a loss when Jacksonville went for it on fourth-and-goal from the 1 with 1 second left in the half. Eagles coach Nick Sirianni jumped and pumped his first in reaction.\nLawrence’s 51-yard touchdown pass to Washington gave Jacksonville an early 7-0 lead before the Eagles responded with two scoring drives — one long, one short.\nTravis Hunter’s defensive pass interference penalty on third-and-17 in the red zone set up the Eagles for first-and-goal from the 3. Two plays later, Will Shipley carried it in from the 2 to finish a 13-play drive that took more than seven minutes. Jalen Hurts had kept the drive alive by finding Dontayvion Wicks for an 18-yard reception on third-and-10 in Jacksonville territory.\nAfter the Jags"
+            }
+          },
+          {
+            "type": "url_citation",
+            "url_citation": {
+              "url": "https://www.espn.com/nfl/story/_/id/50159690/sirianni-call-leads-dramatic-winning-kick-jaguars-little",
+              "title": "Sirianni's call leads to dramatic winning kick by Jaguars' Little - ESPN",
+              "start_index": 0,
+              "end_index": 0,
+              "content": "kicked the ball to Ameer Abdullah, keeping it in play instead of trying for the touchback. Abdullah returned it 53 yards to set up a game-winning 57-yard Cam Little field goal as time expired, dropping Philadelphia to 2-3 while the Jaguars improved to"
+            }
+          },
+          {
+            "type": "url_citation",
+            "url_citation": {
+              "url": "https://www.espn.com/nfl/game/_/gameId/401872981/eagles-jaguars",
+              "title": "Eagles vs. Jaguars (Oct 11, 2026) Live Score - ESPN",
+              "start_index": 0,
+              "end_index": 0,
+              "content": "Eagles vs. Jaguars (Oct 11, 2026) Live Score - ESPN\n...\n# Jacksonville Jaguars vs Philadelphia Eagles\n\nNFL London Games\n...\n2026-10-11T13:30ZOpenSpreadTotalML\n...\n## Injury Report\n...\nJ. Campbell\n...\nEli StowersE. St\n...\nMakai LemonM."
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 9174,
+    "completion_tokens": 1058,
+    "total_tokens": 10232,
+    "cost": 0.0168117,
+    "prompt_tokens_details": {
+      "cached_tokens": 4096,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 523,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0098117,
+      "upstream_inference_prompt_cost": 0.0071667,
+      "upstream_inference_completions_cost": 0.0026449999999999998
+    },
+    "server_tool_use_details": {
+      "web_search_requests": 1,
+      "tool_calls_requested": 1,
+      "tool_calls_executed": 1
+    }
+  }
+}

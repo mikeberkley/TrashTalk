@@ -1,0 +1,75 @@
+{
+  "researchedAt": "2026-10-12T11:16:32.179Z",
+  "gameId": "nfl:401872981",
+  "cards": [
+    {
+      "title": "Dramatic London Finish",
+      "body": "Jaguars defeated Eagles 19-17 on Cam Little's 57-yard FG as time expired after Ameer Abdullah's 53-yard kickoff return. Eagles had taken 17-16 lead on Jake Elliott's 48-yard FG with 8 seconds left.",
+      "sourceUrls": [
+        "https://www.espn.com/nfl/recap/_/gameId/401872981"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://www.espn.com/nfl/recap/_/gameId/401872981",
+      "title": "Jaguars 19-17 Eagles (Oct 11, 2026) Game Recap - ESPN",
+      "publishedAt": "2026-10-11T14:09:00Z",
+      "retrievedAt": "2026-10-12T11:01:20.048Z"
+    }
+  ],
+  "uncertainties": [],
+  "searchRequests": 1,
+  "usage": {
+    "prompt_tokens": 9174,
+    "completion_tokens": 1058,
+    "total_tokens": 10232,
+    "cost": 0.0168117,
+    "prompt_tokens_details": {
+      "cached_tokens": 4096,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 523,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0098117,
+      "upstream_inference_prompt_cost": 0.0071667,
+      "upstream_inference_completions_cost": 0.0026449999999999998
+    },
+    "server_tool_use_details": {
+      "web_search_requests": 1,
+      "tool_calls_requested": 1,
+      "tool_calls_executed": 1
+    }
+  },
+  "citations": [
+    {
+      "url": "https://www.espn.com/nfl/recap/_/gameId/401872981",
+      "title": "Jaguars 19-17 Eagles (Oct 11, 2026) Game Recap - ESPN",
+      "start_index": 0,
+      "end_index": 0,
+      "content": "Jaguars 19-17 Eagles (Oct 11, 2026) Game Recap - ESPN\nPhiladelphia Eagles Eagles PHI\n2-3\n17\n2-3\nFinal\n||1|2|3|4|T|\n|Eagles PHI|0|14|0|3|17|\n|Jaguars JAX|7|0|3|9|19|\nJacksonville Jaguars Jaguars JAX\n4-1\n19\n# Cam Little's 57-yard FG gives Jaguars 19-17 win over Eagles in wild finish in London\nBy AP\nOct 11, 2026, 02:09 pm\nLONDON -- — Cam Little kicked a 57-yard field goal as time expired and the Jacksonville Jaguars beat the Philadelphia Eagles 19-17 after Ameer Abdullah's 53-yard kickoff return left 1 second left in a wild finish at Tottenham Hotspur Stadium on Sunday.\nThe Eagles had taken a 17-16 lead on Jake Elliott's 48-yard field goal with 8 seconds left — after Little's extra-point attempt was wide left following Parker Washington's 27-yard touchdown reception late in the fourth quarter.\nPhiladelphia, which slipped to 2/3 for the first time since 2021, played without leading rusher Saquon Barkley and receiver DeVonta Smith and with a makeshift offensive line.\nTrevor Lawrence completed 24 of 39 passes for 331 yards and two touchdowns — both to Washington — along with an interception for the Jaguars (4-1).\nEagles linebacker Zack Baun ensured his team went into halftime with a 14-7 lead by getting past Chris Rodriguez Jr. and tackling Bhayshul Tuten for a loss when Jacksonville went for it on fourth-and-goal from the 1 with 1 second left in the half. Eagles coach Nick Sirianni jumped and pumped his first in reaction.\nLawrence’s 51-yard touchdown pass to Washington gave Jacksonville an early 7-0 lead before the Eagles responded with two scoring drives — one long, one short.\nTravis Hunter’s defensive pass interference penalty on third-and-17 in the red zone set up the Eagles for first-and-goal from the 3. Two plays later, Will Shipley carried it in from the 2 to finish a 13-play drive that took more than seven minutes. Jalen Hurts had kept the drive alive by finding Dontayvion Wicks for an 18-yard reception on third-and-10 in Jacksonville territory.\nAfter the Jags"
+    },
+    {
+      "url": "https://www.espn.com/nfl/story/_/id/50159690/sirianni-call-leads-dramatic-winning-kick-jaguars-little",
+      "title": "Sirianni's call leads to dramatic winning kick by Jaguars' Little - ESPN",
+      "start_index": 0,
+      "end_index": 0,
+      "content": "kicked the ball to Ameer Abdullah, keeping it in play instead of trying for the touchback. Abdullah returned it 53 yards to set up a game-winning 57-yard Cam Little field goal as time expired, dropping Philadelphia to 2-3 while the Jaguars improved to"
+    },
+    {
+      "url": "https://www.espn.com/nfl/game/_/gameId/401872981/eagles-jaguars",
+      "title": "Eagles vs. Jaguars (Oct 11, 2026) Live Score - ESPN",
+      "start_index": 0,
+      "end_index": 0,
+      "content": "Eagles vs. Jaguars (Oct 11, 2026) Live Score - ESPN\n...\n# Jacksonville Jaguars vs Philadelphia Eagles\n\nNFL London Games\n...\n2026-10-11T13:30ZOpenSpreadTotalML\n...\n## Injury Report\n...\nJ. Campbell\n...\nEli StowersE. St\n...\nMakai LemonM."
+    }
+  ],
+  "attempted": true,
+  "limitation": null
+}

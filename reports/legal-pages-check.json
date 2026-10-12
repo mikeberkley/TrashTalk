@@ -1,0 +1,54 @@
+{
+  "checkedAt": "2026-10-12T12:48:01.224Z",
+  "pages": [
+    {
+      "path": "/",
+      "width": 390,
+      "status": 200,
+      "title": "Sports rivalry. Made personal.",
+      "overflow": false,
+      "publicWithoutLogin": true
+    },
+    {
+      "path": "/privacy",
+      "width": 390,
+      "status": 200,
+      "title": "Privacy Policy",
+      "overflow": false,
+      "publicWithoutLogin": true
+    },
+    {
+      "path": "/terms",
+      "width": 390,
+      "status": 200,
+      "title": "Terms of Service",
+      "overflow": false,
+      "publicWithoutLogin": true
+    },
+    {
+      "path": "/",
+      "width": 1440,
+      "status": 200,
+      "title": "Sports rivalry. Made personal.",
+      "overflow": false,
+      "publicWithoutLogin": true
+    },
+    {
+      "path": "/privacy",
+      "width": 1440,
+      "status": 200,
+      "title": "Privacy Policy",
+      "overflow": false,
+      "publicWithoutLogin": true
+    },
+    {
+      "path": "/terms",
+      "width": 1440,
+      "status": 200,
+      "title": "Terms of Service",
+      "overflow": false,
+      "publicWithoutLogin": true
+    }
+  ],
+  "checkoutBlocked": true
+}

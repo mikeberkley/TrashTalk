@@ -1,0 +1,214 @@
+.trash-talk-card {
+  overflow: hidden;
+}
+.trash-talk-heading .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ff976b;
+}
+.trash-talk-heading {
+  padding: 12px 14px;
+}
+.trash-talk-actions {
+  display: flex;
+  justify-content: center;
+  padding: 16px 14px;
+}
+.trash-talk-neutral-hint {
+  text-align: center;
+  padding-bottom: 14px;
+}
+.trash-talk-card .trash-talk-generate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 18px;
+  border: 1px solid #ff976b80;
+  border-radius: 10px;
+  background: #ff976b18;
+  color: #ffd5c2;
+  font-weight: 600;
+}
+.trash-talk-card .trash-talk-generate:hover:not(:disabled) {
+  background: #ff976b30;
+}
+.trash-talk-card .trash-talk-generate:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.trash-talk-card .poster-stack {
+  margin-top: 0;
+}
+.trash-talk-card > p {
+  padding-inline: 14px;
+}
+.trash-talk-card > p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.trash-talk-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+  margin-top: 14px;
+  border-radius: 10px;
+}
+.trash-talk-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 32px 12px;
+  color: #ff976b;
+}
+.trash-talk-loading span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.trash-talk-art {
+  position: relative;
+  margin-top: 0;
+}
+.trash-talk-art .trash-talk-image {
+  margin-top: 0;
+}
+
+.trash-talk-word-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+}
+.trash-talk-word-form label {
+  font-size: 14px;
+  font-weight: 600;
+}
+.trash-talk-word-form label span,
+.trash-talk-word-form small {
+  color: var(--muted);
+  font-weight: 400;
+}
+.trash-talk-word-form input {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #101820;
+  color: #fff;
+  font-size: 16px;
+}
+.trash-talk-word-form input[aria-invalid='true'] {
+  border-color: #f7a6a6;
+}
+.trash-talk-word-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 4px;
+}
+.trash-talk-cancel {
+  min-height: 44px;
+  padding: 10px 14px;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.trash-talk-word-form :is(input, button):focus-visible {
+  outline: 2px solid #ff976b;
+  outline-offset: 3px;
+}
+.trash-talk-word-form .recap-error {
+  margin: 0;
+}
+
+.trash-talk-image[role='button'] {
+  cursor: zoom-in;
+}
+.trash-talk-image[role='button']:focus-visible {
+  outline: 2px solid #ff976b;
+  outline-offset: -3px;
+}
+.trash-talk-viewer {
+  touch-action: none;
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 64px 16px max(16px, env(safe-area-inset-bottom));
+  border: 0;
+  background: #000;
+  overflow: hidden;
+}
+.trash-talk-viewer[open] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.trash-talk-viewer-share {
+  flex-shrink: 0;
+}
+.trash-talk-viewer-share .poster-share {
+  position: relative;
+  right: auto;
+  bottom: auto;
+}
+.trash-talk-viewer-share .poster-share-trigger {
+  display: flex;
+  gap: 8px;
+  width: auto;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.trash-talk-viewer-share .poster-share-options {
+  right: 50%;
+  transform: translateX(50%);
+}
+.trash-talk-viewer::backdrop {
+  background: #000;
+}
+.trash-talk-viewer > img {
+  display: block;
+  width: min(100%, calc(100dvh - 160px));
+  height: auto;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+.trash-talk-viewer-close {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid #ffffff70;
+  border-radius: 50%;
+  background: #000b;
+  color: #fff;
+  cursor: pointer;
+}
+.trash-talk-viewer-close:focus-visible {
+  outline: 2px solid #ff976b;
+  outline-offset: 3px;
+}

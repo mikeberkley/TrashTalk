@@ -1,0 +1,42 @@
+{
+  "name": "trashtalk",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "verify": "npm run typecheck && npm test && npm run build",
+    "worker:dev": "wrangler dev --env preview",
+    "catalog": "tsx scripts/catalog.ts",
+    "probe": "tsx scripts/probe.ts"
+  },
+  "dependencies": {
+    "fast-png": "latest",
+    "hono": "latest",
+    "jose": "latest",
+    "jpeg-js": "latest",
+    "obscenity": "latest",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "stripe": "latest",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "latest",
+    "@playwright/test": "latest",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@vitejs/plugin-react": "latest",
+    "jsonc-parser": "^3.3.1",
+    "prettier": "^3.9.10",
+    "sharp": "latest",
+    "tsx": "latest",
+    "typescript": "latest",
+    "vite": "latest",
+    "vitest": "latest",
+    "wrangler": "latest"
+  }
+}

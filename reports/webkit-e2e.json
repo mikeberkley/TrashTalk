@@ -1,0 +1,17 @@
+{
+  "engine": "Playwright WebKit",
+  "device": "iPhone 13 emulation, not physical Safari",
+  "errors": [],
+  "privatePhotoStatus": 404,
+  "beforeShareStatus": 404,
+  "nativeShareInvocation": {
+    "data": {
+      "title": "Jags' 57-yard kick? Our force field blinked!",
+      "url": "https://trashtalk-preview.berkleym.workers.dev/m/f081feb486744b90b59e7316b4f6896f"
+    },
+    "active": true
+  },
+  "afterShareStatus": 200,
+  "focusRestored": true,
+  "overflow": false
+}

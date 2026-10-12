@@ -1,0 +1,164 @@
+{
+  "checkedAt": "2026-10-12T13:12:37.809Z",
+  "origin": "https://trashtalk.fanlift.ai",
+  "jobs": [
+    {
+      "id": "693f3924-56c3-472b-96a6-dca8aeec83e2",
+      "status": "complete",
+      "caption": {
+        "text": "RAMS, YOUR 427 YARDS ARE BUFFALO BUFFET!",
+        "visual": "A skyscraper-sized buffalo vacuuming up a tornado of glowing yard ribbons while sad mini-Rams ride away on paper planes shaped like sad trophies"
+      },
+      "creditState": "captured",
+      "googleLinked": true,
+      "freeBalance": 2,
+      "promptVersion": "fanlift-2a91488-standalone-v2-one-photo-logos",
+      "research": {
+        "searchRequests": 1,
+        "sources": [
+          {
+            "url": "https://www.espn.co.uk/nfl/preview/_/gameId/401872994",
+            "title": "Bills vs. Rams (13 Oct, 2026) Pregame (UK)",
+            "publishedAt": null,
+            "retrievedAt": "2026-10-12T13:07:26.038Z"
+          },
+          {
+            "url": "https://www.therams.com/news/all-eyes-on-sofi-stadium-rams-bills-battle-week-5-monday-night-football-game-preview",
+            "title": "All eyes on SoFi Stadium as the Los Angeles Rams and the Buffalo Bills battle on Monday Night Football - Game Preview",
+            "publishedAt": null,
+            "retrievedAt": "2026-10-12T13:07:26.038Z"
+          }
+        ],
+        "limitation": null
+      },
+      "logoVersions": {
+        "home": "81d347b2b6ea869db68ab186ee73bb36bdc130413bfc2f9c204767b170e226cc",
+        "away": "438d340622e3ed278560b7f813d43e1a5d7a771c62cf06356757fb82799bc068"
+      }
+    }
+  ],
+  "purchases": [
+    {
+      "live_session": 1,
+      "status": "pending",
+      "amount": 99,
+      "credits": 4,
+      "grants": 0
+    }
+  ],
+  "leagues": [
+    {
+      "id": "bundesliga",
+      "enabled": 1,
+      "teams": 18
+    },
+    {
+      "id": "epl",
+      "enabled": 1,
+      "teams": 20
+    },
+    {
+      "id": "laliga",
+      "enabled": 1,
+      "teams": 20
+    },
+    {
+      "id": "ligue1",
+      "enabled": 1,
+      "teams": 18
+    },
+    {
+      "id": "mlb",
+      "enabled": 1,
+      "teams": 30
+    },
+    {
+      "id": "mls",
+      "enabled": 1,
+      "teams": 30
+    },
+    {
+      "id": "nba",
+      "enabled": 1,
+      "teams": 30
+    },
+    {
+      "id": "nfl",
+      "enabled": 1,
+      "teams": 32
+    },
+    {
+      "id": "nhl",
+      "enabled": 1,
+      "teams": 32
+    },
+    {
+      "id": "nwsl",
+      "enabled": 1,
+      "teams": 16
+    },
+    {
+      "id": "seriea",
+      "enabled": 1,
+      "teams": 20
+    },
+    {
+      "id": "ucl",
+      "enabled": 1,
+      "teams": 36
+    }
+  ],
+  "http": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/privacy",
+      "status": 200
+    },
+    {
+      "path": "/terms",
+      "status": 200
+    },
+    {
+      "path": "/api/leagues",
+      "status": 200
+    },
+    {
+      "path": "/api/generations/693f3924-56c3-472b-96a6-dca8aeec83e2/image",
+      "status": 404
+    },
+    {
+      "path": "/m/61ce015e60304b5abd63abe6d7920764",
+      "status": 200
+    }
+  ],
+  "limitations": [
+    "No real payment submitted; live webhook fulfillment not verified.",
+    "Native sharing confirmed by user on physical iPhone in preview; production Chrome automation reported Permission denied from native sharing.",
+    "No live game currently available; production generation tested pregame."
+  ],
+  "browserChecks": [
+    {
+      "width": 390,
+      "overflow": false,
+      "competitions": 12
+    },
+    {
+      "width": 1440,
+      "overflow": false,
+      "competitions": 12
+    }
+  ],
+  "nativeSaveDownloadAutomation": "Inconclusive: native-dialog download was not captured. User confirmed physical iPhone preview Save and Share.",
+  "deploymentVersion": "b47e537e-a590-4cf8-a0cd-5bea512e142e",
+  "asset": "index-BEYU5YpF.js",
+  "productionGoogleSignIn": true,
+  "anonymousHistoryPreserved": true,
+  "liveCheckoutObserved": {
+    "priceCents": 99,
+    "credits": 4,
+    "charged": false
+  }
+}

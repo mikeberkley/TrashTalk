@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "environment": "preview",
+  "checks": {
+    "googleProductionAudienceObserved": true,
+    "signOut": true,
+    "repeatSignIn": true,
+    "restoredFreeCredits": 3,
+    "restoredPaidCredits": 9
+  },
+  "evidence": "Signed-in Chrome Google account chooser and TrashTalk account readback",
+  "limitations": [
+    "Production-origin sign-in to be checked after release.",
+    "Anonymous image-history merge not exercised in this login session."
+  ],
+  "checkedAt": "2026-10-12T13:03:02.766016+00:00"
+}

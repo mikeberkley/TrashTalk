@@ -1,0 +1,9 @@
+// Diagnostic only: compares the frozen prompt against the approved logo instruction.
+import fs from 'node:fs/promises';
+import {imageRequest,logoInstruction} from '../packages/trash-talk/src/prompts';
+import {dataUrl,validateArtwork} from '../worker/src/jobs/media';
+import {openrouter} from '../worker/src/research';
+const vars=await fs.readFile('.dev.vars.preview','utf8'),key=vars.match(/^OPENROUTER_API_KEY\s*=\s*["']?([^\s"']+)/m)?.[1];const env:any={OPENROUTER_API_KEY:key,ORIGIN:'https://trashtalk.fanlift.ai'};
+const g=JSON.parse(await fs.readFile('reports/probe-game.json','utf8'));const records=JSON.parse(await fs.readFile('catalog-cache/records.json','utf8'));const c:any={...g,favorite:'away'};for(const side of ['away','home']){const t=records.find((x:any)=>x.metadata.id===g[side].id);c[side]={...t.metadata,color:t.metadata.primary,logo:dataUrl(new Uint8Array(await fs.readFile(t.pngPath)),'image/png')};}
+const caption=JSON.parse(await fs.readFile('reports/caption-probe.json','utf8')),phrase=JSON.parse(caption.choices[0].message.content);
+for(const mode of ['unchanged-one-photo','proposed-logo-instruction']){const request=imageRequest(c,phrase,[dataUrl(new Uint8Array(await fs.readFile('tests/fixtures/pet.png')),'image/png')]);if(mode==='unchanged-one-photo')request.prompt=request.prompt.slice(0,-logoInstruction.length);const d=await openrouter(env,'images',request,120000);const bytes=Buffer.from(d.data[0].b64_json,'base64'),info=validateArtwork(bytes);await fs.writeFile(`reports/${mode}.jpg`,bytes);await fs.writeFile(`reports/${mode}.json`,JSON.stringify({mode,requestPrompt:request.prompt,orderedReferences:['away-logo','home-logo','pet-photo'],usage:d.usage,width:info.width,height:info.height,brandingVisualReview:'pending',productionPromptChanged:true},null,2));console.log('Logo visibility sample ready:',mode);}

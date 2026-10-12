@@ -1,0 +1,122 @@
+[
+  {
+    "league": "nfl",
+    "source": "https://a.espncdn.com/i/teamlogos/leagues/500/nfl.png",
+    "originalKey": "originals/leagues/nfl/0636d39ee7a9b88eda419d786eb1c4dcf20a5e431968391afb04eb917b5bb6b9",
+    "hash": "13bce53a834d105fdb0b9ee76505e7233a55e9d3d76de9b5ef34530f12a57c2a",
+    "width": 256,
+    "height": 256,
+    "checkedAt": "2026-10-12T11:20:45.281Z",
+    "ready": true
+  },
+  {
+    "league": "nba",
+    "source": "https://a.espncdn.com/i/teamlogos/leagues/500/nba.png",
+    "originalKey": "originals/leagues/nba/04b2b9dd2a0bda5310227001f9b48af3bb30ad9919d891a39ac723283e1ffbda",
+    "hash": "22ee1127046ec844d1770f5427d2f550fc7796039768006112eecc4df84c9a40",
+    "width": 256,
+    "height": 256,
+    "checkedAt": "2026-10-12T11:20:50.355Z",
+    "ready": true
+  },
+  {
+    "league": "mlb",
+    "source": "https://a.espncdn.com/i/teamlogos/leagues/500/mlb.png",
+    "originalKey": "originals/leagues/mlb/c9b1b4044466efaa1682048019ee71e22bb57d9ad0507cfbc40ed2991f75630a",
+    "hash": "ca6ad764488832956c2bac4af57ac5f078e15e121849376fded83eb56d19ff1d",
+    "width": 256,
+    "height": 256,
+    "checkedAt": "2026-10-12T11:20:55.864Z",
+    "ready": true
+  },
+  {
+    "league": "nhl",
+    "source": "https://a.espncdn.com/i/teamlogos/leagues/500/nhl.png",
+    "originalKey": "originals/leagues/nhl/e93e6820046d34f4b24d4d2c66e14a889de1dbdd2e8bdf9cb4d55a519b8ec63e",
+    "hash": "35794e6ede01c8c4cdcee68e7b8412046a9fc373491642455acab16dd167f4d9",
+    "width": 256,
+    "height": 256,
+    "checkedAt": "2026-10-12T11:21:00.500Z",
+    "ready": true
+  },
+  {
+    "league": "epl",
+    "source": "https://a.espncdn.com/i/leaguelogos/soccer/500/23.png",
+    "originalKey": "originals/leagues/epl/42e2fdced44ff542fa734409667c733841a7bcb903b526c85d12aac78aff2464",
+    "hash": "a53adea28d8c40e8d44db435332dd4ce2167adcaaf5d55874b5c3191e57c33f7",
+    "width": 256,
+    "height": 256,
+    "checkedAt": "2026-10-12T11:21:06.669Z",
+    "ready": true
+  },
+  {
+    "league": "laliga",
+    "source": "https://a.espncdn.com/i/leaguelogos/soccer/500/15.png",
+    "originalKey": "originals/leagues/laliga/4af38ab01c0313ff54bcfdaf24658100e4302134052a40529500e9551e92b1aa",
+    "hash": "4bd24abc75bfbcbe8ee91e38643fd26a37545babe7b58a6d6f5de8f56d2d4da1",
+    "width": 256,
+    "height": 256,
+    "checkedAt": "2026-10-12T11:21:11.565Z",
+    "ready": true
+  },
+  {
+    "league": "bundesliga",
+    "source": "https://a.espncdn.com/i/leaguelogos/soccer/500/10.png",
+    "originalKey": "originals/leagues/bundesliga/463b74682c9030631d8fc19a1535875496009a8f296775323127e2a2365094d0",
+    "hash": "a02c1da91cd3522b7487ce577f11f58ba025020917b33a5e8b7df8d63b0c9c97",
+    "width": 256,
+    "height": 256,
+    "checkedAt": "2026-10-12T11:21:16.536Z",
+    "ready": true
+  },
+  {
+    "league": "seriea",
+    "source": "https://a.espncdn.com/i/leaguelogos/soccer/500/12.png",
+    "originalKey": "originals/leagues/seriea/a96fb3d84f078adbd03d221f0163e6183624fbe531902970ed7251b149c7d0b9",
+    "hash": "4e5cf0ecff8c5c2331fec95feb600b061de18fcb912422e21b001d6ba9b12cda",
+    "width": 256,
+    "height": 256,
+    "checkedAt": "2026-10-12T11:21:21.110Z",
+    "ready": true
+  },
+  {
+    "league": "ligue1",
+    "source": "https://a.espncdn.com/i/leaguelogos/soccer/500/9.png",
+    "originalKey": "originals/leagues/ligue1/cb99d097992cffe78b57407a9d9d3db0df06f452f47c7f10c0e30ca0a8aeb9b1",
+    "hash": "7301cd447434d37fabffd2b91b0bebede8ff8e23ce903300ec0f3cc5a4e84075",
+    "width": 256,
+    "height": 256,
+    "checkedAt": "2026-10-12T11:21:26.015Z",
+    "ready": true
+  },
+  {
+    "league": "mls",
+    "source": "https://a.espncdn.com/i/leaguelogos/soccer/500/19.png",
+    "originalKey": "originals/leagues/mls/9e4b7c06391ad3742294dc761e7b951d0bf8603fd2b360370e1299832f602a9e",
+    "hash": "557a3d9151266fdd5c960c37361f903003ed2444ce6f26de7e9137818e1c39bb",
+    "width": 256,
+    "height": 256,
+    "checkedAt": "2026-10-12T11:21:30.807Z",
+    "ready": true
+  },
+  {
+    "league": "nwsl",
+    "source": "https://a.espncdn.com/i/leaguelogos/soccer/500/2323.png",
+    "originalKey": "originals/leagues/nwsl/640099eeeceecbf70f1cb280839544559a3d71128c224519b98847f60f902f44",
+    "hash": "15e8553e55c53eb70c63613c3f68bdbb10dac0a8aa553f8200321c3e1aa77c81",
+    "width": 256,
+    "height": 256,
+    "checkedAt": "2026-10-12T11:21:36.010Z",
+    "ready": true
+  },
+  {
+    "league": "ucl",
+    "source": "https://a.espncdn.com/i/leaguelogos/soccer/500/2.png",
+    "originalKey": "originals/leagues/ucl/638ba01ea2dc0679766a8a1c4152756108cadb6763b2f016c8ca5f5c9784ebc7",
+    "hash": "65a844cbef1383f2ac5b3ea514cee68db4c6c68dba014059d21f4c6176667c2f",
+    "width": 256,
+    "height": 256,
+    "checkedAt": "2026-10-12T11:21:41.237Z",
+    "ready": true
+  }
+]

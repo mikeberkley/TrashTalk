@@ -1,0 +1,98 @@
+{
+  "origin": "https://trashtalk.fanlift.ai",
+  "version": "5c0303c2-d916-49ce-b7d1-e338276eef58",
+  "views": [
+    {
+      "width": 390,
+      "overflow": false,
+      "errors": [],
+      "logo": {
+        "x": 20,
+        "y": 15,
+        "width": 42,
+        "height": 42
+      }
+    },
+    {
+      "width": 1440,
+      "overflow": false,
+      "errors": [],
+      "logo": {
+        "x": 340,
+        "y": 14,
+        "width": 46,
+        "height": 46
+      }
+    }
+  ],
+  "assets": [
+    {
+      "name": "trash-can-16.png",
+      "status": 200,
+      "type": "image/png",
+      "sha256": "683c9400f5d8fa2fb24cc8d368a2d249569f989731722360dc8d46b343eac826",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "name": "trash-can-32.png",
+      "status": 200,
+      "type": "image/png",
+      "sha256": "38bb1d71f5e54786c46435688dc1cc37544708017075c3549a150f1ddc8a0a5b",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "name": "trash-can-48.png",
+      "status": 200,
+      "type": "image/png",
+      "sha256": "7d854d8edd7420f04f3c5a6a0e5e7250c420f4a81eaaa6bc699fd2cdf56e4111",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "name": "trash-can-180.png",
+      "status": 200,
+      "type": "image/png",
+      "sha256": "0168f93e759220bd5723d81e90849a6746ba739ab9fe80e07d4509eee2947bd4",
+      "width": 180,
+      "height": 180
+    },
+    {
+      "name": "trash-can-192.png",
+      "status": 200,
+      "type": "image/png",
+      "sha256": "e010492d60ea67d609d28909cda399482e4820fe943528a1012cdb943d0da07e",
+      "width": 192,
+      "height": 192
+    },
+    {
+      "name": "trash-can-512.png",
+      "status": 200,
+      "type": "image/png",
+      "sha256": "0a87b4578ccc8e11065947458c72c7e7aff378ec2cf7fbb8a4dfad1ad72a50de",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "name": "trash-can-maskable-512.png",
+      "status": 200,
+      "type": "image/png",
+      "sha256": "41e42479ded2e92deda67ad0235fd15e3ab0b117f483e11080779622a0cdb019",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "name": "trash-can-favicon.ico",
+      "status": 200,
+      "type": "image/vnd.microsoft.icon",
+      "sha256": "8d2e100d204cf3bfb6dd2eaa89a34d7a25b5503b165b3dd7c2bc491c3601fa06"
+    },
+    {
+      "name": "manifest.webmanifest",
+      "status": 200,
+      "type": "application/manifest+json",
+      "sha256": "53c9346fe867d3327fa079a5472a00de227e78a8e0b232a7b551a482b28e4a74"
+    }
+  ]
+}

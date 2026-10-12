@@ -1,0 +1,18 @@
+{
+  "job": {
+    "id": "5ed83951-f9f3-4f81-8c28-8b39d50bacf9",
+    "gameId": "nfl:401872981",
+    "favoriteTeamId": "espn:football:21",
+    "includeWord": "",
+    "shareToken": "f081feb486744b90b59e7316b4f6896f",
+    "status": "complete",
+    "error": null,
+    "createdAt": 1791804508,
+    "text": "Jags' 57-yard kick? Our force field blinked!",
+    "url": "/api/generations/5ed83951-f9f3-4f81-8c28-8b39d50bacf9/image",
+    "limitation": null
+  },
+  "uploads": [
+    "https://trashtalk-preview.berkleym.workers.dev/api/uploads/9a1425d1-a736-4d52-b67d-955da6b9b9db"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "usage": {
+    "prompt_tokens": 261,
+    "completion_tokens": 4175,
+    "total_tokens": 4436,
+    "cost": 0.08,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.08,
+      "upstream_inference_prompt_cost": 0.02,
+      "upstream_inference_completions_cost": 0.06
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 4175
+    }
+  },
+  "referenceCount": 2,
+  "elapsedMs": 15934,
+  "width": 1024,
+  "height": 1024,
+  "mime": "image/jpeg",
+  "passed": true
+}

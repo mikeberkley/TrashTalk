@@ -1,0 +1,10 @@
+{
+  "crossOwnerPhoto": 404,
+  "malformedUpload": 400,
+  "tooManyReferences": 409,
+  "forgedToken": 400,
+  "csrf": 403,
+  "privateAssetPrefix": 404,
+  "ownedPhoto": 200,
+  "deletedPhoto": 404
+}

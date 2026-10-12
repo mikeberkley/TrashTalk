@@ -1,0 +1,19 @@
+{
+  "checkedAt": "2026-10-12T13:14:16.788Z",
+  "deployment": {
+    "id": "eebbdf0a-efe0-4889-81cd-c43ed80d500e",
+    "source": "wrangler",
+    "strategy": "percentage",
+    "author_email": "berkleym@gmail.com",
+    "annotations": {
+      "workers/triggered_by": "deployment"
+    },
+    "versions": [
+      {
+        "version_id": "b47e537e-a590-4cf8-a0cd-5bea512e142e",
+        "percentage": 100
+      }
+    ],
+    "created_on": "2026-10-12T13:12:56.538775Z"
+  }
+}

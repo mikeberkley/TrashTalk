@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "environment": "preview / Stripe sandbox",
+  "checks": {
+    "newPackPriceCents": 99,
+    "newPackCredits": 4,
+    "cancelNoGrant": true,
+    "historicalFiveCreditsPreserved": true,
+    "repeatPurchaseBalance": 9,
+    "manualReplayHTTPStatus": 200,
+    "manualReplayAdditionalGrants": 0
+  },
+  "evidence": "Chrome Checkout success + Stripe Dashboard manual event replay + remote D1 stripe-purchase-verification.json",
+  "limitations": [
+    "No real money charged; production payment fulfillment remains unverified.",
+    "Refund allocation is automated fixture coverage, not a real Stripe sandbox refund."
+  ],
+  "checkedAt": "2026-10-12T13:03:02.766016+00:00"
+}

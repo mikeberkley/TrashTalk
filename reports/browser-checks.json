@@ -1,0 +1,18 @@
+[
+  {
+    "width": 390,
+    "gameCount": 13,
+    "leagues": 12,
+    "generateEnabled": true,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "width": 1440,
+    "gameCount": 13,
+    "leagues": 12,
+    "generateEnabled": true,
+    "overflow": false,
+    "errors": []
+  }
+]

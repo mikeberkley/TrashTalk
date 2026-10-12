@@ -1,0 +1,256 @@
+{
+  "id": "nhl:401892482",
+  "providerId": "401892482",
+  "league": "nhl",
+  "sport": "hockey",
+  "leagueLabel": "NHL",
+  "date": "2026-10-11T21:00Z",
+  "status": "final",
+  "statusText": "Final",
+  "period": 0,
+  "clock": "",
+  "periodDisplay": "P0 · ",
+  "neutral": false,
+  "home": {
+    "id": "espn:hockey:23",
+    "name": "Capitals",
+    "city": "Washington",
+    "displayName": "Washington Capitals",
+    "abbr": "WSH"
+  },
+  "away": {
+    "id": "espn:hockey:124292",
+    "name": "Kraken",
+    "city": "Seattle",
+    "displayName": "Seattle Kraken",
+    "abbr": "SEA"
+  },
+  "score": {
+    "home": 3,
+    "away": 5
+  },
+  "penalties": {
+    "home": null,
+    "away": null
+  },
+  "capturedAt": "2026-10-12T11:19:55.659Z",
+  "source": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/summary?event=401892482",
+  "recentMoment": {
+    "id": "401892482000005050",
+    "text": "Goalie Stopped",
+    "period": {
+      "number": 3,
+      "displayValue": "3rd"
+    },
+    "clock": {
+      "displayValue": "18:22"
+    }
+  },
+  "statistics": [
+    {
+      "team": {
+        "id": "124292",
+        "uid": "s:70~l:90~t:124292",
+        "slug": "seattle-kraken",
+        "location": "Seattle",
+        "name": "Kraken",
+        "abbreviation": "SEA",
+        "displayName": "Seattle Kraken",
+        "shortDisplayName": "Kraken",
+        "color": "000d33",
+        "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/sea.png"
+      },
+      "statistics": [
+        {
+          "name": "blockedShots",
+          "abbreviation": "BS",
+          "displayValue": "11",
+          "label": "Blocked Shots"
+        },
+        {
+          "name": "hits",
+          "abbreviation": "HT",
+          "displayValue": "13",
+          "label": "Hits"
+        },
+        {
+          "name": "takeaways",
+          "abbreviation": "TK",
+          "displayValue": "7",
+          "label": "Takeaways"
+        },
+        {
+          "name": "shotsTotal",
+          "abbreviation": "S",
+          "displayValue": "27",
+          "label": "Shots"
+        },
+        {
+          "name": "powerPlayGoals",
+          "abbreviation": "PPG",
+          "displayValue": "0",
+          "label": "Power Play Goals"
+        },
+        {
+          "name": "powerPlayOpportunities",
+          "abbreviation": "PPO",
+          "displayValue": "2",
+          "label": "Power Play Opportunities"
+        },
+        {
+          "name": "powerPlayPct",
+          "abbreviation": "PCT",
+          "displayValue": "0.0",
+          "label": "Power Play Percentage"
+        },
+        {
+          "name": "shortHandedGoals",
+          "abbreviation": "SHG",
+          "displayValue": "0",
+          "label": "Short Handed Goals"
+        },
+        {
+          "name": "shootoutGoals",
+          "abbreviation": "SOG",
+          "displayValue": "0",
+          "label": "Shootout Goals"
+        },
+        {
+          "name": "faceoffsWon",
+          "abbreviation": "FW",
+          "displayValue": "32",
+          "label": "Faceoffs Won"
+        },
+        {
+          "name": "faceoffPercent",
+          "abbreviation": "FO%",
+          "displayValue": "48.5",
+          "label": "Faceoff Win Percent"
+        },
+        {
+          "name": "giveaways",
+          "abbreviation": "GV",
+          "displayValue": "14",
+          "label": "Giveaways"
+        },
+        {
+          "name": "penalties",
+          "abbreviation": "PN",
+          "displayValue": "2",
+          "label": "Total Penalties"
+        },
+        {
+          "name": "penaltyMinutes",
+          "abbreviation": "PIM",
+          "displayValue": "4",
+          "label": "Penalty Minutes"
+        }
+      ],
+      "displayOrder": 1,
+      "homeAway": "away"
+    },
+    {
+      "team": {
+        "id": "23",
+        "uid": "s:70~l:90~t:23",
+        "slug": "washington-capitals",
+        "location": "Washington",
+        "name": "Capitals",
+        "abbreviation": "WSH",
+        "displayName": "Washington Capitals",
+        "shortDisplayName": "Capitals",
+        "color": "d71830",
+        "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/wsh.png"
+      },
+      "statistics": [
+        {
+          "name": "blockedShots",
+          "abbreviation": "BS",
+          "displayValue": "13",
+          "label": "Blocked Shots"
+        },
+        {
+          "name": "hits",
+          "abbreviation": "HT",
+          "displayValue": "31",
+          "label": "Hits"
+        },
+        {
+          "name": "takeaways",
+          "abbreviation": "TK",
+          "displayValue": "1",
+          "label": "Takeaways"
+        },
+        {
+          "name": "shotsTotal",
+          "abbreviation": "S",
+          "displayValue": "36",
+          "label": "Shots"
+        },
+        {
+          "name": "powerPlayGoals",
+          "abbreviation": "PPG",
+          "displayValue": "0",
+          "label": "Power Play Goals"
+        },
+        {
+          "name": "powerPlayOpportunities",
+          "abbreviation": "PPO",
+          "displayValue": "2",
+          "label": "Power Play Opportunities"
+        },
+        {
+          "name": "powerPlayPct",
+          "abbreviation": "PCT",
+          "displayValue": "0.0",
+          "label": "Power Play Percentage"
+        },
+        {
+          "name": "shortHandedGoals",
+          "abbreviation": "SHG",
+          "displayValue": "0",
+          "label": "Short Handed Goals"
+        },
+        {
+          "name": "shootoutGoals",
+          "abbreviation": "SOG",
+          "displayValue": "0",
+          "label": "Shootout Goals"
+        },
+        {
+          "name": "faceoffsWon",
+          "abbreviation": "FW",
+          "displayValue": "34",
+          "label": "Faceoffs Won"
+        },
+        {
+          "name": "faceoffPercent",
+          "abbreviation": "FO%",
+          "displayValue": "51.5",
+          "label": "Faceoff Win Percent"
+        },
+        {
+          "name": "giveaways",
+          "abbreviation": "GV",
+          "displayValue": "20",
+          "label": "Giveaways"
+        },
+        {
+          "name": "penalties",
+          "abbreviation": "PN",
+          "displayValue": "2",
+          "label": "Total Penalties"
+        },
+        {
+          "name": "penaltyMinutes",
+          "abbreviation": "PIM",
+          "displayValue": "4",
+          "label": "Penalty Minutes"
+        }
+      ],
+      "displayOrder": 2,
+      "homeAway": "home"
+    }
+  ],
+  "revision": "[\"nhl:401892482\",\"final\",{\"home\":3,\"away\":5},{\"home\":null,\"away\":null},{\"id\":\"401892482000005050\",\"text\":\"Goalie Stopped\",\"period\":{\"number\":3,\"displayValue\":\"3rd\"},\"clock\":{\"displayValue\":\"18:22\"}},[{\"team\":{\"id\":\"124292\",\"uid\":\"s:70~l:90~t:124292\",\"slug\":\"seattle-kraken\",\"location\":\"Seattle\",\"name\":\"Kraken\",\"abbreviation\":\"SEA\",\"displayName\":\"Seattle Kraken\",\"shortDisplayName\":\"Kraken\",\"color\":\"000d33\",\"logo\":\"https://a.espncdn.com/i/teamlogos/nhl/500/sea.png\"},\"statistics\":[{\"name\":\"blockedShots\",\"abbreviation\":\"BS\",\"displayValue\":\"11\",\"label\":\"Blocked Shots\"},{\"name\":\"hits\",\"abbreviation\":\"HT\",\"displayValue\":\"13\",\"label\":\"Hits\"},{\"name\":\"takeaways\",\"abbreviation\":\"TK\",\"displayValue\":\"7\",\"label\":\"Takeaways\"},{\"name\":\"shotsTotal\",\"abbreviation\":\"S\",\"displayValue\":\"27\",\"label\":\"Shots\"},{\"name\":\"powerPlayGoals\",\"abbreviation\":\"PPG\",\"displayValue\":\"0\",\"label\":\"Power Play Goals\"},{\"name\":\"powerPlayOpportunities\",\"abbreviation\":\"PPO\",\"displayValue\":\"2\",\"label\":\"Power Play Opportunities\"},{\"name\":\"powerPlayPct\",\"abbreviation\":\"PCT\",\"displayValue\":\"0.0\",\"label\":\"Power Play Percentage\"},{\"name\":\"shortHandedGoals\",\"abbreviation\":\"SHG\",\"displayValue\":\"0\",\"label\":\"Short Handed Goals\"},{\"name\":\"shootoutGoals\",\"abbreviation\":\"SOG\",\"displayValue\":\"0\",\"label\":\"Shootout Goals\"},{\"name\":\"faceoffsWon\",\"abbreviation\":\"FW\",\"displayValue\":\"32\",\"label\":\"Faceoffs Won\"},{\"name\":\"faceoffPercent\",\"abbreviation\":\"FO%\",\"displayValue\":\"48.5\",\"label\":\"Faceoff Win Percent\"},{\"name\":\"giveaways\",\"abbreviation\":\"GV\",\"displayValue\":\"14\",\"label\":\"Giveaways\"},{\"name\":\"penalties\",\"abbreviation\":\"PN\",\"displayValue\":\"2\",\"label\":\"Total Penalties\"},{\"name\":\"penaltyMinutes\",\"abbreviation\":\"PIM\",\"displayValue\":\"4\",\"label\":\"Penalty Minutes\"}],\"displayOrder\":1,\"homeAway\":\"away\"},{\"team\":{\"id\":\"23\",\"uid\":\"s:70~l:90~t:23\",\"slug\":\"washington-capitals\",\"location\":\"Washington\",\"name\":\"Capitals\",\"abbreviation\":\"WSH\",\"displayName\":\"Washington Capitals\",\"shortDisplayName\":\"Capitals\",\"color\":\"d71830\",\"logo\":\"https://a.espncdn.com/i/teamlogos/nhl/500/wsh.png\"},\"statistics\":[{\"name\":\"blockedShots\",\"abbreviation\":\"BS\",\"displayValue\":\"13\",\"label\":\"Blocked Shots\"},{\"name\":\"hits\",\"abbreviation\":\"HT\",\"displayValue\":\"31\",\"label\":\"Hits\"},{\"name\":\"takeaways\",\"abbreviation\":\"TK\",\"displayValue\":\"1\",\"label\":\"Takeaways\"},{\"name\":\"shotsTotal\",\"abbreviation\":\"S\",\"displayValue\":\"36\",\"label\":\"Shots\"},{\"name\":\"powerPlayGoals\",\"abbreviation\":\"PPG\",\"displayValue\":\"0\",\"label\":\"Power Play Goals\"},{\"name\":\"powerPlayOpportunities\",\"abbreviation\":\"PPO\",\"displayValue\":\"2\",\"label\":\"Power Play Opportunities\"},{\"name\":\"powerPlayPct\",\"abbreviation\":\"PCT\",\"displayValue\":\"0.0\",\"label\":\"Power Play Percentage\"},{\"name\":\"shortHandedGoals\",\"abbreviation\":\"SHG\",\"displayValue\":\"0\",\"label\":\"Short Handed Goals\"},{\"name\":\"shootoutGoals\",\"abbreviation\":\"SOG\",\"displayValue\":\"0\",\"label\":\"Shootout Goals\"},{\"name\":\"faceoffsWon\",\"abbreviation\":\"FW\",\"displayValue\":\"34\",\"label\":\"Faceoffs Won\"},{\"name\":\"faceoffPercent\",\"abbreviation\":\"FO%\",\"displayValue\":\"51.5\",\"label\":\"Faceoff Win Percent\"},{\"name\":\"giveaways\",\"abbreviation\":\"GV\",\"displayValue\":\"20\",\"label\":\"Giveaways\"},{\"name\":\"penalties\",\"abbreviation\":\"PN\",\"displayValue\":\"2\",\"label\":\"Total Penalties\"},{\"name\":\"penaltyMinutes\",\"abbreviation\":\"PIM\",\"displayValue\":\"4\",\"label\":\"Penalty Minutes\"}],\"displayOrder\":2,\"homeAway\":\"home\"}]]"
+}

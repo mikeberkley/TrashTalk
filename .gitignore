@@ -1,0 +1,10 @@
+node_modules/
+.DS_Store
+dist/
+.wrangler/
+.dev.vars*
+.env*
+!.env.example
+catalog-cache/
+test-results/
+playwright-report/

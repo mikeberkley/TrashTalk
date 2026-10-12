@@ -1,0 +1,139 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "trashtalk",
+  "main": "worker/src/index.ts",
+  "compatibility_date": "2026-10-12",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": true,
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["Coordinator"],
+    },
+  ],
+  "env": {
+    "preview": {
+      "name": "trashtalk-preview",
+      "vars": {
+        "ENVIRONMENT": "preview",
+        "ORIGIN": "https://trashtalk-preview.berkleym.workers.dev",
+        "PREVIEW_UNLIMITED": "false",
+        "GOOGLE_CLIENT_ID": "971521186493-eh4cnjnglbl8euctengohfgog780lpt6.apps.googleusercontent.com",
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "trashtalk-preview",
+          "database_id": "85dff09d-619c-426f-99be-3203ed94abf6",
+          "migrations_dir": "worker/migrations",
+        },
+      ],
+      "r2_buckets": [
+        {
+          "binding": "MEDIA",
+          "bucket_name": "trashtalk-preview-media",
+        },
+      ],
+      "queues": {
+        "producers": [
+          {
+            "binding": "JOBS",
+            "queue": "trashtalk-preview-jobs",
+          },
+        ],
+        "consumers": [
+          {
+            "queue": "trashtalk-preview-jobs",
+            "max_batch_size": 1,
+            "max_concurrency": 2,
+            "max_retries": 3,
+          },
+        ],
+      },
+      "durable_objects": {
+        "bindings": [
+          {
+            "name": "COORDINATOR",
+            "class_name": "Coordinator",
+          },
+        ],
+      },
+      "images": {
+        "binding": "IMAGES",
+      },
+      "triggers": {
+        "crons": ["*/5 * * * *", "0 8 * * *"],
+      },
+      "workers_dev": true,
+      "preview_urls": false,
+    },
+    "production": {
+      "name": "trashtalk-production",
+      "vars": {
+        "ENVIRONMENT": "production",
+        "ORIGIN": "https://trashtalk.fanlift.ai",
+        "PREVIEW_UNLIMITED": "false",
+        "GOOGLE_CLIENT_ID": "971521186493-eh4cnjnglbl8euctengohfgog780lpt6.apps.googleusercontent.com",
+        "PAUSE_GENERATION": "false",
+        "LAUNCH_HOLD": "false",
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "trashtalk-production",
+          "database_id": "bd437dbf-a29f-4ffe-89f6-f6a8b16a53b2",
+          "migrations_dir": "worker/migrations",
+        },
+      ],
+      "r2_buckets": [
+        {
+          "binding": "MEDIA",
+          "bucket_name": "trashtalk-production-media",
+        },
+      ],
+      "queues": {
+        "producers": [
+          {
+            "binding": "JOBS",
+            "queue": "trashtalk-production-jobs",
+          },
+        ],
+        "consumers": [
+          {
+            "queue": "trashtalk-production-jobs",
+            "max_batch_size": 1,
+            "max_concurrency": 2,
+            "max_retries": 3,
+          },
+        ],
+      },
+      "durable_objects": {
+        "bindings": [
+          {
+            "name": "COORDINATOR",
+            "class_name": "Coordinator",
+          },
+        ],
+      },
+      "images": {
+        "binding": "IMAGES",
+      },
+      "triggers": {
+        "crons": ["*/5 * * * *", "0 8 * * *"],
+      },
+      "routes": [
+        {
+          "pattern": "trashtalk.fanlift.ai",
+          "custom_domain": true,
+        },
+      ],
+      "workers_dev": false,
+      "preview_urls": false,
+    },
+  },
+}

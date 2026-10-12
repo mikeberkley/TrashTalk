@@ -1,0 +1,395 @@
+[
+  {
+    "id": "3886",
+    "name": "Raymond James Stadium",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3886.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3886.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873134",
+    "location": "Tampa, FL"
+  },
+  {
+    "id": "4738",
+    "name": "Levi's Stadium",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/4738.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/4738.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873120",
+    "location": "Santa Clara, CA"
+  },
+  {
+    "id": "5348",
+    "name": "Mercedes-Benz Stadium",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/5348.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873146",
+    "location": "Atlanta, GA"
+  },
+  {
+    "id": "3874",
+    "name": "Paycor Stadium",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3874.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3874.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873156",
+    "location": "Cincinnati, OH"
+  },
+  {
+    "id": "5239",
+    "name": "U.S. Bank Stadium",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/5239.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873147",
+    "location": "Minneapolis, MN"
+  },
+  {
+    "id": "3839",
+    "name": "MetLife Stadium",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3839.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3839.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873151",
+    "location": "East Rutherford, NJ"
+  },
+  {
+    "id": "3712",
+    "name": "EverBank Stadium",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3712.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3712.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873123",
+    "location": "Jacksonville, FL"
+  },
+  {
+    "id": "3891",
+    "name": "Reliant Stadium",
+    "aliases": [
+      "NRG Stadium"
+    ],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3891.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3891.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873132",
+    "location": "Houston, TX"
+  },
+  {
+    "id": "3883",
+    "name": "Highmark Stadium (Old)",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3883.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3883.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401772967",
+    "location": "Orchard Park, NY"
+  },
+  {
+    "id": "3933",
+    "name": "Soldier Field",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3933.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3933.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873141",
+    "location": "Chicago, IL"
+  },
+  {
+    "id": "3937",
+    "name": "Empower Field at Mile High",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3937.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3937.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873142",
+    "location": "Denver, CO"
+  },
+  {
+    "id": "6501",
+    "name": "Allegiant Stadium",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/6501.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/6501.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873152",
+    "location": "Las Vegas, NV"
+  },
+  {
+    "id": "7065",
+    "name": "SoFi Stadium",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/7065.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/7065.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873136",
+    "location": "Inglewood, CA"
+  },
+  {
+    "id": "3738",
+    "name": "Gillette Stadium",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3738.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3738.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873109",
+    "location": "Foxborough, MA"
+  },
+  {
+    "id": "3806",
+    "name": "Lincoln Financial Field",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3806.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3806.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873140",
+    "location": "Philadelphia, PA"
+  },
+  {
+    "id": "3752",
+    "name": "Acrisure Stadium",
+    "aliases": [
+      "Heinz Field"
+    ],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3752.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3752.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873144",
+    "location": "Pittsburgh, PA"
+  },
+  {
+    "id": "3628",
+    "name": "Bank of America Stadium",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3628.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3628.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873129",
+    "location": "Charlotte, NC"
+  },
+  {
+    "id": "3673",
+    "name": "Lumen Field",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3673.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3673.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873143",
+    "location": "Seattle, WA"
+  },
+  {
+    "id": "3719",
+    "name": "Northwest Stadium",
+    "aliases": [
+      "FedExField"
+    ],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3719.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3719.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873127",
+    "location": "Landover, MD"
+  },
+  {
+    "id": "3622",
+    "name": "Arrowhead Stadium",
+    "aliases": [
+      "GEHA Field at Arrowhead Stadium"
+    ],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3622.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3622.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873153",
+    "location": "Kansas City, MO"
+  },
+  {
+    "id": "3493",
+    "name": "Caesars Superdome",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3493.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3493.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873148",
+    "location": "New Orleans, LA"
+  },
+  {
+    "id": "3814",
+    "name": "M&T Bank Stadium",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3814.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3814.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873149",
+    "location": "Baltimore, MD"
+  },
+  {
+    "id": "3727",
+    "name": "Ford Field",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3727.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3727.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873155",
+    "location": "Detroit, MI"
+  },
+  {
+    "id": "3679",
+    "name": "Huntington Bank Field",
+    "aliases": [
+      "Cleveland Browns Stadium",
+      "FirstEnergy Stadium"
+    ],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3679.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3679.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873110",
+    "location": "Cleveland, OH"
+  },
+  {
+    "id": "3812",
+    "name": "Lucas Oil Stadium",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3812.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3812.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873145",
+    "location": "Indianapolis, IN"
+  },
+  {
+    "id": "3948",
+    "name": "Hard Rock Stadium",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3948.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3948.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873150",
+    "location": "Miami Gardens, FL"
+  },
+  {
+    "id": "3970",
+    "name": "State Farm Stadium",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3970.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3970.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873135",
+    "location": "Glendale, AZ"
+  },
+  {
+    "id": "3810",
+    "name": "Nissan Stadium",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3810.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3810.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873131",
+    "location": "Nashville, TN"
+  },
+  {
+    "id": "3687",
+    "name": "AT&T Stadium",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3687.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3687.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873154",
+    "location": "Arlington, TX"
+  },
+  {
+    "id": "3798",
+    "name": "Lambeau Field",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/interior/3798.jpg",
+      "https://a.espncdn.com/i/venues/nfl/day/3798.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401873133",
+    "location": "Green Bay, WI"
+  },
+  {
+    "id": "2455",
+    "name": "Wembley Stadium",
+    "aliases": [],
+    "images": [
+      "https://a.espncdn.com/i/venues/nfl/day/2455.jpg"
+    ],
+    "credit": "ESPN",
+    "sourceUrl": "https://www.espn.com/nfl/game/_/gameId/401872996",
+    "location": "London, England"
+  },
+  {
+    "id": "11938",
+    "name": "Highmark Stadium",
+    "aliases": [
+      "New Highmark Stadium"
+    ],
+    "images": [
+      "https://static.clubs.nfl.com/image/upload/t_editorial_landscape_12_desktop/bills/feb0as8f7mhmgv4rlnz2"
+    ],
+    "credit": "Bill Wippert / Buffalo Bills",
+    "sourceUrl": "https://www.buffalobills.com/news/how-to-watch-the-bills-ribbon-cutting-ceremony-at-highmark-stadium",
+    "location": "Orchard Park, NY"
+  }
+]

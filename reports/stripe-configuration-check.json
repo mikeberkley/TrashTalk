@@ -1,0 +1,10 @@
+{
+  "checkedAt": "2026-10-12T12:48:45.683Z",
+  "environment": "preview",
+  "bothSecretBindingsPresent": true,
+  "testKeyPrefixAndWebhookPresent": true,
+  "displayedPrice": "USD 0.99",
+  "credits": 4,
+  "pageErrors": [],
+  "actualCheckoutAndWebhookDeliveryVerified": false
+}

@@ -1,0 +1,120 @@
+[
+  {
+    "league": "nfl",
+    "date": "2026-10-12",
+    "count": 1,
+    "live": [],
+    "ids": [
+      "nfl:401872994"
+    ],
+    "capturedAt": "2026-10-12T11:19:55.090Z"
+  },
+  {
+    "league": "nba",
+    "date": "2026-10-12",
+    "count": 5,
+    "live": [],
+    "ids": [
+      "nba:401914130",
+      "nba:401898402",
+      "nba:401901824",
+      "nba:401914124",
+      "nba:401898721"
+    ],
+    "capturedAt": "2026-10-12T11:19:55.100Z"
+  },
+  {
+    "league": "mlb",
+    "date": "2026-10-12",
+    "count": 2,
+    "live": [],
+    "ids": [
+      "mlb:401908031",
+      "mlb:401908023"
+    ],
+    "capturedAt": "2026-10-12T11:19:55.102Z"
+  },
+  {
+    "league": "nhl",
+    "date": "2026-10-12",
+    "count": 3,
+    "live": [],
+    "ids": [
+      "nhl:401892485",
+      "nhl:401892486",
+      "nhl:401892487"
+    ],
+    "capturedAt": "2026-10-12T11:19:55.101Z"
+  },
+  {
+    "league": "epl",
+    "date": "2026-10-12",
+    "count": 1,
+    "live": [],
+    "ids": [
+      "epl:401879267"
+    ],
+    "capturedAt": "2026-10-12T11:19:55.101Z"
+  },
+  {
+    "league": "laliga",
+    "date": "2026-10-12",
+    "count": 1,
+    "live": [],
+    "ids": [
+      "laliga:401882852"
+    ],
+    "capturedAt": "2026-10-12T11:19:55.109Z"
+  },
+  {
+    "league": "bundesliga",
+    "date": "2026-10-12",
+    "count": 0,
+    "live": [],
+    "ids": [],
+    "capturedAt": "2026-10-12T11:19:55.139Z"
+  },
+  {
+    "league": "seriea",
+    "date": "2026-10-12",
+    "count": 2,
+    "live": [],
+    "ids": [
+      "seriea:401875005",
+      "seriea:401874763"
+    ],
+    "capturedAt": "2026-10-12T11:19:55.123Z"
+  },
+  {
+    "league": "ligue1",
+    "date": "2026-10-12",
+    "count": 0,
+    "live": [],
+    "ids": [],
+    "capturedAt": "2026-10-12T11:19:55.122Z"
+  },
+  {
+    "league": "mls",
+    "date": "2026-10-12",
+    "count": 0,
+    "live": [],
+    "ids": [],
+    "capturedAt": "2026-10-12T11:19:55.108Z"
+  },
+  {
+    "league": "nwsl",
+    "date": "2026-10-12",
+    "count": 0,
+    "live": [],
+    "ids": [],
+    "capturedAt": "2026-10-12T11:19:55.108Z"
+  },
+  {
+    "league": "ucl",
+    "date": "2026-10-12",
+    "count": 0,
+    "live": [],
+    "ids": [],
+    "capturedAt": "2026-10-12T11:19:55.123Z"
+  }
+]

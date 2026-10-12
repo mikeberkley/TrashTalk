@@ -1,0 +1,200 @@
+{
+  "sourceCommit": "2a9148807ce75fc21057274b70c9e13b0dbd0ba0",
+  "files": [
+    {
+      "path": "packages/trash-talk/src/index.ts",
+      "sha256": "270bb0fefcfa6751f39df838c316463aa60cbb65e257d165d63439641ff0c7b5",
+      "verified": true
+    },
+    {
+      "path": "packages/trash-talk/src/include-word.ts",
+      "sha256": "aefa9dc118c226bb0b9e367962b05f3f0558ecfedd07d09b15040e6c50c87a96",
+      "verified": true
+    },
+    {
+      "path": "packages/trash-talk/src/share-title.ts",
+      "sha256": "f04ce29cdab21e3d16e848b9026c9dc78b318f67bd0528f8da454602315c21a8",
+      "verified": true
+    },
+    {
+      "path": "worker/src/jobs/trash-talk.ts",
+      "sha256": "851603e7ffe5c0056ed5c58103308327b431b381b3c49fe2da73a8c1cf749627",
+      "verified": true
+    },
+    {
+      "path": "worker/src/jobs/trash-talk-image.ts",
+      "sha256": "c608587e85096cf46538b85e76225951b1e828a3714d19444a9abfeb5a7a0971",
+      "verified": true
+    },
+    {
+      "path": "worker/src/jobs/openrouter.ts",
+      "sha256": "a1cfc6739e0c941cd347e097213ae0ec007a98bcc40f4b4963fb73a9a8b84abd",
+      "verified": true
+    },
+    {
+      "path": "worker/src/jobs/openrouter-error.ts",
+      "sha256": "2e31824ef5e325a3dc80a76ce8271bc5af08b29878000b384204a090e6fea3bc",
+      "verified": true
+    },
+    {
+      "path": "worker/src/jobs/queue.ts",
+      "sha256": "e99eeffffdd13d5c65db978c4f4d68ba1b40839199106fb18457360ec05ba608",
+      "verified": true
+    },
+    {
+      "path": "worker/src/trash-talk-rate.ts",
+      "sha256": "d9eea5f44174dbe4425300db40ae5e5ba68d9696646675902353d1f4321e7fe8",
+      "verified": true
+    },
+    {
+      "path": "worker/src/trash-talk-share.ts",
+      "sha256": "1ef72cc22cf9d64a9ac3f3fce180a991d7913e6fa12e93419de506981f457deb",
+      "verified": true
+    },
+    {
+      "path": "worker/src/GameRoom.ts",
+      "sha256": "28e62c2f9ad075608a9f8e104a4444e09ea72cb094bdbbebe690a69c397461a8",
+      "verified": true
+    },
+    {
+      "path": "worker/src/routes.ts",
+      "sha256": "1387edb4dc1fd9f9ffdae5b6d08547d9ad4099b20b1345423a8be1a9097a4a88",
+      "verified": true
+    },
+    {
+      "path": "worker/src/share-images.ts",
+      "sha256": "10c96473150d2cc48f6c59aa0d27b2ee387e578b6c23042879fe3b50af90dd79",
+      "verified": true
+    },
+    {
+      "path": "worker/src/sources/espn.ts",
+      "sha256": "28f9d43ec709a5f3d059ae160ea62c6f4f869b6956654b330ba976b92432ef05",
+      "verified": true
+    },
+    {
+      "path": "worker/src/room-client.ts",
+      "sha256": "0a7a472667039d8822dd4f95b086742bf9a97ab19a47becc19394671121b6493",
+      "verified": true
+    },
+    {
+      "path": "apps/web/src/TrashTalk.tsx",
+      "sha256": "5450452f7bdf71e1e491ce9b495f66ccfc38a69331b4fc3fff697fb7b2d46199",
+      "verified": true
+    },
+    {
+      "path": "apps/web/src/TrashTalkImageViewer.tsx",
+      "sha256": "b76f949dfe9890e610c9ce9b021b532df7ebf7f74be6bf6540c2b3b02e4cf490",
+      "verified": true
+    },
+    {
+      "path": "apps/web/src/PosterShare.tsx",
+      "sha256": "80b6a9d1a3e0d738163d7908e7294bd7561449bc6e8d1ededb4b2b52991bdf3a",
+      "verified": true
+    },
+    {
+      "path": "apps/web/src/PosterStack.tsx",
+      "sha256": "9b56017f7d7da2cee762ed6290547be1e14aa08009eaa0f001c3568ee6653ad6",
+      "verified": true
+    },
+    {
+      "path": "apps/web/src/posterFile.ts",
+      "sha256": "83cfefc87277db1120822f88a8d036682733355295430bff672d25a43a382c88",
+      "verified": true
+    },
+    {
+      "path": "apps/web/src/styles/trash-talk.css",
+      "sha256": "abc2901175ed968f79ee9fac8a28fe7a1e17623557692785dd5cef1f79cded96",
+      "verified": true
+    },
+    {
+      "path": "tests/trash-talk.test.ts",
+      "sha256": "58a463b05582cb4bf080296d83ea0658043112c633719de71569173c5813e7ee",
+      "verified": true
+    },
+    {
+      "path": "tests/trash-talk-rate.test.ts",
+      "sha256": "c53614ab5f2d68ea8b92626490eaaf7ffaf8251adb77ba6511aa7df8281454e2",
+      "verified": true
+    },
+    {
+      "path": "tests/trash-talk-image.test.ts",
+      "sha256": "f1527f457e39ef472959b49427f6b904191ba28dc1a4bcfc599c87deb0514424",
+      "verified": true
+    },
+    {
+      "path": "tests/trash-talk-queue.test.ts",
+      "sha256": "d2ef16db1121c60cbb2501e759d4ca186b56e095bf7de97d9559ae637614a812",
+      "verified": true
+    },
+    {
+      "path": "tests/trash-talk-word.test.ts",
+      "sha256": "9028900b980e1e23f3a32e7a2b852c779d85d35e1a241a2b56eadb5c928929e5",
+      "verified": true
+    },
+    {
+      "path": "tests/trash-talk-share.test.ts",
+      "sha256": "67b9e03c4b46f8c177288302b8037672d9267efdd5cdd9fa1ad900caf3c66213",
+      "verified": true
+    },
+    {
+      "path": "tests/trash-talk-ui.test.ts",
+      "sha256": "e6bc12c9d4acc0098bb3de8b6a4c721db84cbf805e6682db4efd1b57d2b91fd8",
+      "verified": true
+    },
+    {
+      "path": "tests/trash-talk-share-ui.test.ts",
+      "sha256": "a16cff9d173afbab26a1a8dc2374e6e420196e7e614a95097e4d74ec05ad5649",
+      "verified": true
+    },
+    {
+      "path": "tests/trash-talk-share-title.test.ts",
+      "sha256": "7d27713808430d00f93cb5bd121fada089ba37e74d874c3b4dc80a2d6e0f9cb4",
+      "verified": true
+    },
+    {
+      "path": "package.json",
+      "sha256": "50826e8cc80b29214ae5e69b26841633d88d3db916fa2cba080dce497b4e3174",
+      "verified": true
+    },
+    {
+      "path": "packages/contracts/src/nfl-teams.json",
+      "sha256": "e7a49bf05195318edb55a272be687182d77127634fd616e15258538830e6c553",
+      "verified": true
+    },
+    {
+      "path": "packages/contracts/src/team-season.ts",
+      "sha256": "954ffc02537c904b6d9cf0675a328f8854e3cd588f8b5ab8a1b5cecb62667bff",
+      "verified": true
+    },
+    {
+      "path": "worker/src/teams.ts",
+      "sha256": "e420bb6cb565f2e423459a9e79dc6746cf2f53d02d63cb32c43eb89175b907b9",
+      "verified": true
+    },
+    {
+      "path": "worker/migrations/0002_teams.sql",
+      "sha256": "e690f656a52dcc0ca977ed861ac601161df5f552f523e7b9af2cacfc4d7c149c",
+      "verified": true
+    },
+    {
+      "path": "apps/web/src/teamTheme.ts",
+      "sha256": "51a71f037f9e601a37045ac3aeda25d0e4a3cd2eeabead10109c42b9ce06552f",
+      "verified": true
+    },
+    {
+      "path": "worker/src/sources/team-season.ts",
+      "sha256": "cd62d8b9e1270f3b84a85d7ce90882144a34850f318a0e26adde80ccf76ce583",
+      "verified": true
+    },
+    {
+      "path": "packages/venues/src/catalog.json",
+      "sha256": "85de1bc64915d885f4c020331c25aff532421e040dac97c9d8682399e9dd9a0f",
+      "verified": true
+    },
+    {
+      "path": "packages/venues/src/index.ts",
+      "sha256": "0bb8e43ad1a86855bdf9af0043045a66b9c1b7cd82930e6ba91cc0772a896b5d",
+      "verified": true
+    }
+  ]
+}

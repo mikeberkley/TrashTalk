@@ -1,0 +1,7 @@
+{
+  "origin": "https://trashtalk-preview.berkleym.workers.dev",
+  "servedAsset": "/assets/index-BZDVO_Bs.js",
+  "productionAsset": "/assets/index-BEYU5YpF.js",
+  "latestFallbackUpdateSynced": false,
+  "limitation": "Repeated Cloudflare management API 504s blocked final preview refresh; production deployment is verified independently."
+}
