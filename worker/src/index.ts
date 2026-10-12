@@ -1,4 +1,4 @@
-import { isAdmin, stats, excludeTraffic } from "./stats";
+import { isAdmin, stats, excludeTraffic, statDetails } from "./stats";
 import { publicPage, launchPage } from "./legal";
 import { sharedGame } from "./providers/cache";
 import { refreshLeague } from "./catalog";
@@ -190,6 +190,21 @@ app.get("/api/me", async (c) => {
         ).first<any>()
       )?.id || null,
   });
+});
+app.get("/api/admin/stats/:metric", async (c) => {
+  if (!(await isAdmin(c.env, c.get("owner"))))
+    return c.json({ error: "Forbidden" }, 403);
+  const days = Number(c.req.query("days") ?? 30),
+    offset = Number(c.req.query("offset") ?? 0);
+  if (
+    ![0, 7, 30].includes(days) ||
+    !Number.isSafeInteger(offset) ||
+    offset < 0 ||
+    offset > 1000000
+  )
+    return c.json({ error: "Invalid date range or offset" }, 400);
+  const details = await statDetails(c.env, c.req.param("metric"), days, offset);
+  return details ? c.json(details) : c.json({ error: "Unknown stat" }, 404);
 });
 app.get("/api/admin/stats", async (c) => {
   if (!(await isAdmin(c.env, c.get("owner"))))

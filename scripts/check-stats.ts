@@ -2,7 +2,10 @@ import { chromium } from "@playwright/test";
 import fs from "node:fs/promises";
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 for (const width of [390, 1440]) {
-  const page = await browser.newPage({ viewport: { width, height: 900 } });
+  const page = await browser.newPage({
+    viewport: { width, height: 900 },
+    hasTouch: width === 390,
+  });
   await page.route("**/api/me", (r) =>
     r.fulfill({
       json: {
@@ -44,6 +47,24 @@ for (const width of [390, 1440]) {
       },
     }),
   );
+  await page.route("**/api/admin/stats/*", (r) => {
+    const u = new URL(r.request().url());
+    const offset = Number(u.searchParams.get("offset") || 0);
+    return r.fulfill({
+      json: {
+        columns: ["Account", "Google identifier", "Created (UTC)"],
+        rows: [
+          {
+            Account: offset ? "next-account" : "example-account",
+            "Google identifier": "123456789012345678901",
+            "Created (UTC)": "2026-10-12 12:00:00",
+          },
+        ],
+        note: "Account names and emails are not stored.",
+        nextOffset: offset ? null : 50,
+      },
+    });
+  });
   await page.goto("http://localhost:5175");
   await page.getByRole("button", { name: "App stats", exact: true }).click();
   await page.getByRole("heading", { name: "Daily activity" }).waitFor();
@@ -54,6 +75,28 @@ for (const width of [390, 1440]) {
   await page.getByRole("combobox").selectOption("7");
   await page.getByRole("heading", { name: "Daily activity" }).waitFor();
   await page.screenshot({ path: `reports/stats-${width}.png`, fullPage: true });
+  const cards = page.locator("button.stats-card");
+  for (let i = 0; i < (await cards.count()); i++) {
+    if (width === 390) await cards.nth(i).tap();
+    else await cards.nth(i).click();
+    const dialog = page.getByRole("dialog");
+    await dialog.waitFor();
+    await dialog.getByText("example-account", { exact: true }).waitFor();
+    if (i === 2) {
+      await dialog.getByRole("button", { name: "Next", exact: true }).click();
+      await dialog.getByText("next-account", { exact: true }).waitFor();
+      await dialog
+        .getByRole("button", { name: "Previous", exact: true })
+        .click();
+      await dialog.getByText("example-account", { exact: true }).waitFor();
+      await page.screenshot({ path: `reports/stats-modal-${width}.png` });
+      await page.keyboard.press("Escape");
+    } else
+      await dialog.getByRole("button", { name: "Close stat details" }).click();
+    await dialog.waitFor({ state: "hidden" });
+    if (!(await cards.nth(i).evaluate((el) => el === document.activeElement)))
+      throw Error("Focus not restored");
+  }
   await page.close();
 }
 await browser.close();
@@ -64,6 +107,8 @@ await fs.writeFile(
       passed: true,
       widths: [390, 1440],
       source: "mocked stats API with real UI",
+      checks:
+        "all 15 cards, mobile tap, pagination, Escape, close, focus restoration",
       date: new Date().toISOString(),
     },
     null,

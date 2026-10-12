@@ -5,5 +5,6 @@
     1440
   ],
   "source": "mocked stats API with real UI",
-  "date": "2026-10-12T17:15:36.071Z"
+  "checks": "all 15 cards, mobile tap, pagination, Escape, close, focus restoration",
+  "date": "2026-10-12T17:34:47.070Z"
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 export function Stats() {
   const [days, setDays] = useState(30),
     [data, setData] = useState<any>(null),
@@ -21,6 +21,44 @@ export function Stats() {
       stopped = true;
     };
   }, [days, refresh]);
+  const [selected, setSelected] = useState<{
+    metric: string;
+    label: string;
+    value: string;
+  } | null>(null);
+  const [detail, setDetail] = useState<any>(null),
+    [detailError, setDetailError] = useState(""),
+    [offset, setOffset] = useState(0),
+    [detailRefresh, setDetailRefresh] = useState(0);
+  const modal = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    if (!selected) return;
+    modal.current?.showModal();
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      modal.current?.close();
+      document.body.style.overflow = previous;
+    };
+  }, [selected]);
+  useEffect(() => {
+    if (!selected) return;
+    const controller = new AbortController();
+    setDetail(null);
+    setDetailError("");
+    fetch(`/api/admin/stats/${selected.metric}?days=${days}&offset=${offset}`, {
+      signal: controller.signal,
+    })
+      .then(async (r) => {
+        const b: any = await r.json();
+        if (!r.ok) throw Error(b.error || "Unable to load details");
+        if (!controller.signal.aborted) setDetail(b);
+      })
+      .catch((e) => {
+        if (!controller.signal.aborted) setDetailError(e.message);
+      });
+    return () => controller.abort();
+  }, [selected, days, offset, detailRefresh]);
   const n = (v: any) => Number(v || 0).toLocaleString();
   return (
     <section className="panel stats">
@@ -71,11 +109,40 @@ export function Stats() {
                 data.usage.find((x: any) => x.pool === "paid")?.used,
               ],
               ["Published shares", data.shares.published],
-            ].map(([label, value]) => (
-              <div className="stats-card" key={label}>
+            ].map(([label, value], index) => (
+              <button
+                type="button"
+                className="stats-card"
+                key={label}
+                aria-haspopup="dialog"
+                onClick={() => {
+                  setOffset(0);
+                  setSelected({
+                    metric: [
+                      "views",
+                      "visitors",
+                      "accounts",
+                      "completed",
+                      "retained",
+                      "attempts",
+                      "failed",
+                      "active",
+                      "packs",
+                      "credits",
+                      "amount",
+                      "review",
+                      "trial",
+                      "paid",
+                      "shares",
+                    ][index],
+                    label: String(label),
+                    value: typeof value === "string" ? value : n(value),
+                  });
+                }}
+              >
                 <span>{label}</span>
                 <strong>{typeof value === "string" ? value : n(value)}</strong>
-              </div>
+              </button>
             ))}
           </div>
           <p className="stats-note">
@@ -133,6 +200,103 @@ export function Stats() {
           </p>
         </>
       )}
+      <dialog
+        ref={modal}
+        className="stats-modal"
+        aria-labelledby="stats-detail-title"
+        onCancel={() => setSelected(null)}
+        onClose={() => setSelected(null)}
+        onClick={(e) => {
+          if (e.target === modal.current) {
+            const r = modal.current.getBoundingClientRect();
+            if (
+              e.clientX < r.left ||
+              e.clientX > r.right ||
+              e.clientY < r.top ||
+              e.clientY > r.bottom
+            )
+              setSelected(null);
+          }
+        }}
+      >
+        <button
+          type="button"
+          className="close"
+          aria-label="Close stat details"
+          onClick={() => setSelected(null)}
+        >
+          ×
+        </button>
+        <h2 id="stats-detail-title">{selected?.label}</h2>
+        <p>
+          {selected?.value} · {days ? `Last ${days} days` : "All time"}
+        </p>
+        {detailError ? (
+          <div role="alert">
+            <p>{detailError}</p>
+            <button onClick={() => setDetailRefresh((x) => x + 1)}>
+              Retry
+            </button>
+          </div>
+        ) : !detail ? (
+          <p role="status">Loading details…</p>
+        ) : (
+          <>
+            {detail.note && <p className="stats-note">{detail.note}</p>}
+            {detail.rows.length ? (
+              <div
+                className="stats-table"
+                tabIndex={0}
+                aria-label="Stat detail records"
+              >
+                <table>
+                  <thead>
+                    <tr>
+                      {detail.columns.map((col: string) => (
+                        <th key={col} scope="col">
+                          {col}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {detail.rows.map((row: any, index: number) => (
+                      <tr key={index}>
+                        {detail.columns.map((col: string) => (
+                          <td key={col}>
+                            {row[col] == null ? "—" : String(row[col])}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <p>No records in this period.</p>
+            )}
+            <div className="stats-pagination">
+              <button
+                disabled={offset === 0}
+                onClick={() => setOffset((x) => Math.max(0, x - 50))}
+              >
+                Previous
+              </button>
+              <span>
+                {detail.rows.length
+                  ? `Rows ${offset + 1}–${offset + detail.rows.length}`
+                  : "0 rows"}
+              </span>
+              <button
+                disabled={detail.nextOffset === null}
+                onClick={() => setOffset(detail.nextOffset)}
+              >
+                Next
+              </button>
+            </div>
+          </>
+        )}
+      </dialog>
     </section>
   );
 }
