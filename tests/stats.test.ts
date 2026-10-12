@@ -52,3 +52,46 @@ it("aggregates traffic and paid purchases without counting review purchases", as
   expect(s.traffic.views).toBe(3);
   expect(s.traffic.visitors).toBe(2);
 });
+
+it("excludes the home IP and authenticated operator while counting other visitors", async () => {
+  const { env, db } = testEnv();
+  env.STATS_EXCLUDED_IPS = "174.44.103.190";
+  env.ADMIN_GOOGLE_SUB = "admin";
+  db.exec(
+    "INSERT INTO principals(id,google_sub,created_at) VALUES('admin','admin',0),('other','other',0)",
+  );
+  const admin = await newSession(env, "admin"),
+    other = await newSession(env, "other");
+  env.ASSETS = {
+    fetch: async () =>
+      new Response("<html>App</html>", {
+        headers: { "Content-Type": "text/html" },
+      }),
+  };
+  const pending: Promise<any>[] = [];
+  const visit = async (ip: string, token?: string) => {
+    const r = await worker.fetch(
+      new Request("http://localhost/", {
+        headers: {
+          "CF-Connecting-IP": ip,
+          ...(token ? { Cookie: "tt_session=" + token } : {}),
+        },
+      }),
+      env,
+      { waitUntil: (p: Promise<any>) => pending.push(p) } as any,
+    );
+    expect(r.status).toBe(200);
+    await Promise.all(pending);
+  };
+  await visit("174.44.103.190");
+  await visit("203.0.113.1", admin.token);
+  expect(db.prepare("SELECT COUNT(*) AS n FROM traffic_daily").get()?.n).toBe(
+    0,
+  );
+  await visit("203.0.113.1", other.token);
+  await visit("203.0.113.2");
+  expect(db.prepare("SELECT views FROM traffic_daily").get()?.views).toBe(2);
+  expect(
+    db.prepare("SELECT COUNT(*) AS n FROM traffic_visitors").get()?.n,
+  ).toBe(2);
+});

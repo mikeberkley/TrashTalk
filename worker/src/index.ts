@@ -1,4 +1,4 @@
-import { isAdmin, stats } from "./stats";
+import { isAdmin, stats, excludeTraffic } from "./stats";
 import { publicPage, launchPage } from "./legal";
 import { sharedGame } from "./providers/cache";
 import { refreshLeague } from "./catalog";
@@ -46,6 +46,14 @@ app.use("*", async (c, next) => {
     c.res.status !== 200 ||
     !c.res.headers.get("Content-Type")?.includes("text/html") ||
     !(c.req.path === "/" || /^\/m\/[^/]+$/.test(c.req.path))
+  )
+    return;
+  if (
+    await excludeTraffic(
+      c.env,
+      c.req.header("CF-Connecting-IP"),
+      getCookie(c, "tt_session"),
+    )
   )
     return;
   let visitor = getCookie(c, "tt_visitor");

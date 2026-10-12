@@ -1,4 +1,4 @@
-import { type Env, sql, now } from "./env";
+import { type Env, sql, now, hash } from "./env";
 export async function isAdmin(env: Env, owner: string) {
   if (!env.ADMIN_GOOGLE_SUB) return false;
   const p = await sql(
@@ -46,4 +46,23 @@ export async function stats(
     ).all()
   ).results;
   return { ...result, days, generatedAt: now() };
+}
+
+export async function excludeTraffic(env: Env, ip?: string, token?: string) {
+  if (
+    ip &&
+    (env.STATS_EXCLUDED_IPS || "")
+      .split(",")
+      .map((x) => x.trim())
+      .includes(ip)
+  )
+    return true;
+  if (!token || !env.ADMIN_GOOGLE_SUB) return false;
+  const session = await sql(
+    env,
+    "SELECT principal FROM sessions WHERE token_hash=? AND expires>?",
+    await hash(token),
+    now(),
+  ).first<{ principal: string }>();
+  return session ? isAdmin(env, session.principal) : false;
 }
