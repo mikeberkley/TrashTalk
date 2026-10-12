@@ -3,7 +3,7 @@ vi.mock("../worker/src/Coordinator", () => ({ Coordinator: class {} }));
 import worker from "../worker/src/index";
 import { newSession } from "../worker/src/auth";
 import { testEnv } from "./harness";
-import { stats, statDetails } from "../worker/src/stats";
+import { stats, statDetails, pruneTraffic } from "../worker/src/stats";
 it("only the configured Google account sees the admin flag and stats", async () => {
   const { env, db } = testEnv();
   env.ADMIN_GOOGLE_SUB = "admin";
@@ -97,6 +97,23 @@ it("excludes the home IP and authenticated operator while counting other visitor
   expect(
     db.prepare("SELECT COUNT(*) AS n FROM traffic_visitors").get()?.n,
   ).toBe(2);
+  expect(
+    db
+      .prepare(
+        "SELECT COUNT(*) AS n FROM traffic_ip_daily WHERE ip='174.44.103.190'",
+      )
+      .get()?.n,
+  ).toBe(0);
+  const views = await statDetails(env, "views", 30, 0),
+    visitors = await statDetails(env, "visitors", 30, 0);
+  expect(views?.rows.map((r: any) => r["IP address"]).sort()).toEqual([
+    "203.0.113.1",
+    "203.0.113.2",
+  ]);
+  expect(visitors?.rows.map((r: any) => r["IP addresses"]).sort()).toEqual([
+    "203.0.113.1",
+    "203.0.113.2",
+  ]);
 });
 
 it("details match summary counts and paginate without duplicate accounts", async () => {
@@ -168,4 +185,41 @@ it("details match summary counts and paginate without duplicate accounts", async
     );
     expect(response.status).toBe(path === "invalid" ? 404 : 400);
   }
+});
+
+it("retains aggregate views when IP records expire and does not double-count browser days across IPs", async () => {
+  const { env, db } = testEnv();
+  db.exec(`INSERT INTO traffic_daily VALUES('2000-01-01',5),(date('now'),4);
+ INSERT INTO traffic_ip_daily VALUES('2000-01-01','192.0.2.1',5),(date('now'),'192.0.2.2',2),(date('now'),'192.0.2.3',1);
+ INSERT INTO traffic_visitors VALUES('2000-01-01','old'),(date('now'),'current');
+ INSERT INTO traffic_visitor_ips VALUES('2000-01-01','old','192.0.2.1'),(date('now'),'current','192.0.2.2'),(date('now'),'current','192.0.2.3');`);
+  await pruneTraffic(env);
+  expect(
+    db
+      .prepare(
+        "SELECT COUNT(*) AS n FROM traffic_ip_daily WHERE day='2000-01-01'",
+      )
+      .get()?.n,
+  ).toBe(0);
+  expect(
+    db
+      .prepare(
+        "SELECT COUNT(*) AS n FROM traffic_visitor_ips WHERE day='2000-01-01'",
+      )
+      .get()?.n,
+  ).toBe(0);
+  const details = await statDetails(env, "views", 0, 0);
+  expect(
+    details?.rows.reduce((total: number, r: any) => total + r["Page views"], 0),
+  ).toBe(9);
+  expect(
+    details?.rows.find((r: any) => r["Date (UTC)"] === "2000-01-01")?.[
+      "IP address"
+    ],
+  ).toBe("Not recorded");
+  const browsers = await statDetails(env, "visitors", 0, 0);
+  expect(browsers?.rows).toHaveLength(1);
+  expect(browsers?.rows[0]["Days visited"]).toBe(1);
+  expect(browsers?.rows[0]["IP addresses"]).toContain("192.0.2.2");
+  expect(browsers?.rows[0]["IP addresses"]).toContain("192.0.2.3");
 });

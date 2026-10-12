@@ -1,4 +1,10 @@
-import { isAdmin, stats, excludeTraffic, statDetails } from "./stats";
+import {
+  isAdmin,
+  stats,
+  excludeTraffic,
+  statDetails,
+  pruneTraffic,
+} from "./stats";
 import { publicPage, launchPage } from "./legal";
 import { sharedGame } from "./providers/cache";
 import { refreshLeague } from "./catalog";
@@ -66,6 +72,7 @@ app.use("*", async (c, next) => {
   }
   const day = new Date().toISOString().slice(0, 10);
   const visitorHash = await hash(visitor);
+  const ip = c.req.header("CF-Connecting-IP") || "";
   c.executionCtx.waitUntil(
     c.env.DB.batch([
       sql(
@@ -81,7 +88,16 @@ app.use("*", async (c, next) => {
       ),
       sql(
         c.env,
-        "DELETE FROM traffic_visitors WHERE day < date('now','-90 days')",
+        "INSERT INTO traffic_ip_daily(day,ip,views) VALUES(?,?,1) ON CONFLICT(day,ip) DO UPDATE SET views=views+1",
+        day,
+        ip,
+      ),
+      sql(
+        c.env,
+        "INSERT OR IGNORE INTO traffic_visitor_ips(day,visitor,ip) VALUES(?,?,?)",
+        day,
+        visitorHash,
+        ip,
       ),
     ]).catch((e) => console.error("Traffic recording failed", e.name)),
   );
@@ -796,6 +812,7 @@ export default {
   },
   async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext) {
     ctx.waitUntil(reconcile(env));
+    ctx.waitUntil(pruneTraffic(env));
     if (event.cron === "0 8 * * *") ctx.waitUntil(checkCatalog(env));
   },
 };

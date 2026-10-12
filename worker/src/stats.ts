@@ -87,24 +87,24 @@ export async function statDetails(
     columns: string[],
     note = "";
   if (metric === "views") {
-    query =
-      'SELECT day AS "Date (UTC)",views AS "Page views" FROM traffic_daily WHERE day>=? ORDER BY day DESC';
-    values = [firstDay];
-    columns = ["Date (UTC)", "Page views"];
+    query = `SELECT day AS "Date (UTC)",CASE WHEN ip='' THEN 'Not recorded' ELSE ip END AS "IP address",views AS "Page views" FROM traffic_ip_daily WHERE day>=?
+      UNION ALL SELECT d.day AS "Date (UTC)",'Not recorded' AS "IP address",d.views-COALESCE((SELECT SUM(i.views) FROM traffic_ip_daily i WHERE i.day=d.day),0) AS "Page views" FROM traffic_daily d WHERE d.day>=? AND d.views>COALESCE((SELECT SUM(i.views) FROM traffic_ip_daily i WHERE i.day=d.day),0) ORDER BY "Date (UTC)" DESC,"IP address"`;
+    values = [firstDay, firstDay];
+    columns = ["Date (UTC)", "IP address", "Page views"];
     note =
-      "Page views are stored as daily totals. Individual page visits and IP addresses are not stored. Home-IP and signed-in operator traffic are excluded.";
+      "Page views are grouped by day and IP address. IP records are retained for 90 days. Older views or visits before IP tracking show “Not recorded.” Home-IP and signed-in operator traffic are excluded.";
   } else if (metric === "visitors") {
-    query =
-      'SELECT visitor AS "Browser identifier",MIN(day) AS "First seen (UTC)",MAX(day) AS "Last seen (UTC)",COUNT(*) AS "Days visited" FROM traffic_visitors WHERE day>=? GROUP BY visitor ORDER BY MAX(day) DESC,visitor';
+    query = `SELECT v.visitor AS "Browser identifier",COALESCE(GROUP_CONCAT(DISTINCT NULLIF(i.ip,'')),'Not recorded') AS "IP addresses",MIN(v.day) AS "First seen (UTC)",MAX(v.day) AS "Last seen (UTC)",COUNT(DISTINCT v.day) AS "Days visited" FROM traffic_visitors v LEFT JOIN traffic_visitor_ips i ON i.day=v.day AND i.visitor=v.visitor WHERE v.day>=? GROUP BY v.visitor ORDER BY MAX(v.day) DESC,v.visitor`;
     values = [firstDay];
     columns = [
       "Browser identifier",
+      "IP addresses",
       "First seen (UTC)",
       "Last seen (UTC)",
       "Days visited",
     ];
     note =
-      "These are hashed browser identifiers, not people. Records cover at most 90 days. Home-IP and signed-in operator traffic are excluded.";
+      "Browser identifiers and their recorded IP addresses cover at most 90 days. A browser can use several IPs, and an IP can be shared by several people. Home-IP and signed-in operator traffic are excluded.";
   } else if (metric === "accounts") {
     query = `SELECT id AS "Account",google_sub AS "Google identifier",datetime(created_at,'unixepoch') AS "Created (UTC)" FROM principals WHERE google_sub IS NOT NULL AND created_at>=? ORDER BY created_at DESC,id`;
     values = [since];
@@ -157,4 +157,13 @@ export async function statDetails(
     note,
     nextOffset: more ? offset + 50 : null,
   };
+}
+
+export async function pruneTraffic(env: Env) {
+  await env.DB.batch(
+    ["traffic_visitors", "traffic_ip_daily", "traffic_visitor_ips"].map(
+      (table) =>
+        sql(env, `DELETE FROM ${table} WHERE day < date('now','-90 days')`),
+    ),
+  );
 }
