@@ -151,8 +151,8 @@ export function Stats() {
             excludes purchases marked for refund/dispute review, and is not net
             revenue. Traffic tracking starts with this release; unique browsers
             cover at most 90 days and may include bots. Cookies and multiple
-            devices affect these estimates. Dates use UTC; activity periods are
-            rolling.
+            devices affect these estimates. Daily groups use UTC; detail times
+            use Eastern Time. Activity periods are rolling.
           </p>
           <h2>Daily activity</h2>
           <p>Most recent 30 days with activity in the selected period.</p>
@@ -196,7 +196,11 @@ export function Stats() {
             <p>No activity recorded for this period.</p>
           )}
           <p className="stats-note">
-            Updated {new Date(data.generatedAt * 1000).toLocaleString()}
+            Updated{" "}
+            {new Date(data.generatedAt * 1000).toLocaleString("en-US", {
+              timeZone: "America/New_York",
+              timeZoneName: "short",
+            })}
           </p>
         </>
       )}

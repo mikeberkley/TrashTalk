@@ -52,12 +52,12 @@ for (const width of [390, 1440]) {
     const offset = Number(u.searchParams.get("offset") || 0);
     return r.fulfill({
       json: {
-        columns: ["Account", "Google identifier", "Created (UTC)"],
+        columns: ["Account", "Google identifier", "Created (ET)"],
         rows: [
           {
             Account: offset ? "next-account" : "example-account",
             "Google identifier": "123456789012345678901",
-            "Created (UTC)": "2026-10-12 12:00:00",
+            "Created (ET)": "Oct 12, 2026, 8:00:00 AM EDT",
           },
         ],
         note: "Account names and emails are not stored.",

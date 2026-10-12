@@ -47,7 +47,7 @@ it("only the configured Google account sees the admin flag and stats", async () 
 it("aggregates traffic and paid purchases without counting review purchases", async () => {
   const { env, db } = testEnv();
   db.exec(
-    "INSERT INTO purchases VALUES('one','a','p1','paid',99,4,unixepoch()),('two','b','p2','review',99,4,unixepoch()); INSERT INTO traffic_daily VALUES(date('now'),3); INSERT INTO traffic_visitors VALUES(date('now'),'a'),(date('now'),'b')",
+    "INSERT INTO purchases VALUES('one','a','p1','paid',99,4,unixepoch()),('two','b','p2','review',99,4,unixepoch()); INSERT INTO traffic_daily VALUES(date('now'),3); INSERT INTO traffic_visitors(day,visitor) VALUES(date('now'),'a'),(date('now'),'b')",
   );
   const s = await stats(env, 30);
   expect(s.purchases).toEqual({ packs: 1, grossCents: 99, credits: 4 });
@@ -131,7 +131,7 @@ it("details match summary counts and paginate without duplicate accounts", async
  INSERT INTO ledger(owner,kind,amount,pool,business_key,job_id,created_at) VALUES('u0','captured',0,'trial','capture1','complete',unixepoch()),('u0','captured',0,'paid','capture2','deleted',unixepoch());
  INSERT INTO shares VALUES('s1','complete',unixepoch(),1),('s2','deleted',unixepoch(),1);
  INSERT INTO traffic_daily VALUES(date('now'),7);
- INSERT INTO traffic_visitors VALUES(date('now'),'browser');`);
+ INSERT INTO traffic_visitors(day,visitor) VALUES(date('now'),'browser');`);
   const s = await stats(env, 30);
   for (const [metric, count] of Object.entries({
     completed: s.images.completed,
@@ -190,8 +190,8 @@ it("details match summary counts and paginate without duplicate accounts", async
 it("retains aggregate views when IP records expire and does not double-count browser days across IPs", async () => {
   const { env, db } = testEnv();
   db.exec(`INSERT INTO traffic_daily VALUES('2000-01-01',5),(date('now'),4);
- INSERT INTO traffic_ip_daily VALUES('2000-01-01','192.0.2.1',5),(date('now'),'192.0.2.2',2),(date('now'),'192.0.2.3',1);
- INSERT INTO traffic_visitors VALUES('2000-01-01','old'),(date('now'),'current');
+ INSERT INTO traffic_ip_daily(day,ip,views) VALUES('2000-01-01','192.0.2.1',5),(date('now'),'192.0.2.2',2),(date('now'),'192.0.2.3',1);
+ INSERT INTO traffic_visitors(day,visitor) VALUES('2000-01-01','old'),(date('now'),'current');
  INSERT INTO traffic_visitor_ips VALUES('2000-01-01','old','192.0.2.1'),(date('now'),'current','192.0.2.2'),(date('now'),'current','192.0.2.3');`);
   await pruneTraffic(env);
   expect(
@@ -213,7 +213,7 @@ it("retains aggregate views when IP records expire and does not double-count bro
     details?.rows.reduce((total: number, r: any) => total + r["Page views"], 0),
   ).toBe(9);
   expect(
-    details?.rows.find((r: any) => r["Date (UTC)"] === "2000-01-01")?.[
+    details?.rows.find((r: any) => r["Day (UTC)"] === "2000-01-01")?.[
       "IP address"
     ],
   ).toBe("Not recorded");
@@ -239,7 +239,7 @@ it("looks up an IP once and reuses its saved location even after daily records e
     throw Error("must reuse saved location");
   });
   db.exec(
-    "INSERT INTO traffic_daily VALUES(date('now'),1);INSERT INTO traffic_ip_daily VALUES(date('now'),'192.0.2.20',1);INSERT INTO traffic_visitors VALUES(date('now'),'browser');INSERT INTO traffic_visitor_ips VALUES(date('now'),'browser','192.0.2.20')",
+    "INSERT INTO traffic_daily VALUES(date('now'),1);INSERT INTO traffic_ip_daily(day,ip,views) VALUES(date('now'),'192.0.2.20',1);INSERT INTO traffic_visitors(day,visitor) VALUES(date('now'),'browser');INSERT INTO traffic_visitor_ips VALUES(date('now'),'browser','192.0.2.20')",
   );
   const details = await statDetails(env, "views", 30, 0);
   expect(details?.rows[0]).toMatchObject({
@@ -290,4 +290,40 @@ it("records Cloudflare location on the first counted request and never overwrite
     db.prepare("SELECT city,state,country FROM traffic_ip_locations").get(),
   ).toMatchObject({ city: "Burlington", state: "Vermont", country: "US" });
   expect(db.prepare("SELECT views FROM traffic_ip_daily").get()?.views).toBe(2);
+});
+
+it("formats record timestamps in Eastern Time across daylight saving changes", async () => {
+  const { formatEastern } = await import("../worker/src/stats");
+  expect(formatEastern("2026-07-01T16:05:06Z")).toBe(
+    "Jul 1, 2026, 12:05:06 PM EDT",
+  );
+  expect(formatEastern("2026-01-01T16:05:06Z")).toBe(
+    "Jan 1, 2026, 11:05:06 AM EST",
+  );
+  expect(formatEastern("2026-07-01T02:05:06Z")).toBe(
+    "Jun 30, 2026, 10:05:06 PM EDT",
+  );
+  const { env, db } = testEnv();
+  db.exec(
+    "INSERT INTO principals(id,google_sub,created_at) VALUES('a','google',1782921906)",
+  );
+  const accounts = await statDetails(env, "accounts", 0, 0);
+  expect(accounts?.columns).toContain("Created (ET)");
+  expect(accounts?.rows[0]["Created (ET)"]).toBe(
+    formatEastern(1782921906 * 1000),
+  );
+  db.exec(
+    "INSERT INTO traffic_daily VALUES('2026-07-01',2);INSERT INTO traffic_ip_daily(day,ip,views,first_seen,last_seen) VALUES('2026-07-01','192.0.2.1',2,1782921906,1782925506);INSERT INTO traffic_visitors(day,visitor,first_seen,last_seen) VALUES('2026-07-01','browser',1782921906,1782925506)",
+  );
+  const views = await statDetails(env, "views", 0, 0),
+    visitors = await statDetails(env, "visitors", 0, 0);
+  expect(views?.rows[0]["First visit (ET)"]).toBe(
+    formatEastern(1782921906 * 1000),
+  );
+  expect(views?.rows[0]["Last visit (ET)"]).toBe(
+    formatEastern(1782925506 * 1000),
+  );
+  expect(visitors?.rows[0]["First seen (ET)"]).toBe(
+    formatEastern(1782921906 * 1000),
+  );
 });

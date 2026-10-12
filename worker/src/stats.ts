@@ -87,8 +87,8 @@ export async function statDetails(
     columns: string[],
     note = "";
   if (metric === "views") {
-    query = `SELECT i.day AS "Date (UTC)",CASE WHEN i.ip='' THEN 'Not recorded' ELSE i.ip END AS "IP address",g.city AS "City",g.state AS "State / region",g.country AS "Country",i.views AS "Page views" FROM traffic_ip_daily i LEFT JOIN traffic_ip_locations g ON g.ip=i.ip WHERE i.day>=?
-      UNION ALL SELECT d.day AS "Date (UTC)",'Not recorded' AS "IP address",NULL AS "City",NULL AS "State / region",NULL AS "Country",d.views-COALESCE((SELECT SUM(i.views) FROM traffic_ip_daily i WHERE i.day=d.day),0) AS "Page views" FROM traffic_daily d WHERE d.day>=? AND d.views>COALESCE((SELECT SUM(i.views) FROM traffic_ip_daily i WHERE i.day=d.day),0) ORDER BY "Date (UTC)" DESC,"IP address"`;
+    query = `SELECT i.day AS "Date (UTC)",CASE WHEN i.ip='' THEN 'Not recorded' ELSE i.ip END AS "IP address",g.city AS "City",g.state AS "State / region",g.country AS "Country",i.views AS "Page views",i.first_seen AS "First visit (ET)",i.last_seen AS "Last visit (ET)" FROM traffic_ip_daily i LEFT JOIN traffic_ip_locations g ON g.ip=i.ip WHERE i.day>=?
+      UNION ALL SELECT d.day AS "Date (UTC)",'Not recorded' AS "IP address",NULL AS "City",NULL AS "State / region",NULL AS "Country",d.views-COALESCE((SELECT SUM(i.views) FROM traffic_ip_daily i WHERE i.day=d.day),0) AS "Page views",NULL AS "First visit (ET)",NULL AS "Last visit (ET)" FROM traffic_daily d WHERE d.day>=? AND d.views>COALESCE((SELECT SUM(i.views) FROM traffic_ip_daily i WHERE i.day=d.day),0) ORDER BY "Date (UTC)" DESC,"IP address"`;
     values = [firstDay, firstDay];
     columns = [
       "Date (UTC)",
@@ -97,22 +97,24 @@ export async function statDetails(
       "State / region",
       "Country",
       "Page views",
+      "First visit (ET)",
+      "Last visit (ET)",
     ];
     note =
-      "Page views are grouped by day and IP address. Daily IP records are retained for 90 days; the first location for each IP is cached. Geolocation is approximate; country uses its two-letter code. Older views or visits before IP tracking show “Not recorded.” Home-IP and signed-in operator traffic are excluded.";
+      "Page views are grouped by day and IP address. Daily IP records are retained for 90 days; the first location for each IP is cached. Geolocation is approximate; country uses its two-letter code. Older views or visits before IP tracking show “Not recorded.” Home-IP and signed-in operator traffic are excluded. Traffic timestamps begin with this update; earlier times were not recorded.";
   } else if (metric === "visitors") {
-    query = `SELECT v.visitor AS "Browser identifier",COALESCE(GROUP_CONCAT(DISTINCT NULLIF(i.ip,'')),'Not recorded') AS "IP addresses",GROUP_CONCAT(DISTINCT CASE WHEN i.ip IS NOT NULL AND i.ip!='' THEN i.ip||': '||COALESCE(g.city,'Unknown city')||', '||COALESCE(g.state,'Unknown region')||', '||COALESCE(g.country,'Unknown country') END) AS "Locations",MIN(v.day) AS "First seen (UTC)",MAX(v.day) AS "Last seen (UTC)",COUNT(DISTINCT v.day) AS "Days visited" FROM traffic_visitors v LEFT JOIN traffic_visitor_ips i ON i.day=v.day AND i.visitor=v.visitor LEFT JOIN traffic_ip_locations g ON g.ip=i.ip WHERE v.day>=? GROUP BY v.visitor ORDER BY MAX(v.day) DESC,v.visitor`;
+    query = `SELECT v.visitor AS "Browser identifier",COALESCE(GROUP_CONCAT(DISTINCT NULLIF(i.ip,'')),'Not recorded') AS "IP addresses",GROUP_CONCAT(DISTINCT CASE WHEN i.ip IS NOT NULL AND i.ip!='' THEN i.ip||': '||COALESCE(g.city,'Unknown city')||', '||COALESCE(g.state,'Unknown region')||', '||COALESCE(g.country,'Unknown country') END) AS "Locations",MIN(v.first_seen) AS "First seen (ET)",MAX(v.last_seen) AS "Last seen (ET)",COUNT(DISTINCT v.day) AS "Days visited" FROM traffic_visitors v LEFT JOIN traffic_visitor_ips i ON i.day=v.day AND i.visitor=v.visitor LEFT JOIN traffic_ip_locations g ON g.ip=i.ip WHERE v.day>=? GROUP BY v.visitor ORDER BY MAX(v.day) DESC,v.visitor`;
     values = [firstDay];
     columns = [
       "Browser identifier",
       "IP addresses",
       "Locations",
-      "First seen (UTC)",
-      "Last seen (UTC)",
+      "First seen (ET)",
+      "Last seen (ET)",
       "Days visited",
     ];
     note =
-      "Browser identifiers and their recorded IP addresses cover at most 90 days. A browser can use several IPs, and an IP can be shared by several people. Home-IP and signed-in operator traffic are excluded.";
+      "Browser identifiers and their recorded IP addresses cover at most 90 days. A browser can use several IPs, and an IP can be shared by several people. Home-IP and signed-in operator traffic are excluded. Traffic timestamps begin with this update; earlier times were not recorded.";
   } else if (metric === "accounts") {
     query = `SELECT id AS "Account",google_sub AS "Google identifier",datetime(created_at,'unixepoch') AS "Created (UTC)" FROM principals WHERE google_sub IS NOT NULL AND created_at>=? ORDER BY created_at DESC,id`;
     values = [since];
@@ -160,8 +162,30 @@ export async function statDetails(
   ).results;
   const more = rows.length > 50;
   return {
-    columns,
-    rows: rows.slice(0, 50),
+    columns: columns.map((col) =>
+      col === "Date (UTC)" ? "Day (UTC)" : col.replace("(UTC)", "(ET)"),
+    ),
+    rows: rows.slice(0, 50).map((row: any) =>
+      Object.fromEntries(
+        Object.entries(row).map(([col, value]) => {
+          // Daily aggregates have only a date; keep that grouping explicit in UTC.
+          if (col === "Date (UTC)") return ["Day (UTC)", value];
+          if (col.endsWith("(UTC)"))
+            return [
+              col.replace("(UTC)", "(ET)"),
+              formatEastern(String(value).replace(" ", "T") + "Z"),
+            ];
+          if (col.endsWith("(ET)"))
+            return [
+              col,
+              value == null
+                ? "Time not recorded"
+                : formatEastern(Number(value) * 1000),
+            ];
+          return [col, value];
+        }),
+      ),
+    ),
     note,
     nextOffset: more ? offset + 50 : null,
   };
@@ -203,4 +227,19 @@ export async function cacheIpLocation(
     geo?.country || null,
     now(),
   ).run();
+}
+
+export function formatEastern(value: string | number) {
+  const date = new Date(value);
+  if (!Number.isFinite(date.getTime())) return "Time not recorded";
+  return new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    second: "2-digit",
+    timeZoneName: "short",
+  }).format(date);
 }

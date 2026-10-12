@@ -91,15 +91,19 @@ app.use("*", async (c, next) => {
         ),
         sql(
           c.env,
-          "INSERT OR IGNORE INTO traffic_visitors(day,visitor) VALUES(?,?)",
+          "INSERT INTO traffic_visitors(day,visitor,first_seen,last_seen) VALUES(?,?,?,?) ON CONFLICT(day,visitor) DO UPDATE SET first_seen=COALESCE(first_seen,excluded.first_seen),last_seen=excluded.last_seen",
           day,
           visitorHash,
+          now(),
+          now(),
         ),
         sql(
           c.env,
-          "INSERT INTO traffic_ip_daily(day,ip,views) VALUES(?,?,1) ON CONFLICT(day,ip) DO UPDATE SET views=views+1",
+          "INSERT INTO traffic_ip_daily(day,ip,views,first_seen,last_seen) VALUES(?,?,1,?,?) ON CONFLICT(day,ip) DO UPDATE SET views=views+1,first_seen=COALESCE(first_seen,excluded.first_seen),last_seen=excluded.last_seen",
           day,
           ip,
+          now(),
+          now(),
         ),
         sql(
           c.env,
