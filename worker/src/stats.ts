@@ -87,18 +87,26 @@ export async function statDetails(
     columns: string[],
     note = "";
   if (metric === "views") {
-    query = `SELECT day AS "Date (UTC)",CASE WHEN ip='' THEN 'Not recorded' ELSE ip END AS "IP address",views AS "Page views" FROM traffic_ip_daily WHERE day>=?
-      UNION ALL SELECT d.day AS "Date (UTC)",'Not recorded' AS "IP address",d.views-COALESCE((SELECT SUM(i.views) FROM traffic_ip_daily i WHERE i.day=d.day),0) AS "Page views" FROM traffic_daily d WHERE d.day>=? AND d.views>COALESCE((SELECT SUM(i.views) FROM traffic_ip_daily i WHERE i.day=d.day),0) ORDER BY "Date (UTC)" DESC,"IP address"`;
+    query = `SELECT i.day AS "Date (UTC)",CASE WHEN i.ip='' THEN 'Not recorded' ELSE i.ip END AS "IP address",g.city AS "City",g.state AS "State / region",g.country AS "Country",i.views AS "Page views" FROM traffic_ip_daily i LEFT JOIN traffic_ip_locations g ON g.ip=i.ip WHERE i.day>=?
+      UNION ALL SELECT d.day AS "Date (UTC)",'Not recorded' AS "IP address",NULL AS "City",NULL AS "State / region",NULL AS "Country",d.views-COALESCE((SELECT SUM(i.views) FROM traffic_ip_daily i WHERE i.day=d.day),0) AS "Page views" FROM traffic_daily d WHERE d.day>=? AND d.views>COALESCE((SELECT SUM(i.views) FROM traffic_ip_daily i WHERE i.day=d.day),0) ORDER BY "Date (UTC)" DESC,"IP address"`;
     values = [firstDay, firstDay];
-    columns = ["Date (UTC)", "IP address", "Page views"];
+    columns = [
+      "Date (UTC)",
+      "IP address",
+      "City",
+      "State / region",
+      "Country",
+      "Page views",
+    ];
     note =
-      "Page views are grouped by day and IP address. IP records are retained for 90 days. Older views or visits before IP tracking show “Not recorded.” Home-IP and signed-in operator traffic are excluded.";
+      "Page views are grouped by day and IP address. Daily IP records are retained for 90 days; the first location for each IP is cached. Geolocation is approximate; country uses its two-letter code. Older views or visits before IP tracking show “Not recorded.” Home-IP and signed-in operator traffic are excluded.";
   } else if (metric === "visitors") {
-    query = `SELECT v.visitor AS "Browser identifier",COALESCE(GROUP_CONCAT(DISTINCT NULLIF(i.ip,'')),'Not recorded') AS "IP addresses",MIN(v.day) AS "First seen (UTC)",MAX(v.day) AS "Last seen (UTC)",COUNT(DISTINCT v.day) AS "Days visited" FROM traffic_visitors v LEFT JOIN traffic_visitor_ips i ON i.day=v.day AND i.visitor=v.visitor WHERE v.day>=? GROUP BY v.visitor ORDER BY MAX(v.day) DESC,v.visitor`;
+    query = `SELECT v.visitor AS "Browser identifier",COALESCE(GROUP_CONCAT(DISTINCT NULLIF(i.ip,'')),'Not recorded') AS "IP addresses",GROUP_CONCAT(DISTINCT CASE WHEN i.ip IS NOT NULL AND i.ip!='' THEN i.ip||': '||COALESCE(g.city,'Unknown city')||', '||COALESCE(g.state,'Unknown region')||', '||COALESCE(g.country,'Unknown country') END) AS "Locations",MIN(v.day) AS "First seen (UTC)",MAX(v.day) AS "Last seen (UTC)",COUNT(DISTINCT v.day) AS "Days visited" FROM traffic_visitors v LEFT JOIN traffic_visitor_ips i ON i.day=v.day AND i.visitor=v.visitor LEFT JOIN traffic_ip_locations g ON g.ip=i.ip WHERE v.day>=? GROUP BY v.visitor ORDER BY MAX(v.day) DESC,v.visitor`;
     values = [firstDay];
     columns = [
       "Browser identifier",
       "IP addresses",
+      "Locations",
       "First seen (UTC)",
       "Last seen (UTC)",
       "Days visited",
@@ -166,4 +174,33 @@ export async function pruneTraffic(env: Env) {
         sql(env, `DELETE FROM ${table} WHERE day < date('now','-90 days')`),
     ),
   );
+}
+
+// Cloudflare already resolves request geolocation. Read it only for uncached IPs;
+// INSERT OR IGNORE makes the first saved value authoritative under concurrent visits.
+export async function cacheIpLocation(
+  env: Env,
+  ip: string,
+  lookup: () =>
+    { city?: string; region?: string; country?: string } | undefined,
+) {
+  if (
+    !ip ||
+    (await sql(
+      env,
+      "SELECT ip FROM traffic_ip_locations WHERE ip=?",
+      ip,
+    ).first())
+  )
+    return;
+  const geo = lookup();
+  await sql(
+    env,
+    "INSERT OR IGNORE INTO traffic_ip_locations(ip,city,state,country,created_at) VALUES(?,?,?,?,?)",
+    ip,
+    geo?.city || null,
+    geo?.region || null,
+    geo?.country || null,
+    now(),
+  ).run();
 }

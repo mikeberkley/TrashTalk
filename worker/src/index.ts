@@ -4,6 +4,7 @@ import {
   excludeTraffic,
   statDetails,
   pruneTraffic,
+  cacheIpLocation,
 } from "./stats";
 import { publicPage, launchPage } from "./legal";
 import { sharedGame } from "./providers/cache";
@@ -74,32 +75,41 @@ app.use("*", async (c, next) => {
   const visitorHash = await hash(visitor);
   const ip = c.req.header("CF-Connecting-IP") || "";
   c.executionCtx.waitUntil(
-    c.env.DB.batch([
-      sql(
+    (async () => {
+      await cacheIpLocation(
         c.env,
-        "INSERT INTO traffic_daily(day,views) VALUES(?,1) ON CONFLICT(day) DO UPDATE SET views=views+1",
-        day,
-      ),
-      sql(
-        c.env,
-        "INSERT OR IGNORE INTO traffic_visitors(day,visitor) VALUES(?,?)",
-        day,
-        visitorHash,
-      ),
-      sql(
-        c.env,
-        "INSERT INTO traffic_ip_daily(day,ip,views) VALUES(?,?,1) ON CONFLICT(day,ip) DO UPDATE SET views=views+1",
-        day,
         ip,
-      ),
-      sql(
-        c.env,
-        "INSERT OR IGNORE INTO traffic_visitor_ips(day,visitor,ip) VALUES(?,?,?)",
-        day,
-        visitorHash,
-        ip,
-      ),
-    ]).catch((e) => console.error("Traffic recording failed", e.name)),
+        () =>
+          c.req.raw.cf as
+            { city?: string; region?: string; country?: string } | undefined,
+      );
+      await c.env.DB.batch([
+        sql(
+          c.env,
+          "INSERT INTO traffic_daily(day,views) VALUES(?,1) ON CONFLICT(day) DO UPDATE SET views=views+1",
+          day,
+        ),
+        sql(
+          c.env,
+          "INSERT OR IGNORE INTO traffic_visitors(day,visitor) VALUES(?,?)",
+          day,
+          visitorHash,
+        ),
+        sql(
+          c.env,
+          "INSERT INTO traffic_ip_daily(day,ip,views) VALUES(?,?,1) ON CONFLICT(day,ip) DO UPDATE SET views=views+1",
+          day,
+          ip,
+        ),
+        sql(
+          c.env,
+          "INSERT OR IGNORE INTO traffic_visitor_ips(day,visitor,ip) VALUES(?,?,?)",
+          day,
+          visitorHash,
+          ip,
+        ),
+      ]);
+    })().catch((e) => console.error("Traffic recording failed", e.name)),
   );
 });
 app.post("/api/billing/webhook", async (c) => {

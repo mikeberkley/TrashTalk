@@ -223,3 +223,71 @@ it("retains aggregate views when IP records expire and does not double-count bro
   expect(browsers?.rows[0]["IP addresses"]).toContain("192.0.2.2");
   expect(browsers?.rows[0]["IP addresses"]).toContain("192.0.2.3");
 });
+
+it("looks up an IP once and reuses its saved location even after daily records expire", async () => {
+  const { env, db } = testEnv();
+  const { cacheIpLocation } = await import("../worker/src/stats");
+  const lookup = vi.fn(() => ({
+    city: "Burlington",
+    region: "Vermont",
+    country: "US",
+  }));
+  await cacheIpLocation(env, "192.0.2.20", lookup);
+  await cacheIpLocation(env, "192.0.2.20", lookup);
+  expect(lookup).toHaveBeenCalledTimes(1);
+  await cacheIpLocation(env, "192.0.2.20", () => {
+    throw Error("must reuse saved location");
+  });
+  db.exec(
+    "INSERT INTO traffic_daily VALUES(date('now'),1);INSERT INTO traffic_ip_daily VALUES(date('now'),'192.0.2.20',1);INSERT INTO traffic_visitors VALUES(date('now'),'browser');INSERT INTO traffic_visitor_ips VALUES(date('now'),'browser','192.0.2.20')",
+  );
+  const details = await statDetails(env, "views", 30, 0);
+  expect(details?.rows[0]).toMatchObject({
+    City: "Burlington",
+    "State / region": "Vermont",
+    Country: "US",
+  });
+  expect(
+    (await statDetails(env, "visitors", 30, 0))?.rows[0].Locations,
+  ).toContain("192.0.2.20: Burlington, Vermont, US");
+  await pruneTraffic(env);
+  expect(db.prepare("SELECT city FROM traffic_ip_locations").get()?.city).toBe(
+    "Burlington",
+  );
+  const unknown = vi.fn(() => undefined);
+  await cacheIpLocation(env, "192.0.2.21", unknown);
+  await cacheIpLocation(env, "192.0.2.21", unknown);
+  expect(unknown).toHaveBeenCalledTimes(1);
+});
+it("records Cloudflare location on the first counted request and never overwrites it", async () => {
+  const { env, db } = testEnv();
+  env.ASSETS = {
+    fetch: async () =>
+      new Response("<html>App</html>", {
+        headers: { "Content-Type": "text/html" },
+      }),
+  };
+  const pending: Promise<any>[] = [];
+  const visit = async (city: string) => {
+    const request = new Request("http://localhost/", {
+      headers: { "CF-Connecting-IP": "192.0.2.30" },
+    });
+    Object.defineProperty(request, "cf", {
+      value: { city, region: "Vermont", country: "US" },
+    });
+    expect(
+      (
+        await worker.fetch(request, env, {
+          waitUntil: (p: Promise<any>) => pending.push(p),
+        } as any)
+      ).status,
+    ).toBe(200);
+    await Promise.all(pending);
+  };
+  await visit("Burlington");
+  await visit("Montpelier");
+  expect(
+    db.prepare("SELECT city,state,country FROM traffic_ip_locations").get(),
+  ).toMatchObject({ city: "Burlington", state: "Vermont", country: "US" });
+  expect(db.prepare("SELECT views FROM traffic_ip_daily").get()?.views).toBe(2);
+});
