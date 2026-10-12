@@ -120,8 +120,8 @@ it("details match summary counts and paginate without duplicate accounts", async
   const { env, db } = testEnv();
   for (let i = 0; i < 52; i++)
     db.prepare(
-      "INSERT INTO principals(id,google_sub,created_at) VALUES(?,?,unixepoch())",
-    ).run("u" + i, "g" + i);
+      "INSERT INTO principals(id,google_sub,created_at) VALUES(?,?,unixepoch()-?)",
+    ).run("u" + i, "g" + i, i);
   db.exec(`INSERT INTO jobs(id,owner,idempotency,input_hash,input,status,created_at,updated_at,deleted_at) VALUES
  ('complete','u0','a','h','{}','complete',unixepoch(),unixepoch(),NULL),
  ('deleted','u0','b','h','{}','complete',unixepoch(),unixepoch(),unixepoch()),
@@ -156,7 +156,9 @@ it("details match summary counts and paginate without duplicate accounts", async
   expect(second?.rows).toHaveLength(2);
   expect(second?.nextOffset).toBeNull();
   expect(
-    new Set([...first!.rows, ...second!.rows].map((r: any) => r.Account)).size,
+    new Set(
+      [...first!.rows, ...second!.rows].map((r: any) => r["Created (ET)"]),
+    ).size,
   ).toBe(52);
   expect((await statDetails(env, "credits", 30, 0))?.rows[0].Credits).toBe(
     s.purchases.credits,
@@ -326,4 +328,60 @@ it("formats record timestamps in Eastern Time across daylight saving changes", a
   expect(visitors?.rows[0]["First seen (ET)"]).toBe(
     formatEastern(1782921906 * 1000),
   );
+});
+
+it("sorts traffic by latest timestamp within a day and omits internal identifiers from all details", async () => {
+  const { env, db } = testEnv();
+  db.exec(`INSERT INTO traffic_daily VALUES('2026-07-01',2);
+ INSERT INTO traffic_ip_daily(day,ip,views,first_seen,last_seen) VALUES('2026-07-01','192.0.2.1',1,1782921906,1782921906),('2026-07-01','192.0.2.2',1,1782921906,1782925506);
+ INSERT INTO traffic_visitors(day,visitor,first_seen,last_seen) VALUES('2026-07-01','aaaa',1782921906,1782921906),('2026-07-01','zzzz',1782921906,1782925506);
+ INSERT INTO traffic_visitor_ips VALUES('2026-07-01','aaaa','192.0.2.1'),('2026-07-01','zzzz','192.0.2.2');`);
+  expect((await statDetails(env, "views", 0, 0))?.rows[0]["IP address"]).toBe(
+    "192.0.2.2",
+  );
+  expect(
+    (await statDetails(env, "visitors", 0, 0))?.rows[0]["IP addresses"],
+  ).toBe("192.0.2.2");
+  for (const metric of [
+    "views",
+    "visitors",
+    "accounts",
+    "completed",
+    "retained",
+    "attempts",
+    "failed",
+    "active",
+    "packs",
+    "credits",
+    "amount",
+    "review",
+    "trial",
+    "paid",
+    "shares",
+  ]) {
+    const details = await statDetails(env, metric, 0, 0);
+    expect(details?.columns[0], metric).toMatch(
+      /^(Last visit|Last seen|Created|Used) \(ET\)$/,
+    );
+    const firstNonDate = details!.columns.findIndex(
+      (col) => !col.endsWith("(ET)") && col !== "Day (UTC)",
+    );
+    if (firstNonDate >= 0)
+      expect(
+        details!.columns
+          .slice(firstNonDate)
+          .every((col) => !col.endsWith("(ET)") && col !== "Day (UTC)"),
+      ).toBe(true);
+    for (const forbidden of [
+      "Account",
+      "Google identifier",
+      "Browser identifier",
+      "Image",
+      "Checkout",
+    ]) {
+      expect(details?.columns).not.toContain(forbidden);
+      for (const row of details!.rows)
+        expect(row).not.toHaveProperty(forbidden);
+    }
+  }
 });

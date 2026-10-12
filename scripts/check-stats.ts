@@ -52,12 +52,12 @@ for (const width of [390, 1440]) {
     const offset = Number(u.searchParams.get("offset") || 0);
     return r.fulfill({
       json: {
-        columns: ["Account", "Google identifier", "Created (ET)"],
+        columns: ["Created (ET)"],
         rows: [
           {
-            Account: offset ? "next-account" : "example-account",
-            "Google identifier": "123456789012345678901",
-            "Created (ET)": "Oct 12, 2026, 8:00:00 AM EDT",
+            "Created (ET)": offset
+              ? "Oct 11, 2026, 8:00:00 AM EDT"
+              : "Oct 12, 2026, 8:00:00 AM EDT",
           },
         ],
         note: "Account names and emails are not stored.",
@@ -81,14 +81,20 @@ for (const width of [390, 1440]) {
     else await cards.nth(i).click();
     const dialog = page.getByRole("dialog");
     await dialog.waitFor();
-    await dialog.getByText("example-account", { exact: true }).waitFor();
+    await dialog
+      .getByText("Oct 12, 2026, 8:00:00 AM EDT", { exact: true })
+      .waitFor();
     if (i === 2) {
       await dialog.getByRole("button", { name: "Next", exact: true }).click();
-      await dialog.getByText("next-account", { exact: true }).waitFor();
+      await dialog
+        .getByText("Oct 11, 2026, 8:00:00 AM EDT", { exact: true })
+        .waitFor();
       await dialog
         .getByRole("button", { name: "Previous", exact: true })
         .click();
-      await dialog.getByText("example-account", { exact: true }).waitFor();
+      await dialog
+        .getByText("Oct 12, 2026, 8:00:00 AM EDT", { exact: true })
+        .waitFor();
       await page.screenshot({ path: `reports/stats-modal-${width}.png` });
       await page.keyboard.press("Escape");
     } else
