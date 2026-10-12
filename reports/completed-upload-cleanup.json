@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-12T18:03:01.159Z",
+  "environment": "production",
+  "cleaned": [
+    {
+      "id": "9498774a-76d4-41d8-a350-754dc3fd67fc",
+      "objectDeleted": true,
+      "uploadRecordDeleted": true
+    },
+    {
+      "id": "c27b4ddf-701b-4dd7-964e-12fb27d1d696",
+      "objectDeleted": true,
+      "uploadRecordDeleted": true
+    }
+  ]
+}

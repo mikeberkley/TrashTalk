@@ -26,6 +26,35 @@ export const phraseSchema = z.object({
   visual: z.string().trim().min(1).max(1000),
 });
 class InvalidStoredArtwork extends Error {}
+export async function deleteJobUploads(env: Env, id: string) {
+  const job = await sql(
+    env,
+    "SELECT owner,input FROM jobs WHERE id=?",
+    id,
+  ).first<any>();
+  if (!job) throw Error("Job missing during photo cleanup");
+  const refs = JSON.parse(job.input).references || [];
+  for (const ref of refs) {
+    const upload = await sql(
+      env,
+      "SELECT object_key FROM uploads WHERE id=? AND owner=?",
+      ref.id,
+      job.owner,
+    ).first<any>();
+    const key = upload?.object_key || ref.key;
+    if (typeof key !== "string" || !key.startsWith("uploads/"))
+      throw Error("Invalid upload cleanup key");
+    await env.MEDIA.delete(key);
+    if (await env.MEDIA.head(key))
+      throw Error("Uploaded photo deletion not confirmed");
+    await sql(
+      env,
+      "DELETE FROM uploads WHERE id=? AND owner=?",
+      ref.id,
+      job.owner,
+    ).run();
+  }
+}
 export async function finalize(env: Env, id: string, key: string) {
   const object = await env.MEDIA.get(key);
   if (!object) throw Error("Stored artwork missing");
@@ -34,6 +63,7 @@ export async function finalize(env: Env, id: string, key: string) {
   } catch {
     throw new InvalidStoredArtwork("Stored artwork failed validation");
   }
+  await deleteJobUploads(env, id);
   await env.DB.batch([
     sql(
       env,
@@ -297,6 +327,12 @@ export async function reconcile(env: Env) {
       j.id,
     ).run();
   }
+  // Backfill legacy completions and repair interrupted photo cleanup.
+  const completed = await sql(
+    env,
+    `SELECT DISTINCT j.id FROM jobs j JOIN json_each(j.input,'$.references') r JOIN uploads u ON u.id=json_extract(r.value,'$.id') AND u.owner=j.owner WHERE j.status='complete' LIMIT 100`,
+  ).all<any>();
+  for (const j of completed.results) await deleteJobUploads(env, j.id);
   const expired = await sql(
     env,
     "SELECT id,object_key FROM uploads WHERE (attached_at IS NULL AND created_at<?) OR (attached_at IS NOT NULL AND attached_at<?) LIMIT 100",

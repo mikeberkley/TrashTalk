@@ -206,6 +206,12 @@ function App() {
     return () => clearInterval(t);
   }, [job?.id, job?.status]);
   useEffect(() => {
+    if (job?.status === "complete")
+      setRefs((current) =>
+        current.filter((ref) => !job.referenceIds?.includes(ref.id)),
+      );
+  }, [job?.id, job?.status]);
+  useEffect(() => {
     if (viewer) dialog.current?.showModal();
     else dialog.current?.close();
   }, [viewer]);

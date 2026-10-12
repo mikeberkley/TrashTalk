@@ -506,6 +506,7 @@ function publicJob(j: any) {
     gameId: input.gameId,
     favoriteTeamId: input.favoriteTeamId,
     includeWord: input.includeWord,
+    referenceIds: input.referenceIds || [],
     shareToken: j.share_token || null,
     shareTitle: context
       ? `${context.away.displayName} vs ${context.home.displayName}`

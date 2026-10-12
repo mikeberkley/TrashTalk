@@ -287,3 +287,107 @@ it("corrupt stored artwork is terminal and releases credit on redelivery", async
     "failed",
   );
 });
+
+it("deletes associated uploads before completion and preserves the generated meme and unrelated photos", async () => {
+  const { env, db, objects } = testEnv();
+  seed(db);
+  const refs = [
+    { id: "photo", key: "uploads/photo", hash: "h", mime: "image/jpeg" },
+  ];
+  db.prepare("UPDATE jobs SET input=? WHERE id='j'").run(
+    JSON.stringify({ references: refs }),
+  );
+  db.exec(
+    "INSERT INTO uploads VALUES('photo','a','uploads/photo','h','image/jpeg',0,0),('unused','a','uploads/unused','h','image/jpeg',0,NULL)",
+  );
+  objects.set("uploads/photo", { bytes: new Uint8Array([1]) });
+  objects.set("uploads/unused", { bytes: new Uint8Array([1]) });
+  objects.set("artwork/j", {
+    bytes: fs.readFileSync("reports/image-0-references.jpg"),
+  });
+  const remove = env.MEDIA.delete;
+  env.MEDIA.delete = async (key: string) => {
+    expect(
+      db.prepare("SELECT status FROM jobs WHERE id='j'").get()?.status,
+    ).toBe("imaging");
+    await remove(key);
+  };
+  await finalize(env, "j", "artwork/j");
+  expect(objects.has("uploads/photo")).toBe(false);
+  expect(objects.has("uploads/unused")).toBe(true);
+  expect(objects.has("artwork/j")).toBe(true);
+  expect(
+    db.prepare("SELECT id FROM uploads WHERE id='photo'").get(),
+  ).toBeUndefined();
+  expect(db.prepare("SELECT status FROM jobs WHERE id='j'").get()?.status).toBe(
+    "complete",
+  );
+  env.MEDIA.delete = remove;
+  await finalize(env, "j", "artwork/j");
+  expect(
+    db.prepare("SELECT COUNT(*) n FROM ledger WHERE kind='captured'").get()?.n,
+  ).toBe(1);
+});
+it("holds completion on deletion failure and recovers stored artwork without a paid call", async () => {
+  const { env, db, objects } = testEnv();
+  seed(db);
+  db.prepare("UPDATE jobs SET input=? WHERE id='j'").run(
+    JSON.stringify({ references: [{ id: "photo", key: "uploads/photo" }] }),
+  );
+  db.exec(
+    "INSERT INTO uploads VALUES('photo','a','uploads/photo','h','image/jpeg',0,0)",
+  );
+  objects.set("uploads/photo", { bytes: new Uint8Array([1]) });
+  objects.set("artwork/j", {
+    bytes: fs.readFileSync("reports/image-0-references.jpg"),
+  });
+  const remove = env.MEDIA.delete;
+  env.MEDIA.delete = async () => {
+    throw Error("R2 unavailable");
+  };
+  await expect(finalize(env, "j", "artwork/j")).rejects.toThrow(
+    "R2 unavailable",
+  );
+  expect(db.prepare("SELECT status FROM jobs WHERE id='j'").get()?.status).toBe(
+    "imaging",
+  );
+  expect(db.prepare("SELECT state FROM reservations").get()?.state).toBe(
+    "reserved",
+  );
+  expect(objects.has("uploads/photo")).toBe(true);
+  env.MEDIA.delete = remove;
+  const paid = vi.spyOn(globalThis, "fetch").mockImplementation(() => {
+    throw Error("No paid call");
+  });
+  await runJob(env, "j");
+  expect(paid).not.toHaveBeenCalled();
+  paid.mockRestore();
+  expect(objects.has("uploads/photo")).toBe(false);
+  expect(db.prepare("SELECT status FROM jobs WHERE id='j'").get()?.status).toBe(
+    "complete",
+  );
+});
+
+it("scheduled cleanup removes legacy completed uploads while preserving failed-job retry photos", async () => {
+  const { env, db, objects } = testEnv();
+  seed(db, "j", "complete", null);
+  db.prepare("UPDATE jobs SET input=? WHERE id='j'").run(
+    JSON.stringify({ references: [{ id: "legacy", key: "uploads/legacy" }] }),
+  );
+  db.prepare(
+    "INSERT INTO uploads VALUES('legacy','a','uploads/legacy','h','image/jpeg',?,?),('retry','a','uploads/retry','h','image/jpeg',?,?)",
+  ).run(
+    Math.floor(Date.now() / 1000),
+    Math.floor(Date.now() / 1000),
+    Math.floor(Date.now() / 1000),
+    Math.floor(Date.now() / 1000),
+  );
+  objects.set("uploads/legacy", { bytes: new Uint8Array([1]) });
+  objects.set("uploads/retry", { bytes: new Uint8Array([1]) });
+  await reconcile(env);
+  expect(objects.has("uploads/legacy")).toBe(false);
+  expect(objects.has("uploads/retry")).toBe(true);
+  expect(
+    db.prepare("SELECT id FROM uploads WHERE id='legacy'").get(),
+  ).toBeUndefined();
+});
