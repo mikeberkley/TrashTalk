@@ -27,6 +27,7 @@ const checkoutSession = checkoutReturn.get("session_id");
 
 function App() {
   const [wordError, setWordError] = useState("");
+  const errorNotice = useRef<HTMLDivElement>(null);
   const saved = (() => {
     try {
       return JSON.parse(sessionStorage.getItem("tt-form") || "{}");
@@ -62,6 +63,15 @@ function App() {
     [viewer, setViewer] = useState(false),
     [deleting, setDeleting] = useState<string | null>(null),
     [purchases, setPurchases] = useState<any[]>([]);
+  useEffect(() => {
+    if (error) {
+      errorNotice.current?.focus({ preventScroll: true });
+      errorNotice.current?.scrollIntoView({
+        block: "nearest",
+        behavior: "instant",
+      });
+    }
+  }, [error]);
   const [purchaseResult, setPurchaseResult] = useState<any>(null);
   const [purchaseMessage, setPurchaseMessage] = useState("");
   const [purchaseRetry, setPurchaseRetry] = useState(0);
@@ -262,6 +272,12 @@ function App() {
     }
   }
   async function generate(retry = false) {
+    if (needsCredits) {
+      setError("");
+      setTab("credits");
+      window.scrollTo({ top: 0, behavior: "instant" });
+      return;
+    }
     if (!retry) {
       const validation = validateIncludeWord(word);
       setWordError(validation.error || "");
@@ -375,6 +391,17 @@ function App() {
       setBusy(false);
     }
   }
+  const needsCredits =
+    me && !me.generationUnlimited && me.trial <= 0 && me.paid <= 0;
+  const inlineError = tab === "create" && !!game && !job;
+  const errorMessage = error && (
+    <div ref={errorNotice} role="alert" tabIndex={-1} className="notice">
+      {error}
+      <button aria-label="Dismiss message" onClick={() => setError("")}>
+        ×
+      </button>
+    </div>
+  );
   const active = job && !["complete", "failed"].includes(job.status);
   const suggestions = query.trim()
     ? teams
@@ -490,14 +517,7 @@ function App() {
         {me && me.environment !== "production" && (
           <div className="preview">PREVIEW · Payments use test mode</div>
         )}
-        {error && (
-          <div role="alert" className="notice">
-            {error}
-            <button aria-label="Dismiss message" onClick={() => setError("")}>
-              ×
-            </button>
-          </div>
-        )}
+        {!inlineError && errorMessage}
         {tab === "stats" && me?.admin ? (
           <Stats />
         ) : tab === "purchase" ? (
@@ -865,9 +885,11 @@ function App() {
                       24 hours; used photos after 7 days. Upload only photos you
                       have permission to use; no photos of children.
                     </p>
+                    {inlineError && errorMessage}
                     <button
                       className="primary generate"
                       disabled={
+                        !me ||
                         !favorite ||
                         !game ||
                         game.status === "unavailable" ||
@@ -878,20 +900,18 @@ function App() {
                       }
                       onClick={() => generate()}
                     >
-                      {active ? "Cooking up nonsense…" : "Unleash the meme"}
+                      {active
+                        ? "Cooking up nonsense…"
+                        : needsCredits
+                          ? me.authenticated
+                            ? "Get more credits"
+                            : "Sign in & get more credits"
+                          : "Unleash the meme"}
                     </button>
                     <p className="price">
                       3 free successful images. Then {offerPrice} for{" "}
                       {offer.credits}. Only finished images use a credit.
                     </p>
-                    {me && !me.trial && !me.paid && (
-                      <button
-                        className="link"
-                        onClick={() => setTab("credits")}
-                      >
-                        Sign in & get more credits
-                      </button>
-                    )}
                   </section>
                 )}
               </div>

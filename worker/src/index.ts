@@ -207,6 +207,8 @@ app.get("/api/me", async (c) => {
     ),
     paid: Math.max(0, balances.results.find((x) => x.pool === "paid")?.n || 0),
     environment: c.env.ENVIRONMENT,
+    generationUnlimited:
+      c.env.ENVIRONMENT !== "production" && c.env.PREVIEW_UNLIMITED === "true",
     paymentsReady:
       !!c.env.STRIPE_SECRET_KEY?.startsWith(
         c.env.ENVIRONMENT === "production" ? "sk_live_" : "sk_test_",

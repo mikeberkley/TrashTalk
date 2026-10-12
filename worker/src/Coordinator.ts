@@ -1,4 +1,8 @@
-import { generationInputSchema } from "../../packages/contracts/src/generation";
+import {
+  offer,
+  offerPrice,
+  generationInputSchema,
+} from "../../packages/contracts/src/generation";
 import { linkGoogle } from "./auth";
 import { cachedGame, sharedGame } from "./providers/cache";
 import { DurableObject } from "cloudflare:workers";
@@ -173,8 +177,8 @@ export class Coordinator extends DurableObject<Env> {
       ).first<any>();
       throw Error(
         p?.google_sub
-          ? "Buy five image credits for $1."
-          : "Sign in with Google to buy five image credits for $1.",
+          ? `Buy ${offer.credits} image credits for ${offerPrice}.`
+          : `Sign in with Google to buy ${offer.credits} image credits for ${offerPrice}.`,
       );
     }
     const id = uid();
