@@ -9,6 +9,7 @@ export interface Env {
   ORIGIN: string;
   OPENROUTER_API_KEY: string;
   GOOGLE_CLIENT_ID?: string;
+  ADMIN_GOOGLE_SUB?: string;
   STRIPE_SECRET_KEY?: string;
   STRIPE_WEBHOOK_SECRET?: string;
   PREVIEW_UNLIMITED?: string;

@@ -23,6 +23,7 @@
         "ENVIRONMENT": "preview",
         "ORIGIN": "https://trashtalk-preview.berkleym.workers.dev",
         "PREVIEW_UNLIMITED": "false",
+        "ADMIN_GOOGLE_SUB": "107038734643938960197",
         "GOOGLE_CLIENT_ID": "971521186493-eh4cnjnglbl8euctengohfgog780lpt6.apps.googleusercontent.com",
       },
       "d1_databases": [
@@ -78,6 +79,7 @@
         "ENVIRONMENT": "production",
         "ORIGIN": "https://trashtalk.fanlift.ai",
         "PREVIEW_UNLIMITED": "false",
+        "ADMIN_GOOGLE_SUB": "107038734643938960197",
         "GOOGLE_CLIENT_ID": "971521186493-eh4cnjnglbl8euctengohfgog780lpt6.apps.googleusercontent.com",
         "PAUSE_GENERATION": "false",
         "LAUNCH_HOLD": "false",

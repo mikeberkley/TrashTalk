@@ -1023,3 +1023,63 @@ header {
   color: #ccff66;
   line-height: 1;
 }
+
+.stats-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.stats-controls select {
+  padding: 10px;
+  background: #171c25;
+  color: #fff;
+  border: 1px solid #596170;
+  border-radius: 8px;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+.stats-card {
+  padding: 18px;
+  background: #171c25;
+  border: 1px solid #424957;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.stats-card span,
+.stats-note {
+  font-size: 14px;
+  color: #b9c0cc;
+}
+.stats-card strong {
+  font-size: 28px;
+  color: #fff;
+}
+.stats-table {
+  overflow: auto;
+}
+.stats table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.stats th,
+.stats td {
+  padding: 12px 8px;
+  border-bottom: 1px solid #424957;
+}
+.stats-link {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  text-decoration: underline;
+  font: inherit;
+  cursor: pointer;
+}

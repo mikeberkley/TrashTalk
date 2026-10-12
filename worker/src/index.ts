@@ -1,3 +1,4 @@
+import { isAdmin, stats } from "./stats";
 import { publicPage, launchPage } from "./legal";
 import { sharedGame } from "./providers/cache";
 import { refreshLeague } from "./catalog";
@@ -36,6 +37,46 @@ app.use("*", async (c, next) => {
   if (c.env.ENVIRONMENT === "production" && c.env.PREVIEW_UNLIMITED === "true")
     return c.json({ error: "Invalid production configuration" }, 503);
   await next();
+});
+// Count public HTML navigations, excluding API/assets and admin visits.
+app.use("*", async (c, next) => {
+  await next();
+  if (
+    c.req.method !== "GET" ||
+    c.res.status !== 200 ||
+    !c.res.headers.get("Content-Type")?.includes("text/html") ||
+    !(c.req.path === "/" || /^\/m\/[^/]+$/.test(c.req.path))
+  )
+    return;
+  let visitor = getCookie(c, "tt_visitor");
+  if (!visitor || !/^[0-9a-f-]{36}$/.test(visitor)) {
+    visitor = uid();
+    setCookie(c, "tt_visitor", visitor, {
+      ...cookieOptions,
+      maxAge: 90 * 86400,
+    });
+  }
+  const day = new Date().toISOString().slice(0, 10);
+  const visitorHash = await hash(visitor);
+  c.executionCtx.waitUntil(
+    c.env.DB.batch([
+      sql(
+        c.env,
+        "INSERT INTO traffic_daily(day,views) VALUES(?,1) ON CONFLICT(day) DO UPDATE SET views=views+1",
+        day,
+      ),
+      sql(
+        c.env,
+        "INSERT OR IGNORE INTO traffic_visitors(day,visitor) VALUES(?,?)",
+        day,
+        visitorHash,
+      ),
+      sql(
+        c.env,
+        "DELETE FROM traffic_visitors WHERE day < date('now','-90 days')",
+      ),
+    ]).catch((e) => console.error("Traffic recording failed", e.name)),
+  );
 });
 app.post("/api/billing/webhook", async (c) => {
   const body = await bounded(c.req.raw, 256 * 1024);
@@ -119,6 +160,7 @@ app.get("/api/me", async (c) => {
   ).all<any>();
   return c.json({
     authenticated: !!p?.google_sub,
+    admin: await isAdmin(c.env, owner),
     csrf: c.get("csrf"),
     googleClientId: c.env.GOOGLE_CLIENT_ID || null,
     trial: Math.max(
@@ -140,6 +182,14 @@ app.get("/api/me", async (c) => {
         ).first<any>()
       )?.id || null,
   });
+});
+app.get("/api/admin/stats", async (c) => {
+  if (!(await isAdmin(c.env, c.get("owner"))))
+    return c.json({ error: "Forbidden" }, 403);
+  const days = Number(c.req.query("days") ?? 30);
+  if (![0, 7, 30].includes(days))
+    return c.json({ error: "Invalid date range" }, 400);
+  return c.json(await stats(c.env, days));
 });
 app.get("/api/leagues", async (c) => {
   const enabled = await sql(

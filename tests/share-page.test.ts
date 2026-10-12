@@ -15,13 +15,18 @@ it("publishes only the image and two actions with escaped matchup metadata", asy
     "INSERT INTO jobs(id,owner,idempotency,input_hash,input,status,created_at,updated_at,context,caption) VALUES('j','owner','key','hash','{}','complete',0,0,?,?)",
   ).run(JSON.stringify(context), JSON.stringify({ text: "Meme caption" }));
   db.prepare("INSERT INTO shares VALUES('token','j',0,0)").run();
+  const pending: Promise<any>[] = [];
   const request = () =>
-    worker.fetch(new Request("http://localhost/m/token"), env, {} as any);
+    worker.fetch(new Request("http://localhost/m/token"), env, {
+      waitUntil: (p: Promise<any>) => pending.push(p),
+    } as any);
   expect((await request()).status).toBe(404);
   db.prepare("UPDATE shares SET published=1").run();
   const result = await request();
   const html = await result.text();
   expect(result.status).toBe(200);
+  await Promise.all(pending);
+  expect(db.prepare("SELECT views FROM traffic_daily").get()?.views).toBe(1);
   const title = "A &amp; &lt;B&gt; vs C &quot;D&quot;";
   expect(html).toContain(`<title>${title}</title>`);
   expect(html).toContain(`property="og:title" content="${title}"`);

@@ -1,3 +1,4 @@
+import { Stats } from "./Stats";
 import React, { useEffect, useState, useRef } from "react";
 import { createRoot } from "react-dom/client";
 import type { Game } from "../../../packages/contracts/src/leagues";
@@ -491,7 +492,9 @@ function App() {
             </button>
           </div>
         )}
-        {tab === "purchase" ? (
+        {tab === "stats" && me?.admin ? (
+          <Stats />
+        ) : tab === "purchase" ? (
           <section
             className="panel account purchase-confirmation"
             aria-live="polite"
@@ -1122,6 +1125,17 @@ function App() {
                 <p>
                   For adults 18+. By using TrashTalk, you agree to the{" "}
                   <a href="/terms">Terms of Service</a>. Read our{" "}
+                  {me?.admin && (
+                    <>
+                      <button
+                        className="stats-link"
+                        onClick={() => setTab("stats")}
+                      >
+                        App stats
+                      </button>{" "}
+                      ·{" "}
+                    </>
+                  )}
                   <a href="/privacy">Privacy Policy</a>.
                 </p>
                 <div ref={google} />
@@ -1180,6 +1194,14 @@ function App() {
         <footer>
           TrashTalk · Real teams. Ridiculous memes. Absolutely no chill.
           <p>
+            {me?.admin && (
+              <>
+                <button className="stats-link" onClick={() => setTab("stats")}>
+                  App stats
+                </button>{" "}
+                ·{" "}
+              </>
+            )}
             <a href="/privacy">Privacy Policy</a> ·{" "}
             <a href="/terms">Terms of Service</a> ·{" "}
             <a href="mailto:mike@earthly.art">Contact</a>
