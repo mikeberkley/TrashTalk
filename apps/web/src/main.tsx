@@ -1308,6 +1308,9 @@ function App() {
             )}
             {!me?.authenticated ? (
               <>
+                {tab === "credits" && (
+                  <p>First, sign in with Google to buy more credits.</p>
+                )}
                 <p>
                   For adults 18+. By using TrashTalk, you agree to the{" "}
                   <a href="/terms">Terms of Service</a>. Read our{" "}
@@ -1363,7 +1366,7 @@ function App() {
                 )}
               </>
             )}
-            {tab === "credits" && (
+            {tab === "credits" && me?.authenticated && purchases.length > 0 && (
               <>
                 <h2>Purchases</h2>
                 {purchases.map((p) => (
