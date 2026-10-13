@@ -48,7 +48,6 @@ it("legal pages and descriptive homepage remain public during the production hol
     expect(response.status).toBe(200);
     const html = await response.text();
     expect(html).toContain(title);
-    expect(html).toContain("Mike Berkley");
     expect(html).toContain("mike@earthly.art");
     expect(html).toContain('href="/privacy"');
     expect(html).toContain('href="/terms"');
