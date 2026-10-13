@@ -54,7 +54,7 @@ export function publicPage(path: string): Response | null {
       "Terms of Service",
       `
 <p class="meta">Effective October 12, 2026</p>
-<p>These terms govern your use of TrashTalk at trashtalk.fanlift.ai and its preview app, operated by Mike Berkley (“we,” “us”). By using the service, you agree to these terms. If you do not agree, do not use the service. Contact ${contact} with questions. Our <a href="/privacy">Privacy Policy</a> explains our data practices.</p>
+<p>These terms govern your use of TrashTalk (“we,” “us”) at trashtalk.fanlift.ai. By using the service, you agree to these terms. If you do not agree, do not use the service. Contact ${contact} with questions. Our <a href="/privacy">Privacy Policy</a> explains our data practices.</p>
 <h2>The service and eligibility</h2>
 <p>TrashTalk creates AI-generated sports comedy from a selected game and participating team, an optional word, and up to one optional reference photo. You must be at least 18 and able to enter a binding agreement to use it. Keep your account and devices secure. You are responsible for activity you authorize and must not bypass trial limits, security measures or payment controls.</p>
 <h2>Credits and payments</h2>
