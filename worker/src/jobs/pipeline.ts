@@ -11,10 +11,13 @@ import { openrouter } from "../research";
 import {
   captionPrompt,
   captionModel,
+  imageModel,
   imageRequest,
   PROMPT_VERSION,
 } from "../../../packages/trash-talk/src/prompts";
 import { captionIncludesWord } from "../../../packages/trash-talk/src/include-word";
+import { loadLogo, loadPinnedTeams } from "./preparation";
+import { GenerationTiming } from "./timing";
 import { recentCaptions } from "./recent-captions";
 import { validateArtwork, dataUrl } from "./media";
 export const phraseSchema = z.object({
@@ -115,11 +118,18 @@ export async function runJob(env: Env, id: string) {
     now(),
   ).first<any>();
   if (!lock) return;
+  const timing = new GenerationTiming(lock.created_at);
+  let outcome = "failed";
+  const logos: Record<string, string> = {};
+  let history: Awaited<ReturnType<typeof recentCaptions>> = [];
   const input = JSON.parse(lock.input),
     imageKey = `artwork/${id}`;
   try {
     if (await env.MEDIA.head(imageKey)) {
-      await recoverStored(env, id, imageKey);
+      timing.next("recovery");
+      outcome = (await recoverStored(env, id, imageKey))
+        ? "recovered"
+        : "failed";
       return;
     }
     // A prior process may have sent a paid call. Never repeat it on automatic redelivery.
@@ -144,29 +154,19 @@ export async function runJob(env: Env, id: string) {
         now(),
         id,
       ).run();
-      let g: any = null;
-      try {
-        g = await sharedGame(env, input.gameId, true);
-      } catch {
-        /* No score is safer than a stale or invented score. */
-      }
-      const league = leagueById(input.gameId.split(":")[0]);
+      timing.next("preparation");
+      const [g, loaded, recent] = await Promise.all([
+        sharedGame(env, input.gameId, true).catch(() => null),
+        loadPinnedTeams(env, input.teams),
+        recentCaptions(env, id),
+      ]);
+      history = recent;
       const teams: any = {};
       for (const side of ["away", "home"]) {
-        const pinned = input.teams[side];
-        const row = await sql(
-          env,
-          "SELECT metadata FROM team_versions WHERE team_id=? AND version=?",
-          pinned.id,
-          pinned.version,
-        ).first<{ metadata: string }>();
-        if (!row) throw Error("Pinned team catalog missing");
-        const t = JSON.parse(row.metadata);
-        const obj = await env.MEDIA.get(t.logoKey);
-        if (!obj || (await hash(await obj.arrayBuffer())) !== t.logoHash)
-          throw Error("Stored team logo integrity failure");
-        teams[side] = { ...t, color: t.primary, logo: t.logoKey };
+        teams[side] = loaded[side].team;
+        logos[side] = loaded[side].logo;
       }
+      const league = leagueById(input.gameId.split(":")[0]);
       if (
         ![teams.home.id, teams.away.id].includes(input.favoriteTeamId) ||
         (g && (g.home.id !== teams.home.id || g.away.id !== teams.away.id))
@@ -209,6 +209,7 @@ export async function runJob(env: Env, id: string) {
         id,
       ).run();
       const clean = captionInput(context);
+      timing.next("captionProvider");
       const d = await openrouter(
         env,
         "chat/completions",
@@ -227,7 +228,7 @@ export async function runJob(env: Env, id: string) {
               role: "user",
               content: JSON.stringify({
                 ...clean,
-                recentCaptions: await recentCaptions(env, id),
+                recentCaptions: history,
               }),
             },
           ],
@@ -237,6 +238,7 @@ export async function runJob(env: Env, id: string) {
         45000,
         id,
       );
+      timing.next("captionValidationAndSave");
       phrase = phraseSchema.parse(JSON.parse(d.choices[0].message.content));
       if (
         input.includeWord &&
@@ -250,32 +252,37 @@ export async function runJob(env: Env, id: string) {
         id,
       ).run();
     }
+    timing.next("imagePreparation");
     const c = structuredClone(context);
-    for (const side of ["away", "home"]) {
-      const obj = await env.MEDIA.get(c[side].logoKey);
-      if (!obj) throw Error("Logo missing");
-      const b = new Uint8Array(await obj.arrayBuffer());
-      if ((await hash(b)) !== c[side].logoHash)
-        throw Error("Logo hash mismatch");
-      c[side].logo = dataUrl(b, "image/png");
-    }
-    const photos = [];
-    for (const ref of input.references) {
-      const obj = await env.MEDIA.get(ref.key);
-      if (!obj)
-        throw Error(
-          "Reference expired. Upload it again to create a new image.",
-        );
-      const b = new Uint8Array(await obj.arrayBuffer());
-      if ((await hash(b)) !== ref.hash) throw Error("Reference hash mismatch");
-      photos.push(dataUrl(b, ref.mime));
-    }
+    const [logoEntries, photos] = await Promise.all([
+      Promise.all(
+        ["away", "home"].map(
+          async (side) =>
+            [side, logos[side] || (await loadLogo(env, c[side]))] as const,
+        ),
+      ),
+      Promise.all(
+        input.references.map(async (ref: any) => {
+          const obj = await env.MEDIA.get(ref.key);
+          if (!obj)
+            throw Error(
+              "Reference expired. Upload it again to create a new image.",
+            );
+          const b = new Uint8Array(await obj.arrayBuffer());
+          if ((await hash(b)) !== ref.hash)
+            throw Error("Reference hash mismatch");
+          return dataUrl(b, ref.mime);
+        }),
+      ),
+    ]);
+    for (const [side, logo] of logoEntries) c[side].logo = logo;
     await sql(
       env,
       "UPDATE jobs SET status='imaging',call_started='image',updated_at=? WHERE id=?",
       now(),
       id,
     ).run();
+    timing.next("imageProvider");
     const d = await openrouter(
       env,
       "images",
@@ -283,6 +290,7 @@ export async function runJob(env: Env, id: string) {
       120000,
       id,
     );
+    timing.next("imageValidationAndStorage");
     const o = d.data?.[0];
     if (!o?.b64_json) throw Error("Provider returned no inline image");
     const bytes = Uint8Array.from(atob(o.b64_json), (x) => x.charCodeAt(0));
@@ -290,7 +298,9 @@ export async function runJob(env: Env, id: string) {
     await env.MEDIA.put(imageKey, bytes, {
       httpMetadata: { contentType: info.mime },
     });
+    timing.next("finalization");
     await finalize(env, id, imageKey);
+    outcome = "complete";
     await sql(
       env,
       "INSERT INTO audit(kind,object_id,detail,created_at) VALUES(?,?,?,?)",
@@ -301,10 +311,19 @@ export async function runJob(env: Env, id: string) {
     ).run();
   } catch (e) {
     if (await env.MEDIA.head(imageKey)) {
-      await recoverStored(env, id, imageKey);
+      timing.next("recovery");
+      outcome = (await recoverStored(env, id, imageKey))
+        ? "recovered"
+        : "failed";
       return;
     }
+    timing.next("failureFinalization");
     await fail(env, id, e instanceof Error ? e.message : "Generation failed");
+  } finally {
+    await timing.persist(env, id, outcome, {
+      caption: captionModel,
+      image: imageModel,
+    });
   }
 }
 export async function reconcile(env: Env) {
@@ -360,8 +379,11 @@ export async function reconcile(env: Env) {
 async function recoverStored(env: Env, id: string, key: string) {
   try {
     await finalize(env, id, key);
+    return true;
   } catch (e) {
-    if (e instanceof InvalidStoredArtwork) await fail(env, id, e.message);
-    else throw e;
+    if (e instanceof InvalidStoredArtwork) {
+      await fail(env, id, e.message);
+      return false;
+    } else throw e;
   }
 }

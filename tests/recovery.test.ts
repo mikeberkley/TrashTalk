@@ -206,6 +206,7 @@ it.each([
       JSON.stringify({ promptVersion: "old", briefing: "old backstory" }),
       JSON.stringify({ text: "OLD CAPTION", visual: "OLD VISUAL" }),
     );
+    const logoReadSpy = vi.spyOn(env.MEDIA, "get");
     const calls: any[] = [];
     const fetchSpy = vi
       .spyOn(globalThis, "fetch")
@@ -243,6 +244,37 @@ it.each([
       (db.prepare("SELECT status FROM jobs WHERE id='pinned'").get() as any)
         .status,
     ).toBe("complete");
+    for (const side of ["away", "home"]) {
+      expect(
+        logoReadSpy.mock.calls.filter(([key]) => key === contextLogoKey(side)),
+      ).toHaveLength(1);
+    }
+    function contextLogoKey(side: string) {
+      return catalog.find((x: any) => x.metadata.id === source[side].id)
+        .metadata.logoKey;
+    }
+    const timing = JSON.parse(
+      (
+        db
+          .prepare(
+            "SELECT detail FROM audit WHERE kind='generation_timing' AND object_id='pinned'",
+          )
+          .get() as any
+      ).detail,
+    );
+    expect(timing.outcome).toBe("complete");
+    for (const stage of [
+      "preparation",
+      "captionProvider",
+      "imagePreparation",
+      "imageProvider",
+      "imageValidationAndStorage",
+      "finalization",
+    ]) {
+      expect(timing.stagesMs[stage]).toBeGreaterThanOrEqual(0);
+    }
+    expect(timing.models.caption).toBe("x-ai/grok-4.3");
+    expect(JSON.stringify(timing)).not.toContain("space bananas");
     expect(calls[1].prompt).not.toContain("#ABCDEF");
     expect(calls[1].input_references).toHaveLength(2);
     const context = JSON.parse(
