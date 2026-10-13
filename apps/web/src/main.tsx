@@ -1389,8 +1389,7 @@ function App() {
               </>
             )}
             <a href="/privacy">Privacy Policy</a> ·{" "}
-            <a href="/terms">Terms of Service</a> ·{" "}
-            <a href="mailto:mike@earthly.art">Contact</a>
+            <a href="/terms">Terms of Service</a>
           </p>
         </footer>
       </main>
