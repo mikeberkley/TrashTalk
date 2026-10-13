@@ -70,6 +70,8 @@ export function Stats() {
             value={days}
             onChange={(e) => setDays(Number(e.target.value))}
           >
+            <option value={0.125}>Last 3 hours</option>
+            <option value={1}>Last 24 hours</option>
             <option value={7}>Last 7 days</option>
             <option value={30}>Last 30 days</option>
             <option value={0}>All time</option>
@@ -152,8 +154,10 @@ export function Stats() {
             revenue. Traffic tracking starts with this release; unique browsers
             cover at most 90 days and may include bots. Cookies and multiple
             devices affect these estimates. Daily groups use UTC; detail times
-            use Eastern Time. Activity periods are rolling.
+            use Eastern Time. Activity periods are rolling. Operator credits,
+            memes, and shares are excluded.
           </p>
+          {data.trafficNote && <p className="stats-note">{data.trafficNote}</p>}
           <h2>Daily activity</h2>
           <p>Most recent 30 days with activity in the selected period.</p>
           <div className="stats-table">
@@ -233,7 +237,14 @@ export function Stats() {
         </button>
         <h2 id="stats-detail-title">{selected?.label}</h2>
         <p>
-          {selected?.value} · {days ? `Last ${days} days` : "All time"}
+          {selected?.value} ·{" "}
+          {days === 0.125
+            ? "Last 3 hours"
+            : days === 1
+              ? "Last 24 hours"
+              : days
+                ? `Last ${days} days`
+                : "All time"}
         </p>
         {detailError ? (
           <div role="alert">

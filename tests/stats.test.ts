@@ -175,7 +175,7 @@ it("details match summary counts and paginate without duplicate accounts", async
   for (const path of [
     "accounts?offset=-1",
     "accounts?offset=1.5",
-    "accounts?days=1",
+    "accounts?days=2",
     "invalid",
   ]) {
     const response = await worker.fetch(
@@ -383,5 +383,110 @@ it("sorts traffic by latest timestamp within a day and omits internal identifier
       for (const row of details!.rows)
         expect(row).not.toHaveProperty(forbidden);
     }
+  }
+});
+
+it("excludes past and future operator memes, purchases, shares and merged credit history in every period", async () => {
+  const { env, db } = testEnv();
+  env.ADMIN_GOOGLE_SUB = "operator";
+  db.exec(`INSERT INTO principals(id,google_sub,created_at,merged_into) VALUES
+    ('admin','operator',0,NULL),('anon',NULL,0,NULL),('older',NULL,0,NULL),('customer','customer',0,NULL);`);
+  for (const owner of ["admin", "anon", "older", "customer"]) {
+    for (const hours of [2, 4, 25]) {
+      const id = owner + hours;
+      db.prepare(
+        "INSERT INTO jobs(id,owner,idempotency,input_hash,input,status,created_at,updated_at) VALUES(?,?,?,'h','{}','complete',unixepoch()-?,unixepoch())",
+      ).run(id, owner, id, hours * 3600);
+      db.prepare(
+        "INSERT INTO purchases VALUES(?,?,?,'paid',99,4,unixepoch()-?)",
+      ).run(id, owner, id, hours * 3600);
+      for (const pool of ["trial", "paid"])
+        db.prepare(
+          "INSERT INTO ledger(owner,kind,amount,pool,business_key,job_id,created_at) VALUES(?,'captured',0,?,?,?,unixepoch()-?)",
+        ).run(owner, pool, id + pool, id, hours * 3600);
+      db.prepare("INSERT INTO shares VALUES(?,?,unixepoch()-?,1)").run(
+        id,
+        id,
+        hours * 3600,
+      );
+    }
+  }
+  db.exec(
+    "UPDATE principals SET merged_into='admin' WHERE id='anon'; UPDATE principals SET merged_into='anon' WHERE id='older'",
+  );
+  for (const [days, count] of [
+    [0, 3],
+    [30, 3],
+    [7, 3],
+    [1, 2],
+    [0.125, 1],
+  ]) {
+    const summary = await stats(env, days);
+    expect(summary.images.attempts).toBe(count);
+    expect(summary.images.completed).toBe(count);
+    expect(summary.purchases).toEqual({
+      packs: count,
+      credits: count * 4,
+      grossCents: count * 99,
+    });
+    expect(summary.shares.published).toBe(count);
+    expect(summary.daily.reduce((n: number, r: any) => n + r.images, 0)).toBe(
+      count,
+    );
+    expect(summary.usage).toEqual(
+      expect.arrayContaining([
+        { pool: "trial", used: count },
+        { pool: "paid", used: count },
+      ]),
+    );
+    for (const metric of [
+      "completed",
+      "retained",
+      "attempts",
+      "packs",
+      "credits",
+      "amount",
+      "trial",
+      "paid",
+      "shares",
+    ])
+      expect(
+        (await statDetails(env, metric, days, 0))?.rows.length,
+        metric,
+      ).toBe(count);
+    for (const metric of ["failed", "active", "review"])
+      expect((await statDetails(env, metric, days, 0))?.rows).toHaveLength(0);
+  }
+  // New records remain excluded without a cleanup job or data deletion.
+  db.exec(
+    "INSERT INTO purchases VALUES('future','admin','future','paid',199,8,unixepoch())",
+  );
+  expect((await stats(env, 0)).purchases.packs).toBe(3);
+  expect(db.prepare("SELECT COUNT(*) AS n FROM purchases").get()?.n).toBe(13);
+});
+
+it("uses exact timestamps for rolling traffic windows, summaries and details", async () => {
+  const { env, db } = testEnv();
+  for (const hours of [2, 4, 25])
+    db.prepare(
+      "INSERT INTO traffic_events(visitor,ip,created_at) VALUES(?,?,unixepoch()-?)",
+    ).run("v" + hours, "192.0.2." + hours, hours * 3600);
+  for (const [days, count] of [
+    [0.125, 1],
+    [1, 2],
+  ]) {
+    const summary = await stats(env, days);
+    expect(summary.traffic.views).toBe(count);
+    expect(summary.traffic.visitors).toBe(count);
+    expect(
+      summary.trafficDaily.reduce((n: number, r: any) => n + r.views, 0),
+    ).toBe(count);
+    const views = await statDetails(env, "views", days, 0);
+    expect(
+      views?.rows.reduce((n: number, r: any) => n + r["Page views"], 0),
+    ).toBe(count);
+    expect((await statDetails(env, "visitors", days, 0))?.rows).toHaveLength(
+      count,
+    );
   }
 });

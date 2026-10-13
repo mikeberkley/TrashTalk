@@ -93,6 +93,13 @@ app.use("*", async (c, next) => {
       await c.env.DB.batch([
         sql(
           c.env,
+          "INSERT INTO traffic_events(visitor,ip,created_at) VALUES(?,?,?)",
+          visitorHash,
+          ip,
+          now(),
+        ),
+        sql(
+          c.env,
           "INSERT INTO traffic_daily(day,views) VALUES(?,1) ON CONFLICT(day) DO UPDATE SET views=views+1",
           day,
         ),
@@ -272,7 +279,7 @@ app.get("/api/admin/stats/:metric", async (c) => {
   const days = Number(c.req.query("days") ?? 30),
     offset = Number(c.req.query("offset") ?? 0);
   if (
-    ![0, 7, 30].includes(days) ||
+    ![0, 0.125, 1, 7, 30].includes(days) ||
     !Number.isSafeInteger(offset) ||
     offset < 0 ||
     offset > 1000000
@@ -285,7 +292,7 @@ app.get("/api/admin/stats", async (c) => {
   if (!(await isAdmin(c.env, c.get("owner"))))
     return c.json({ error: "Forbidden" }, 403);
   const days = Number(c.req.query("days") ?? 30);
-  if (![0, 7, 30].includes(days))
+  if (![0, 0.125, 1, 7, 30].includes(days))
     return c.json({ error: "Invalid date range" }, 400);
   return c.json(await stats(c.env, days));
 });

@@ -8,25 +8,46 @@ export async function isAdmin(env: Env, owner: string) {
   ).first<{ google_sub: string }>();
   return !!p?.google_sub && p.google_sub === env.ADMIN_GOOGLE_SUB;
 }
+// Include anonymous principals merged into the operator account so historical
+// credit captures remain excluded even when their ledger owner was not moved.
+function externalOwner(owner: string) {
+  return `${owner} NOT IN (WITH RECURSIVE operator(id) AS (
+    SELECT id FROM principals WHERE google_sub=?
+    UNION SELECT p.id FROM principals p JOIN operator o ON p.merged_into=o.id
+  ) SELECT id FROM operator)`;
+}
+function recentTraffic(since: number) {
+  return `WITH recent AS (SELECT * FROM traffic_events WHERE created_at>=${since}),
+    traffic_daily AS (SELECT date(created_at,'unixepoch') AS day, COUNT(*) AS views FROM recent GROUP BY day),
+    traffic_ip_daily AS (SELECT date(created_at,'unixepoch') AS day,ip,COUNT(*) AS views,MIN(created_at) AS first_seen,MAX(created_at) AS last_seen FROM recent GROUP BY day,ip),
+    traffic_visitors AS (SELECT date(created_at,'unixepoch') AS day,visitor,MIN(created_at) AS first_seen,MAX(created_at) AS last_seen FROM recent GROUP BY day,visitor),
+    traffic_visitor_ips AS (SELECT DISTINCT date(created_at,'unixepoch') AS day,visitor,ip FROM recent) `;
+}
 export async function stats(
   env: Env,
   days: number,
 ): Promise<Record<string, any>> {
   const since = days ? now() - days * 86400 : 0;
   const firstDay = new Date(since * 1000).toISOString().slice(0, 10);
+  const trafficPrefix = days > 0 && days <= 1 ? recentTraffic(since) : "";
   const queries = {
     users: `SELECT COUNT(*) AS accounts FROM principals WHERE google_sub IS NOT NULL AND created_at>=?`,
-    images: `SELECT COUNT(*) AS attempts, SUM(status='complete') AS completed, SUM(status='failed') AS failed, SUM(status NOT IN ('complete','failed')) AS active, SUM(status='complete' AND deleted_at IS NULL) AS retained FROM jobs WHERE created_at>=?`,
-    purchases: `SELECT COUNT(*) AS packs,COALESCE(SUM(amount),0) AS grossCents,COALESCE(SUM(credits),0) AS credits FROM purchases WHERE status='paid' AND created_at>=?`,
-    review: `SELECT COUNT(*) AS purchases FROM purchases WHERE status='review' AND created_at>=?`,
-    shares: `SELECT COUNT(*) AS published FROM shares WHERE published=1 AND created_at>=?`,
-    usage: `SELECT pool,COUNT(*) AS used FROM ledger WHERE kind='captured' AND created_at>=? GROUP BY pool`,
-    daily: `SELECT date(created_at,'unixepoch') AS day, COUNT(*) AS images FROM jobs WHERE status='complete' AND created_at>=? GROUP BY day ORDER BY day DESC LIMIT 30`,
+    images: `SELECT COUNT(*) AS attempts, SUM(status='complete') AS completed, SUM(status='failed') AS failed, SUM(status NOT IN ('complete','failed')) AS active, SUM(status='complete' AND deleted_at IS NULL) AS retained FROM jobs WHERE ${externalOwner("jobs.owner")} AND created_at>=?`,
+    purchases: `SELECT COUNT(*) AS packs,COALESCE(SUM(amount),0) AS grossCents,COALESCE(SUM(credits),0) AS credits FROM purchases WHERE ${externalOwner("purchases.owner")} AND status='paid' AND created_at>=?`,
+    review: `SELECT COUNT(*) AS purchases FROM purchases WHERE ${externalOwner("purchases.owner")} AND status='review' AND created_at>=?`,
+    shares: `SELECT COUNT(*) AS published FROM shares JOIN jobs ON jobs.id=shares.job_id WHERE ${externalOwner("jobs.owner")} AND published=1 AND shares.created_at>=?`,
+    usage: `SELECT pool,COUNT(*) AS used FROM ledger WHERE ${externalOwner("ledger.owner")} AND kind='captured' AND created_at>=? GROUP BY pool`,
+    daily: `SELECT date(created_at,'unixepoch') AS day, COUNT(*) AS images FROM jobs WHERE ${externalOwner("jobs.owner")} AND status='complete' AND created_at>=? GROUP BY day ORDER BY day DESC LIMIT 30`,
   };
   const result: Record<string, any> = {};
   await Promise.all(
     Object.entries(queries).map(async ([key, q]) => {
-      const rows = await sql(env, q, since).all();
+      const rows = await sql(
+        env,
+        q,
+        ...(key === "users" ? [] : [env.ADMIN_GOOGLE_SUB || ""]),
+        since,
+      ).all();
       result[key] = ["usage", "daily"].includes(key)
         ? rows.results
         : rows.results[0];
@@ -34,17 +55,23 @@ export async function stats(
   );
   result.traffic = await sql(
     env,
-    `SELECT COALESCE(SUM(views),0) AS views,(SELECT COUNT(DISTINCT visitor) FROM traffic_visitors WHERE day>=?) AS visitors,MIN(day) AS trackingSince FROM traffic_daily WHERE day>=?`,
+    trafficPrefix +
+      `SELECT COALESCE(SUM(views),0) AS views,(SELECT COUNT(DISTINCT visitor) FROM traffic_visitors WHERE day>=?) AS visitors,MIN(day) AS trackingSince FROM traffic_daily WHERE day>=?`,
     firstDay,
     firstDay,
   ).first();
   result.trafficDaily = (
     await sql(
       env,
-      "SELECT day,views FROM traffic_daily WHERE day>=? ORDER BY day DESC LIMIT 30",
+      trafficPrefix +
+        "SELECT day,views FROM traffic_daily WHERE day>=? ORDER BY day DESC LIMIT 30",
       firstDay,
     ).all()
   ).results;
+  result.trafficNote =
+    days > 0 && days <= 1
+      ? "Hourly traffic tracking begins with this update; earlier page views cannot be assigned to these rolling windows."
+      : "";
   return { ...result, days, generatedAt: now() };
 }
 
@@ -75,6 +102,7 @@ export async function statDetails(
 ) {
   const since = days ? now() - days * 86400 : 0;
   const firstDay = new Date(since * 1000).toISOString().slice(0, 10);
+  const trafficPrefix = days > 0 && days <= 1 ? recentTraffic(since) : "";
   const imageFilters: Record<string, string> = {
     completed: "status='complete'",
     retained: "status='complete' AND deleted_at IS NULL",
@@ -121,7 +149,7 @@ export async function statDetails(
     note =
       "The app stores Google identifiers, not names or email addresses. Account creation may precede Google sign-in.";
   } else if (Object.hasOwn(imageFilters, metric)) {
-    query = `SELECT json_extract(caption,'$.text') AS "Caption",status AS "Status",datetime(created_at,'unixepoch') AS "Created (UTC)",CASE WHEN deleted_at IS NULL THEN 'No' ELSE 'Yes' END AS "Deleted",error AS "Error",id AS "Job ID",call_started AS "Stage",(SELECT detail FROM audit WHERE kind='provider_error' AND object_id=jobs.id ORDER BY id DESC LIMIT 1) AS "Provider details" FROM jobs WHERE created_at>=? AND (${imageFilters[metric]}) ORDER BY created_at DESC,id`;
+    query = `SELECT json_extract(caption,'$.text') AS "Caption",status AS "Status",datetime(created_at,'unixepoch') AS "Created (UTC)",CASE WHEN deleted_at IS NULL THEN 'No' ELSE 'Yes' END AS "Deleted",error AS "Error",id AS "Job ID",call_started AS "Stage",(SELECT detail FROM audit WHERE kind='provider_error' AND object_id=jobs.id ORDER BY id DESC LIMIT 1) AS "Provider details" FROM jobs WHERE ${externalOwner("jobs.owner")} AND created_at>=? AND (${imageFilters[metric]}) ORDER BY created_at DESC,id`;
     values = [since];
     columns = [
       "Caption",
@@ -136,25 +164,40 @@ export async function statDetails(
     note =
       "Provider details include sanitized response messages, model, HTTP status, timing, and request IDs. Details are recorded from this update onward; older failures may have no provider details.";
   } else if (["packs", "credits", "amount", "review"].includes(metric)) {
-    query = `SELECT status AS "Status",printf('$%.2f',amount/100.0) AS "Amount",credits AS "Credits",datetime(created_at,'unixepoch') AS "Created (UTC)" FROM purchases WHERE status=? AND created_at>=? ORDER BY created_at DESC,session_id`;
+    query = `SELECT status AS "Status",printf('$%.2f',amount/100.0) AS "Amount",credits AS "Credits",datetime(created_at,'unixepoch') AS "Created (UTC)" FROM purchases WHERE ${externalOwner("purchases.owner")} AND status=? AND created_at>=? ORDER BY created_at DESC,session_id`;
     values = [metric === "review" ? "review" : "paid", since];
     columns = ["Status", "Amount", "Credits", "Created (UTC)"];
     note =
       "Each row is a purchase. Credits and amount boxes total the corresponding columns. Review purchases are excluded from paid totals; amounts are not net revenue.";
   } else if (["trial", "paid"].includes(metric)) {
-    query = `SELECT json_extract(j.caption,'$.text') AS "Caption",l.pool AS "Credit pool",datetime(l.created_at,'unixepoch') AS "Used (UTC)" FROM ledger l LEFT JOIN jobs j ON j.id=l.job_id WHERE l.kind='captured' AND l.pool=? AND l.created_at>=? ORDER BY l.created_at DESC,l.id DESC`;
+    query = `SELECT json_extract(j.caption,'$.text') AS "Caption",l.pool AS "Credit pool",datetime(l.created_at,'unixepoch') AS "Used (UTC)" FROM ledger l LEFT JOIN jobs j ON j.id=l.job_id WHERE ${externalOwner("l.owner")} AND l.kind='captured' AND l.pool=? AND l.created_at>=? ORDER BY l.created_at DESC,l.id DESC`;
     values = [metric, since];
     columns = ["Caption", "Credit pool", "Used (UTC)"];
     note = "Each row is one credit captured for a successful image.";
   } else if (metric === "shares") {
-    query = `SELECT json_extract(j.caption,'$.text') AS "Caption",datetime(s.created_at,'unixepoch') AS "Created (UTC)",CASE WHEN j.deleted_at IS NULL THEN 'No' ELSE 'Yes' END AS "Image deleted" FROM shares s JOIN jobs j ON j.id=s.job_id WHERE s.published=1 AND s.created_at>=? ORDER BY s.created_at DESC,s.token`;
+    query = `SELECT json_extract(j.caption,'$.text') AS "Caption",datetime(s.created_at,'unixepoch') AS "Created (UTC)",CASE WHEN j.deleted_at IS NULL THEN 'No' ELSE 'Yes' END AS "Image deleted" FROM shares s JOIN jobs j ON j.id=s.job_id WHERE ${externalOwner("j.owner")} AND s.published=1 AND s.created_at>=? ORDER BY s.created_at DESC,s.token`;
     values = [since];
     columns = ["Caption", "Created (UTC)", "Image deleted"];
     note =
       "Published share records use their creation date and include subsequently deleted images.";
   } else return null;
+  if (metric === "views" || metric === "visitors") {
+    query = trafficPrefix + query;
+    if (trafficPrefix)
+      note +=
+        " Hourly traffic tracking begins with this update; earlier visits are not included.";
+  } else if (metric !== "accounts")
+    note += " Operator account activity is excluded.";
   const rows = (
-    await sql(env, query + " LIMIT 51 OFFSET ?", ...values, offset).all()
+    await sql(
+      env,
+      query + " LIMIT 51 OFFSET ?",
+      ...(["views", "visitors", "accounts"].includes(metric)
+        ? []
+        : [env.ADMIN_GOOGLE_SUB || ""]),
+      ...values,
+      offset,
+    ).all()
   ).results;
   const more = rows.length > 50;
   const timeColumns = [
@@ -201,6 +244,10 @@ export async function statDetails(
 }
 
 export async function pruneTraffic(env: Env) {
+  await sql(
+    env,
+    "DELETE FROM traffic_events WHERE created_at < unixepoch()-90*86400",
+  ).run();
   await env.DB.batch(
     ["traffic_visitors", "traffic_ip_daily", "traffic_visitor_ips"].map(
       (table) =>
