@@ -1,0 +1,19 @@
+{
+  "checkedAt": "2026-10-13T12:43:03.654Z",
+  "origin": "https://trashtalk.fanlift.ai",
+  "assets": [
+    {
+      "path": "/assets/index-B8jV5k8E.js",
+      "hash": "1c3f8534d726f4db3ff30d7327228b9e948d36337fcbd3ec382c6d55ead54cd3",
+      "matchesLocal": true
+    },
+    {
+      "path": "/assets/index-Sdkeuwhu.css",
+      "hash": "ddb2f3571da6fef2cad42ad4189ea34ec2aa38400661301d299faebffa28ed1d",
+      "matchesLocal": true
+    }
+  ],
+  "leagues": 14,
+  "teams": 434,
+  "legalAndCrawlerRoutes": true
+}

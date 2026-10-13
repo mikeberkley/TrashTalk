@@ -17,7 +17,7 @@ for (const engine of ["chrome", "webkit"]) {
     ["My trash talk", "My trash talk"],
     ["Credits", "Credits"],
     ["Account", "Account"],
-    ["Make a meme", "Step 1: pick a game"],
+    ["Make a meme", "Step 1: Pick a team"],
   ]) {
     await tap(page.getByLabel("Navigation menu"));
     await tap(page.getByRole("button", { name: label, exact: true }));
@@ -108,7 +108,7 @@ for (const engine of ["chrome", "webkit"]) {
   await tap(page.getByLabel("Navigation menu"));
   await tap(page.getByRole("button", { name: "Make a meme", exact: true }));
   await expect(
-    page.getByRole("heading", { name: "Step 1: pick a game" }),
+    page.getByRole("heading", { name: "Step 1: Pick a team" }),
   ).toBeVisible();
   await expect(page.locator(".result")).toHaveCount(0);
   await expect(page.getByRole("navigation")).toBeHidden();
@@ -122,7 +122,7 @@ for (const engine of ["chrome", "webkit"]) {
   ).toBeVisible();
   await tap(page.getByRole("link", { name: "TrashTalk — back to Step 1" }));
   await expect(
-    page.getByRole("heading", { name: "Step 1: pick a game" }),
+    page.getByRole("heading", { name: "Step 1: Pick a team" }),
   ).toBeVisible();
   await expect(page.getByRole("combobox")).toHaveValue("");
   const saved = await page.evaluate(() =>

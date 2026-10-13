@@ -4,7 +4,7 @@ for (const width of [390, 1440]) {
   const page = await browser.newPage({ viewport: { width, height: 844 } });
   await page.goto("https://trashtalk.fanlift.ai");
   await expect(
-    page.getByRole("heading", { name: "Step 1: pick a game" }),
+    page.getByRole("heading", { name: "Step 1: Pick a team" }),
   ).toBeVisible();
   await expect(
     page.getByRole("combobox", { name: "Search by team" }),

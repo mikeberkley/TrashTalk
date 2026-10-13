@@ -13,8 +13,8 @@ import { Hono } from "hono";
 import { getCookie, setCookie, deleteCookie } from "hono/cookie";
 import { type Env, sql, hash, now, uid } from "./env";
 import { leagues } from "../../packages/contracts/src/leagues";
-import { teamSeasonGames, espn } from "./providers/espn";
 import { availableTeamGames } from "./providers/team-games";
+import { teamSeasonGames, espn } from "./providers/espn";
 import { newSession, verifyGoogle, linkGoogle } from "./auth";
 import { checkout, webhook } from "./billing";
 import { normalizeUpload } from "./jobs/media";
@@ -36,6 +36,12 @@ app.onError((e, c) => {
   return c.json({ error: e.message.slice(0, 240) }, 400);
 });
 app.use("*", async (c, next) => {
+  if (
+    c.env.ENVIRONMENT !== "production" ||
+    c.req.path.startsWith("/api/") ||
+    (c.req.path === "/" && c.req.url.includes("?"))
+  )
+    c.header("X-Robots-Tag", "noindex, follow");
   c.header("X-Content-Type-Options", "nosniff");
   c.header("Referrer-Policy", "strict-origin-when-cross-origin");
   c.header(
@@ -320,6 +326,19 @@ app.delete("/api/favorites/:id", async (c) => {
     c.req.param("id"),
   ).run();
   return c.json({ saved: false });
+});
+app.get("/api/featured-games", async (c) => {
+  const response = await c.env.COORDINATOR.get(
+    c.env.COORDINATOR.idFromName("featured-live-games"),
+  ).fetch("https://internal/featured", { method: "POST", body: "{}" });
+  if (!response.ok) throw Error("Featured games unavailable");
+  const data: any = await response.json();
+  return c.json({
+    ...data,
+    games: await Promise.all(
+      data.games.map((g: any) => withBranding(c.env, g)),
+    ),
+  });
 });
 app.get("/api/teams/:id/games", async (c) => {
   const id = c.req.param("id"),
@@ -746,9 +765,27 @@ app.get("/m/:token", async (c) => {
   const ctx = JSON.parse(j.context),
     caption = JSON.parse(j.caption).text,
     title = escape(`${ctx.away.displayName} vs ${ctx.home.displayName}`),
-    url = escape(c.env.ORIGIN + "/m/" + c.req.param("token"));
+    url = escape(
+      c.env.ORIGIN + "/m/" + encodeURIComponent(c.req.param("token")),
+    ),
+    description = escape(
+      `${String(caption).replace(/\s+/g, " ").trim().slice(0, 220)} — Made with TrashTalk. Roast your rivals and make your own sports meme.`,
+    );
   return c.html(
-    `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title}</title><meta property="og:title" content="${title}"><meta property="og:type" content="website"><meta property="og:url" content="${url}"><meta property="og:image" content="${url}/image"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${title}"><meta name="twitter:image" content="${url}/image"><link rel="canonical" href="${url}"><link rel="icon" href="/icon.svg"><link rel="stylesheet" href="/share.css"><script src="/share.js" defer></script></head><body><main><img src="${url}/image" alt="${escape(caption)}"><button id="share" type="button">↗ Share</button><a href="/">Make your own</a></main></body></html>`,
+    `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title}</title><meta name="description" content="${description}"><meta name="robots" content="index, follow, max-image-preview:large"><meta property="og:site_name" content="TrashTalk"><meta property="og:locale" content="en_US"><meta property="og:description" content="${description}"><meta property="og:title" content="${title}"><meta property="og:type" content="website"><meta property="og:url" content="${url}"><meta property="og:image" content="${url}/image"><meta property="og:image:alt" content="${escape(caption)}"><meta name="twitter:description" content="${description}"><meta name="twitter:image:alt" content="${escape(caption)}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${title}"><meta name="twitter:image" content="${url}/image"><link rel="canonical" href="${url}"><link rel="icon" href="/icon.svg"><link rel="stylesheet" href="/share.css"><script src="/share.js" defer></script></head><body><main><img src="${url}/image" alt="${escape(caption)}"><button id="share" type="button">↗ Share</button><a href="/">Make your own</a></main></body></html>`,
+  );
+});
+app.get("/robots.txt", (c) =>
+  c.text(
+    c.env.ENVIRONMENT === "production"
+      ? "User-agent: *\nAllow: /\nDisallow: /api/\nSitemap: https://trashtalk.fanlift.ai/sitemap.xml\n"
+      : "User-agent: *\nDisallow: /\n",
+  ),
+);
+app.get("/sitemap.xml", (c) => {
+  c.header("Content-Type", "application/xml; charset=utf-8");
+  return c.body(
+    `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${["/", "/privacy", "/terms"].map((path) => `<url><loc>https://trashtalk.fanlift.ai${path}</loc></url>`).join("")}</urlset>`,
   );
 });
 app.all("/api/*", (c) => c.json({ error: "Not found" }, 404));
@@ -758,8 +795,11 @@ export default {
     const path = new URL(request.url).pathname;
     if (request.method === "GET" || request.method === "HEAD") {
       const legal = publicPage(path);
-      if (legal)
+      if (legal) {
+        if (env.ENVIRONMENT !== "production")
+          legal.headers.set("X-Robots-Tag", "noindex, follow");
         return request.method === "HEAD" ? new Response(null, legal) : legal;
+      }
       if (
         path === "/" &&
         env.ENVIRONMENT === "production" &&

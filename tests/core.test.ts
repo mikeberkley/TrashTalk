@@ -21,10 +21,6 @@ import {
 import { leagues } from "../packages/contracts/src/leagues";
 import { validateResearch } from "../worker/src/research";
 import { decodeImage, validateArtwork } from "../worker/src/jobs/media";
-const source = fs.readFileSync(
-  "reference/worker/src/jobs/trash-talk.ts",
-  "utf8",
-);
 const c: any = {
   league: "nfl",
   leagueLabel: "NFL",
@@ -62,24 +58,23 @@ describe("source preservation", () => {
       ).toBe(h);
   });
   it("caption instructions require supplied scores and prohibit ungrounded game facts", () => {
-    expect(captionBase).toContain(
-      "If it is absent, write a timeless team-rivalry roast",
-    );
+    expect(captionBase).toContain('If gameContext.status is "upcoming"');
     expect(captionBase).toContain("gameContext.status is live");
     expect(captionBase).toContain("gameContext.status is final");
     expect(captionBase).not.toContain("latest supplied briefing");
     expect(captionBase).not.toContain("recent big play");
   });
-  it("NFL image template is verbatim", () => {
-    const template = source
-      .split("        prompt: `")[1]
-      .split("`,\n        input_references:")[0];
-    const original = new Function("c", "phrase", "return `" + template + "`")(
-      c,
-      phrase,
+  it("uses the approved league image prompt", () => {
+    const prompt = originalImagePrompt(c, phrase);
+    expect(prompt).toContain(
+      "outrageously absurd trash-talk meme for this NFL game.",
     );
-    expect(originalImagePrompt(c, phrase)).toBe(original);
-    expect(imageRequest(c, phrase, []).prompt).toBe(original + logoInstruction);
+    expect(prompt).toContain(
+      "The image’s artistic style must be exaggerated cartoon style.",
+    );
+    expect(prompt).toContain("generous 10% safe margins");
+    expect(prompt).not.toContain("No identifiable players");
+    expect(imageRequest(c, phrase, []).prompt).toBe(prompt + logoInstruction);
   });
   it("preserves model settings and reference order", () => {
     const r = imageRequest(c, phrase, ["person"]);
@@ -102,17 +97,23 @@ describe("source preservation", () => {
     expect(() => imageRequest(c, phrase, ["person", "pet"])).toThrow(
       "at most one photo",
     ));
-  it("adapts only allowed image clauses", () => {
+  it("adapts the league and personal references", () => {
     expect(
       imageRequest({ ...c, league: "nba", leagueLabel: "NBA" }, phrase, [])
         .prompt,
     ).toBe(
-      originalImagePrompt(c, phrase).replace("NFL", "NBA") + logoInstruction,
+      originalImagePrompt(c, phrase).replaceAll("NFL", "NBA") + logoInstruction,
     );
     expect(imageRequest(c, phrase, ["pet"]).prompt).toContain(
-      "unless explicitly depicted",
+      "Use the user reference images for recognizable personalization",
     );
     expect(captionPrompt("", false)).toContain("innings, halves, or periods");
+  });
+  it("lowercases the user word before inserting it into the caption prompt", () => {
+    expect(captionPrompt("BaNaNa", true)).toContain(
+      'Required caption word: "banana".',
+    );
+    expect(captionPrompt("", true)).not.toContain("Required caption word:");
   });
   it.each(["bad word", "bad1", "damn", "hell", "a".repeat(31)])(
     "rejects invalid optional word %s",

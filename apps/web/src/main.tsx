@@ -1,3 +1,5 @@
+import { ChefCaption } from "./ChefCaption";
+import { ChaosChef } from "./ChaosChef";
 import { Stats } from "./Stats";
 import React, { useEffect, useState, useRef } from "react";
 import { createRoot } from "react-dom/client";
@@ -42,6 +44,7 @@ function App() {
     [suggestion, setSuggestion] = useState(0),
     [query, setQuery] = useState(""),
     [games, setGames] = useState<Game[]>([]),
+    [featured, setFeatured] = useState<any>(null),
     [game, setGame] = useState<Game | null>(saved.game || null),
     [favorite, setFavorite] = useState(saved.favorite || ""),
     [word, setWord] = useState(saved.word || ""),
@@ -172,6 +175,23 @@ function App() {
         .catch(() => {});
   }, []);
   useEffect(() => {
+    let stopped = false;
+    const load = () =>
+      api("/featured-games")
+        .then((data) => {
+          if (!stopped) setFeatured(data);
+        })
+        .catch(() => {
+          if (!stopped) setFeatured({ unavailable: true, games: [] });
+        });
+    load();
+    const timer = setInterval(load, 600_000);
+    return () => {
+      stopped = true;
+      clearInterval(timer);
+    };
+  }, []);
+  useEffect(() => {
     sessionStorage.setItem(
       "tt-form",
       JSON.stringify({ team, game, favorite, word, refs }),
@@ -256,10 +276,10 @@ function App() {
       document.head.appendChild(s);
     }
   }, [me?.googleClientId, me?.authenticated, tab, history.length]);
-  async function choose(g: Game) {
+  async function choose(g: Game, rootingTeam = team?.id || "") {
     setFromCollection(false);
     sessionStorage.removeItem("tt-job");
-    setFavorite(team.id);
+    setFavorite(rootingTeam);
     setGame(g);
     setJob(null);
     setBusy(true);
@@ -621,7 +641,7 @@ function App() {
                           ) : games.length ? (
                             games.map((g) => (
                               <button
-                                className="game"
+                                className={`game${g.status === "final" ? " game-final" : ""}`}
                                 key={g.id}
                                 onClick={() => choose(g)}
                                 disabled={busy}
@@ -648,6 +668,14 @@ function App() {
                                     />
                                     {g.away.displayName}
                                   </span>
+                                  {g.status === "final" && (
+                                    <b
+                                      className="game-score"
+                                      aria-label={`${g.away.displayName} score ${g.score.away ?? "unavailable"}`}
+                                    >
+                                      {g.score.away ?? "–"}
+                                    </b>
+                                  )}
                                 </strong>
                                 <strong>
                                   <span>
@@ -658,7 +686,20 @@ function App() {
                                     />
                                     {g.home.displayName}
                                   </span>
+                                  {g.status === "final" && (
+                                    <b
+                                      className="game-score"
+                                      aria-label={`${g.home.displayName} score ${g.score.home ?? "unavailable"}`}
+                                    >
+                                      {g.score.home ?? "–"}
+                                    </b>
+                                  )}
                                 </strong>
+                                {g.status === "final" && (
+                                  <span className="state">
+                                    Most recent final
+                                  </span>
+                                )}
                                 {g.status === "live" && (
                                   <span className="state live">● Live</span>
                                 )}
@@ -666,8 +707,8 @@ function App() {
                             ))
                           ) : (
                             <p>
-                              No upcoming games are currently scheduled for this
-                              team.
+                              No upcoming or recently finished games are
+                              available for this team.
                             </p>
                           )}
                         </div>
@@ -678,8 +719,8 @@ function App() {
                           Your team. Their humiliation. Turn real matchups into
                           gloriously unhinged memes.
                         </p>
-                        <h1>Step 1: pick a game</h1>
-                        <label className="search">
+                        <h1>Step 1: Pick a team</h1>
+                        <label className="search discovery-choice-label">
                           Search by team
                           <input
                             type="search"
@@ -755,7 +796,9 @@ function App() {
                         )}
                         {!query && favorites.length > 0 && (
                           <div className="presets">
-                            <p>Your ride-or-dies</p>
+                            <p className="discovery-choice-label">
+                              Your ride-or-dies
+                            </p>
                             {teams
                               .filter((t) => favorites.includes(t.id))
                               .map((t) => (
@@ -772,6 +815,73 @@ function App() {
                                 </button>
                               ))}
                           </div>
+                        )}
+                        {!query && !!featured?.games?.length && (
+                          <section
+                            className="featured-games"
+                            aria-labelledby="featured-heading"
+                          >
+                            <div className="discovery-or" aria-hidden="true" />
+                            <h2
+                              id="featured-heading"
+                              className="discovery-choice-label"
+                            >
+                              Or jump directly to a live game
+                            </h2>
+                            {featured?.games?.map((g: any) => (
+                              <button
+                                className="featured-game"
+                                key={g.id}
+                                onClick={() => {
+                                  setTeam(null);
+                                  setError("");
+                                  choose(g, "");
+                                }}
+                              >
+                                <span className="featured-matchup">
+                                  <span title={g.away.displayName}>
+                                    <img
+                                      className="team-logo"
+                                      src={g.away.brandingUrl}
+                                      alt=""
+                                    />
+                                    <span>
+                                      {g.away.name || g.away.displayName}
+                                    </span>
+                                  </span>
+                                  <b className="featured-score">
+                                    {g.score.away}–{g.score.home}
+                                  </b>
+                                  <span title={g.home.displayName}>
+                                    <img
+                                      className="team-logo"
+                                      src={g.home.brandingUrl}
+                                      alt=""
+                                    />
+                                    <span>
+                                      {g.home.name || g.home.displayName}
+                                    </span>
+                                  </span>
+                                </span>
+                                <small>
+                                  <span className="live">● Live</span> ·{" "}
+                                  {g.leagueLabel} · {g.periodDisplay}
+                                </small>
+                              </button>
+                            ))}
+                            {!!featured?.games.length && (
+                              <p className="featured-note">
+                                Scores at{" "}
+                                {new Date(
+                                  featured.updatedAt,
+                                ).toLocaleTimeString([], {
+                                  hour: "numeric",
+                                  minute: "2-digit",
+                                })}{" "}
+                                · Updates every 10 minutes
+                              </p>
+                            )}
+                          </section>
                         )}
                       </>
                     )}
@@ -829,6 +939,22 @@ function App() {
                         <span className="state live">● Live</span>
                       )}
                     </div>
+                    {!team && (
+                      <label>
+                        Who are you rooting for?
+                        <select
+                          value={favorite}
+                          onChange={(e) => setFavorite(e.target.value)}
+                        >
+                          <option value="">Choose your team</option>
+                          {[game.away, game.home].map((t) => (
+                            <option key={t.id} value={t.id}>
+                              {t.displayName}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                    )}
                     <p className="rooting">
                       Roasting on behalf of{" "}
                       {team?.displayName ||
@@ -974,21 +1100,12 @@ function App() {
                 )}
                 {active ? (
                   <>
-                    <div className="spinner" />
-                    <h2>
-                      {
-                        {
-                          queued: "Warming up the chaos cannon",
-                          researching: "Checking the scoreboard",
-                          captioning: "Seasoning the disrespect",
-                          imaging: "Making a spectacular scene",
-                        }[job.status as string]
-                      }
-                    </h2>
-                    <p>
-                      Great nonsense takes a minute. You can come back while we
+                    <p className="cooking-message">
+                      Great nonsense takes a minute. Thx for waiting while we
                       cook.
                     </p>
+                    <ChaosChef />
+                    <ChefCaption />
                   </>
                 ) : job.status === "failed" ? (
                   <>

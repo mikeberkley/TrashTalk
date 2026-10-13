@@ -136,3 +136,12 @@ it("a generation freshness request bypasses an otherwise-valid scoreboard cache"
     spy.mockRestore();
   }
 });
+
+it("supplies upcoming status for fresh future scheduled games without a score", () => {
+  const upcoming = game({ status: "scheduled", date: new Date(at + 3600000).toISOString(), score: { home: null, away: null } });
+  expect(scoreContext(upcoming, at)).toEqual({ status: "upcoming" });
+  expect(captionInput({ gameContext: scoreContext(upcoming, at), home: {}, away: {} }).gameContext).toEqual({ status: "upcoming" });
+  expect(scoreContext({ ...upcoming, capturedAt: new Date(at - 31000).toISOString() }, at)).toBeUndefined();
+  expect(scoreContext({ ...upcoming, date: "bad" }, at)).toBeUndefined();
+  expect(scoreContext({ ...upcoming, date: new Date(at).toISOString() }, at)).toBeUndefined();
+});

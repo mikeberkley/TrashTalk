@@ -227,6 +227,7 @@ export async function runJob(env: Env, id: string) {
           max_tokens: 1000,
         },
         45000,
+        id,
       );
       phrase = phraseSchema.parse(JSON.parse(d.choices[0].message.content));
       if (
@@ -272,6 +273,7 @@ export async function runJob(env: Env, id: string) {
       "images",
       imageRequest(c, phrase, photos),
       120000,
+      id,
     );
     const o = d.data?.[0];
     if (!o?.b64_json) throw Error("Provider returned no inline image");

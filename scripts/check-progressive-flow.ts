@@ -11,7 +11,7 @@ for (const width of [390, 1440]) {
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("https://trashtalk.fanlift.ai");
   await expect(
-    page.getByRole("heading", { name: "Step 1: pick a game" }),
+    page.getByRole("heading", { name: "Step 1: Pick a team" }),
   ).toBeVisible();
   await expect(page.locator(".creative")).toHaveCount(0);
   await page.getByRole("combobox").fill("Patriots");
@@ -24,7 +24,7 @@ for (const width of [390, 1440]) {
   await expect(page.getByRole("button", { name: "★ Favorited" })).toBeVisible();
   await page.locator(".game").first().waitFor();
   const games = await page.locator(".game").count();
-  expect(games).toBeLessThanOrEqual(5);
+  expect(games).toBeLessThanOrEqual(6);
   await page.screenshot({
     path: `reports/progressive-schedule-${width}.png`,
     fullPage: true,

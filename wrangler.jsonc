@@ -76,6 +76,10 @@
     },
     "production": {
       "name": "trashtalk-production",
+      "observability": {
+        "enabled": true,
+        "head_sampling_rate": 1,
+      },
       "vars": {
         "ENVIRONMENT": "production",
         "ORIGIN": "https://trashtalk.fanlift.ai",

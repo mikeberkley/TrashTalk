@@ -1,6 +1,6 @@
 const LIVE_WINDOW_MS = 4 * 60 * 60 * 1000;
 const SCORE_MAX_AGE_MS = 30 * 1000;
-/** Only a fresh ESPN scoreboard may supply factual caption context. */
+/** Only a fresh ESPN response may supply game status or factual caption context. */
 export function scoreContext(game: any, at = Date.now()) {
   if (!game) return undefined;
   const captured = Date.parse(game.capturedAt);
@@ -10,6 +10,9 @@ export function scoreContext(game: any, at = Date.now()) {
     at - captured > SCORE_MAX_AGE_MS
   )
     return undefined;
+  const start = Date.parse(game.date);
+  if (game.status === "scheduled" && Number.isFinite(start) && start > at)
+    return { status: "upcoming" };
   const score = game.score;
   if (
     ![score?.home, score?.away].every(
@@ -18,7 +21,6 @@ export function scoreContext(game: any, at = Date.now()) {
   )
     return undefined;
   const final = game.status === "final";
-  const start = Date.parse(game.date);
   const live =
     game.status === "live" &&
     Number.isFinite(start) &&

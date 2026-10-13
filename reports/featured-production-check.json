@@ -1,0 +1,104 @@
+{
+  "passed": true,
+  "widths": [
+    390,
+    1440
+  ],
+  "sameCachedSnapshot": true,
+  "snapshot": {
+    "games": [
+      {
+        "id": "laliga:401882852",
+        "providerId": "401882852",
+        "league": "laliga",
+        "sport": "soccer",
+        "leagueLabel": "La Liga",
+        "date": "2026-10-12T19:00Z",
+        "status": "live",
+        "statusText": "90'+13'",
+        "period": 2,
+        "clock": "90'+13'",
+        "periodDisplay": "2nd half · 90'+13'",
+        "neutral": false,
+        "home": {
+          "id": "espn:soccer:1538",
+          "name": "Levante",
+          "city": "Levante",
+          "displayName": "Levante",
+          "abbr": "LEV",
+          "brandingUrl": "/branding/soccer/1538/bb76b3a442859c0a4c93ef5870df2eff86e21a7a8c5a86ce6840b1b10cd471e0"
+        },
+        "away": {
+          "id": "espn:soccer:243",
+          "name": "Sevilla",
+          "city": "Sevilla",
+          "displayName": "Sevilla",
+          "abbr": "SEV",
+          "brandingUrl": "/branding/soccer/243/d9a3e82680c73f3e7c11c6dddef995743c029094239d0095588e7df430c0efda"
+        },
+        "score": {
+          "home": 3,
+          "away": 3
+        },
+        "penalties": {
+          "home": null,
+          "away": null
+        },
+        "capturedAt": "2026-10-12T21:02:10.887Z",
+        "source": "https://site.api.espn.com/apis/site/v2/sports/soccer/esp.1/summary?event=401882852",
+        "recentMoment": null,
+        "statistics": [],
+        "revision": "[\"laliga:401882852\",\"live\",{\"home\":3,\"away\":3},{\"home\":null,\"away\":null},null,[]]",
+        "featuredScore": 90,
+        "featuredReason": "Tied game"
+      },
+      {
+        "id": "nba:401914130",
+        "providerId": "401914130",
+        "league": "nba",
+        "sport": "basketball",
+        "leagueLabel": "NBA",
+        "date": "2026-10-12T20:00Z",
+        "status": "live",
+        "statusText": "2:47 - 2nd Quarter",
+        "period": 2,
+        "clock": "2:47",
+        "periodDisplay": "Q2 · 2:47",
+        "neutral": false,
+        "home": {
+          "id": "espn:basketball:22",
+          "name": "Trail Blazers",
+          "city": "Portland",
+          "displayName": "Portland Trail Blazers",
+          "abbr": "POR",
+          "brandingUrl": "/branding/basketball/22/c69dbe7873dddf08dc00b0f2d27bf56a7e223faa972c56af34d5a1d96724b4d1"
+        },
+        "away": {
+          "id": "espn:basketball:134478",
+          "name": "Lions",
+          "city": "London",
+          "displayName": "London Lions",
+          "abbr": "LON"
+        },
+        "score": {
+          "home": 65,
+          "away": 33
+        },
+        "penalties": {
+          "home": null,
+          "away": null
+        },
+        "capturedAt": "2026-10-12T21:02:10.884Z",
+        "source": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401914130",
+        "recentMoment": null,
+        "statistics": [],
+        "revision": "[\"nba:401914130\",\"live\",{\"home\":65,\"away\":33},{\"home\":null,\"away\":null},null,[]]",
+        "featuredScore": 13.725694444444443,
+        "featuredReason": "Live matchup"
+      }
+    ],
+    "updatedAt": "2026-10-12T21:02:11.090Z",
+    "partial": false,
+    "unavailable": false
+  }
+}

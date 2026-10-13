@@ -121,9 +121,20 @@ export async function statDetails(
     note =
       "The app stores Google identifiers, not names or email addresses. Account creation may precede Google sign-in.";
   } else if (Object.hasOwn(imageFilters, metric)) {
-    query = `SELECT json_extract(caption,'$.text') AS "Caption",status AS "Status",datetime(created_at,'unixepoch') AS "Created (UTC)",CASE WHEN deleted_at IS NULL THEN 'No' ELSE 'Yes' END AS "Deleted",error AS "Error" FROM jobs WHERE created_at>=? AND (${imageFilters[metric]}) ORDER BY created_at DESC,id`;
+    query = `SELECT json_extract(caption,'$.text') AS "Caption",status AS "Status",datetime(created_at,'unixepoch') AS "Created (UTC)",CASE WHEN deleted_at IS NULL THEN 'No' ELSE 'Yes' END AS "Deleted",error AS "Error",id AS "Job ID",call_started AS "Stage",(SELECT detail FROM audit WHERE kind='provider_error' AND object_id=jobs.id ORDER BY id DESC LIMIT 1) AS "Provider details" FROM jobs WHERE created_at>=? AND (${imageFilters[metric]}) ORDER BY created_at DESC,id`;
     values = [since];
-    columns = ["Caption", "Status", "Created (UTC)", "Deleted", "Error"];
+    columns = [
+      "Caption",
+      "Status",
+      "Created (UTC)",
+      "Deleted",
+      "Error",
+      "Job ID",
+      "Stage",
+      "Provider details",
+    ];
+    note =
+      "Provider details include sanitized response messages, model, HTTP status, timing, and request IDs. Details are recorded from this update onward; older failures may have no provider details.";
   } else if (["packs", "credits", "amount", "review"].includes(metric)) {
     query = `SELECT status AS "Status",printf('$%.2f',amount/100.0) AS "Amount",credits AS "Credits",datetime(created_at,'unixepoch') AS "Created (UTC)" FROM purchases WHERE status=? AND created_at>=? ORDER BY created_at DESC,session_id`;
     values = [metric === "review" ? "review" : "paid", since];

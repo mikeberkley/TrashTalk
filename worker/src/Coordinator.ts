@@ -9,6 +9,7 @@ import { DurableObject } from "cloudflare:workers";
 import { type Env, sql, now, hash, uid } from "./env";
 import { espn } from "./providers/espn";
 import { validateIncludeWord } from "../../packages/trash-talk/src/include-word";
+import { cachedFeaturedGames } from "./providers/featured-games";
 export class Coordinator extends DurableObject<Env> {
   async fetch(req: Request) {
     return this.ctx.blockConcurrencyWhile(async () => {
@@ -19,6 +20,8 @@ export class Coordinator extends DurableObject<Env> {
           return Response.json({
             owner: await linkGoogle(this.env, body.owner, body.sub),
           });
+        if (path === "/featured")
+          return Response.json(await cachedFeaturedGames(this.env));
         if (path === "/facts")
           return Response.json(
             await cachedGame(this.env, body.id, body.fresh === true),

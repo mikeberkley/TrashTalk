@@ -26,5 +26,8 @@
       "type": "image/png",
       "purpose": "maskable"
     }
-  ]
+  ],
+  "description": "Turn real sports matchups into AI memes. Roast your rivals, add a photo, and share the trash talk with your group chat. Try 3 free images.",
+  "lang": "en-US",
+  "categories": ["entertainment", "sports"]
 }

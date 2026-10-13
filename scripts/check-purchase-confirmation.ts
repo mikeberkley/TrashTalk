@@ -49,7 +49,7 @@ for (const width of [390, 1440]) {
   await page.getByRole("button", { name: "Make a meme", exact: true }).click();
   expect(new URL(page.url()).search).toBe("");
   await expect(
-    page.getByRole("heading", { name: "Step 1: pick a game" }),
+    page.getByRole("heading", { name: "Step 1: Pick a team" }),
   ).toBeVisible();
   await page.goto(origin + "/?checkout=success");
   await expect(

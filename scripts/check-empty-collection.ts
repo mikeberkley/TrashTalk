@@ -46,7 +46,7 @@ for (const authenticated of [false, true]) {
     .getByRole("link", { name: "Show some disrespect", exact: true })
     .click();
   await expect(
-    page.getByRole("heading", { name: "Step 1: pick a game" }),
+    page.getByRole("heading", { name: "Step 1: Pick a team" }),
   ).toBeVisible();
   expect(
     await page.evaluate(

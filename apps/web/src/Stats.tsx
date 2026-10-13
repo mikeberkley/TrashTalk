@@ -268,7 +268,22 @@ export function Stats() {
                       <tr key={index}>
                         {detail.columns.map((col: string) => (
                           <td key={col}>
-                            {row[col] == null ? "—" : String(row[col])}
+                            {col === "Provider details" && row[col] ? (
+                              <pre
+                                style={{
+                                  whiteSpace: "pre-wrap",
+                                  overflowWrap: "anywhere",
+                                  minWidth: 240,
+                                  maxWidth: 480,
+                                }}
+                              >
+                                {JSON.stringify(JSON.parse(row[col]), null, 2)}
+                              </pre>
+                            ) : row[col] == null ? (
+                              "—"
+                            ) : (
+                              String(row[col])
+                            )}
                           </td>
                         ))}
                       </tr>
