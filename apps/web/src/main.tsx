@@ -1311,6 +1311,7 @@ function App() {
                 {tab === "credits" && (
                   <p>First, sign in with Google to buy more credits.</p>
                 )}
+                <div ref={google} />
                 <p>
                   For adults 18+. By using TrashTalk, you agree to the{" "}
                   <a href="/terms">Terms of Service</a>. Read our{" "}
@@ -1327,7 +1328,6 @@ function App() {
                   )}
                   <a href="/privacy">Privacy Policy</a>.
                 </p>
-                <div ref={google} />
                 {!me?.googleClientId && (
                   <p>Google sign-in is awaiting configuration.</p>
                 )}
