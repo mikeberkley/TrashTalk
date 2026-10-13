@@ -11,9 +11,9 @@ This is a handoff for a separate Codex project. Build in the TrashTalk project a
 - Optional word follows the current FanLift validation rules. Optional references: zero, one, or two images, including people or pets for personalization.
 - Perform a brief LLM web search to understand the current story behind the selected game.
 - Use the exact existing caption prompt and model; preserve the image prompt except for the specific adaptations described below.
-- Monetization: three free generations, then Google authentication and $1 for five images. This supersedes the earlier unlimited-testing discussion. Implement an explicit preview-only testing bypass; production uses credits.
+- Monetization: five free generations, then Google authentication and $1 for five images. This supersedes the earlier unlimited-testing discussion. Implement an explicit preview-only testing bypass; production uses credits.
 
-Defaults for implementation: USD; three free successful images as a lifetime introductory allowance, not a daily reset; repeatable five-image packs; no subscription; no credit expiration; no additional time cooldown. Stripe Checkout is the proposed payment provider. Soccer initially includes Premier League, La Liga, Bundesliga, Serie A, Ligue 1, MLS, NWSL, and UEFA Champions League, subject to verified feed availability. League coverage and billing defaults are configurable rather than embedded in UI code.
+Defaults for implementation: USD; five free successful images as a lifetime introductory allowance, not a daily reset; repeatable five-image packs; no subscription; no credit expiration; no additional time cooldown. Stripe Checkout is the proposed payment provider. Soccer initially includes Premier League, La Liga, Bundesliga, Serie A, Ligue 1, MLS, NWSL, and UEFA Champions League, subject to verified feed availability. League coverage and billing defaults are configurable rather than embedded in UI code.
 
 ## Existing FanLift behavior and implementation
 
@@ -46,7 +46,7 @@ Display live games first, then upcoming and recent finals. Provide date navigati
 
 Keep optional inputs visible and compact. References need thumbnails, remove/replace controls, upload progress, and a clear maximum of two. No extra required creative instructions. Show generation stages such as Finding the story, Writing the roast, and Making the image. Loading, retry, and failure states must preserve input and never misrepresent a stale score as current.
 
-Show remaining free images or paid credits. After the third successful free result, keep sharing/downloading available and offer Sign in with Google to get 5 more images for $1. Authentication alone does not purchase credits. Keep image history private to its owner; explicit share links publish only the selected finished meme, not the source photos or account data. A public game/team gallery is outside the launch scope.
+Show remaining free images or paid credits. After the fifth successful free result, keep sharing/downloading available and offer Sign in with Google to get 5 more images for $1. Authentication alone does not purchase credits. Keep image history private to its owner; explicit share links publish only the selected finished meme, not the source photos or account data. A public game/team gallery is outside the launch scope.
 
 Adapt FanLift’s viewer and sharing controls. Share to `/m/:publicToken`, which opens the exact immutable meme with crawler-readable Open Graph metadata. Derive titles, scores, and dates from stored generation metadata, never editable query strings. Use the footer `Shared from trashtalk.fanlift.ai` for downloads, outside the artwork; do not add generated watermarks. Prepare download files before a share click to preserve mobile user activation. Check iPhone Safari link sharing and image download explicitly.
 
@@ -156,7 +156,7 @@ Proposed retention: delete unattached uploads after 24 hours and attached refere
 
 ## Credits and Google authentication
 
-Use a random server-issued anonymous session cookie and persistent server ledger for the first three free successes. Browser storage alone is not authoritative. An anonymous allowance cannot perfectly enforce three images per human across deleted cookies and devices; use privacy-conscious IP abuse signals and optional challenge escalation without blocking an entire household by default.
+Use a random server-issued anonymous session cookie and persistent server ledger for the first five free successes. Browser storage alone is not authoritative. An anonymous allowance cannot perfectly enforce five images per human across deleted cookies and devices; use privacy-conscious IP abuse signals and optional challenge escalation without blocking an entire household by default.
 
 On Google sign-in, verify the ID token server-side, including signature, issuer, audience, expiry, and CSRF protection. Identify accounts by Google `sub`, not mutable email. Issue a host-only Secure, HttpOnly, SameSite session cookie; keep sessions separate from FanLift. Atomically link the current anonymous history and consumed trial count to the account. Signing in must not grant a second introductory allowance; account linkage is idempotent and cannot transfer someone else's paid balance. [Google token verification guidance](https://developers.google.com/identity/gsi/web/guides/verify-google-id-token)
 
@@ -218,7 +218,7 @@ Use preview Stripe test mode and test Google credentials where possible. An unli
 2. Implement league adapters and complete NFL discovery, including non-featured games, playoff dates, and distinct doubleheaders. Verify every launch league against real provider responses; hide unsupported entries instead of claiming coverage. Run the team/asset ingestion pipeline, store all supported team logos in R2 and verified primary/secondary palettes in D1, and review the complete logo/color coverage report before enabling the league.
 3. Implement bounded web research with citations, cache, freshness, and fallback policy. Verify an actual search occurred and that stale/wrong-match sources cannot contaminate the caption.
 4. Implement private uploads and the preserved caption/image pipeline. Verify zero/one/two user references plus team logos on the exact model endpoint. Keep the model settings unchanged.
-5. Implement Google auth, anonymous linkage, ledger, reservations, reconciliation, and Stripe test-mode purchase fulfillment. Exercise three free successes followed by the sign-in/payment gate and a five-image grant.
+5. Implement Google auth, anonymous linkage, ledger, reservations, reconciliation, and Stripe test-mode purchase fulfillment. Exercise five free successes followed by the sign-in/payment gate and a five-image grant.
 6. Implement private history, public individual share pages, download footer, and mobile viewer. Complete accessibility and browser verification.
 7. Deploy preview and perform explicit end-to-end generations for pregame/live/final and representative non-NFL games. Then configure production domain/secrets/payments, deploy, and verify live routes and assets. Only claim production billing works after actual payment/webhook/ledger evidence; distinguish test-mode validation.
 

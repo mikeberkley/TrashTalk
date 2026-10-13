@@ -10,7 +10,7 @@ const seed = (
   call: string | null = "image",
 ) => {
   db.exec(
-    "INSERT INTO principals(id,created_at) VALUES('a',0); INSERT INTO ledger(owner,kind,amount,pool,business_key,created_at) VALUES('a','grant',3,'trial','trial:a',0)",
+    "INSERT INTO principals(id,created_at) VALUES('a',0); INSERT INTO ledger(owner,kind,amount,pool,business_key,created_at) VALUES('a','grant',5,'trial','trial:a',0)",
   );
   db.prepare(
     "INSERT INTO jobs(id,owner,idempotency,input_hash,input,status,created_at,updated_at,call_started) VALUES(?,'a','key','h','{}',?,0,0,?)",
@@ -72,7 +72,7 @@ it("failure is idempotent", async () => {
   await fail(env, "j", "test");
   await fail(env, "j", "test");
   expect((db.prepare("SELECT SUM(amount) n FROM ledger").get() as any).n).toBe(
-    3,
+    5,
   );
 });
 it("malformed persisted image cannot capture a credit", async () => {
@@ -103,7 +103,7 @@ it("account linkage does not grant another trial", async () => {
         .prepare("SELECT SUM(amount) n FROM ledger WHERE owner=?")
         .get(a.owner) as any
     ).n,
-  ).toBe(2);
+  ).toBe(4);
   expect(
     (
       db

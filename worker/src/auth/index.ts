@@ -12,7 +12,7 @@ export async function verifyGoogle(token: string, audience: string) {
   if (!payload.sub || !payload.exp) throw Error("Invalid Google token");
   return payload.sub;
 }
-export async function newSession(env: Env, principal?: string, trial = 3) {
+export async function newSession(env: Env, principal?: string, trial = 5) {
   const token = uid() + uid(),
     csrf = uid(),
     owner = principal || uid(),

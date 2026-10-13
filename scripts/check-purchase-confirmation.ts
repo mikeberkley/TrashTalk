@@ -10,7 +10,7 @@ for (const width of [390, 1440]) {
       path === "/api/me"
         ? {
             csrf: "fixture",
-            trial: 3,
+            trial: 5,
             paid: paid ? 8 : 4,
             authenticated: true,
             environment: "production",

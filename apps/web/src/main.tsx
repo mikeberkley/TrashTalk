@@ -1078,7 +1078,7 @@ function App() {
                           : "Unleash the meme"}
                     </button>
                     <p className="price">
-                      3 free successful images. Then {offerPrice} for{" "}
+                      5 free successful images. Then {offerPrice} for{" "}
                       {offer.credits}. Only finished images use a credit.
                     </p>
                   </section>

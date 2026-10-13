@@ -12,7 +12,7 @@ for (const width of [390, 1440]) {
         authenticated: true,
         admin: true,
         csrf: "test",
-        trial: 3,
+        trial: 5,
         paid: 4,
         environment: "production",
       },

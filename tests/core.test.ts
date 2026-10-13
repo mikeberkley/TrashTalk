@@ -128,7 +128,7 @@ function db() {
   const d = new DatabaseSync(":memory:");
   d.exec(fs.readFileSync("worker/migrations/0001_initial.sql", "utf8"));
   d.exec(
-    "INSERT INTO principals(id,created_at) VALUES('a',0); INSERT INTO ledger(owner,kind,amount,pool,business_key,created_at) VALUES('a','grant',3,'trial','trial:a',0)",
+    "INSERT INTO principals(id,created_at) VALUES('a',0); INSERT INTO ledger(owner,kind,amount,pool,business_key,created_at) VALUES('a','grant',5,'trial','trial:a',0)",
   );
   return d;
 }
@@ -147,23 +147,25 @@ const balance = (d: DatabaseSync) =>
     ).n,
   );
 describe("atomic ledger in real SQLite", () => {
-  it("only three free successes", () => {
+  it("only five free successes", () => {
     const d = db();
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 5; i++) {
       reserve(d, "" + i);
       d.prepare("UPDATE reservations SET state='captured' WHERE job_id=?").run(
         "" + i,
       );
     }
     expect(balance(d)).toBe(0);
-    expect(() => reserve(d, "4")).toThrow("insufficient_credit");
+    expect(() => reserve(d, "6")).toThrow("insufficient_credit");
   });
   it("racing reservations cannot spend last credit twice", () => {
     const d = db();
     reserve(d, "1");
     reserve(d, "2");
     reserve(d, "3");
-    expect(() => reserve(d, "4")).toThrow();
+    reserve(d, "4");
+    reserve(d, "5");
+    expect(() => reserve(d, "6")).toThrow();
     expect(balance(d)).toBe(0);
   });
   it("release once and capture once", () => {
@@ -172,18 +174,18 @@ describe("atomic ledger in real SQLite", () => {
     d.exec(
       "UPDATE reservations SET state='released' WHERE job_id='1'; UPDATE reservations SET state='released' WHERE job_id='1'",
     );
-    expect(balance(d)).toBe(3);
+    expect(balance(d)).toBe(5);
     reserve(d, "2");
     d.exec(
       "UPDATE reservations SET state='captured' WHERE job_id='2'; UPDATE reservations SET state='captured' WHERE job_id='2'",
     );
-    expect(balance(d)).toBe(2);
+    expect(balance(d)).toBe(4);
   });
   it("duplicate reservation is rejected", () => {
     const d = db();
     reserve(d, "1");
     expect(() => reserve(d, "1")).toThrow();
-    expect(balance(d)).toBe(2);
+    expect(balance(d)).toBe(4);
   });
   it("duplicate grant business keys cannot credit twice", () => {
     const d = db();
@@ -201,7 +203,7 @@ describe("atomic ledger in real SQLite", () => {
   });
   it("job insert rolls back if reservation fails", () => {
     const d = db();
-    for (let i = 0; i < 3; i++) reserve(d, "" + i);
+    for (let i = 0; i < 5; i++) reserve(d, "" + i);
     d.exec("BEGIN");
     try {
       d.exec(

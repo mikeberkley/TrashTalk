@@ -42,7 +42,7 @@ for (const engine of ["chrome", "webkit"]) {
     r.fulfill({
       json: {
         csrf: "fixture",
-        trial: 3,
+        trial: 5,
         paid: 0,
         environment: "production",
         authenticated: false,
