@@ -15,6 +15,7 @@ import {
   PROMPT_VERSION,
 } from "../../../packages/trash-talk/src/prompts";
 import { captionIncludesWord } from "../../../packages/trash-talk/src/include-word";
+import { recentCaptions } from "./recent-captions";
 import { validateArtwork, dataUrl } from "./media";
 export const phraseSchema = z.object({
   text: z
@@ -24,6 +25,7 @@ export const phraseSchema = z.object({
     .max(180)
     .refine((v) => v.split(/\s+/).length <= 15),
   visual: z.string().trim().min(1).max(1000),
+  theme: z.string().trim().min(1).max(160).optional(),
 });
 class InvalidStoredArtwork extends Error {}
 export async function deleteJobUploads(env: Env, id: string) {
@@ -221,7 +223,13 @@ export async function runJob(env: Env, id: string) {
                 context.league === "nfl",
               ),
             },
-            { role: "user", content: JSON.stringify(clean) },
+            {
+              role: "user",
+              content: JSON.stringify({
+                ...clean,
+                recentCaptions: await recentCaptions(env, id),
+              }),
+            },
           ],
           response_format: { type: "json_object" },
           max_tokens: 1000,
