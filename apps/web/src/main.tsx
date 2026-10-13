@@ -721,7 +721,7 @@ function App() {
                         </p>
                         <h1>Step 1: Pick a team</h1>
                         <label className="search discovery-choice-label">
-                          Search by team
+                          Search by team (all pro sports &amp; college football)
                           <input
                             type="search"
                             role="combobox"
