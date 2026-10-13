@@ -788,15 +788,56 @@ function App() {
                       ← Choose another game
                     </button>
                     <h1>Step 2: add chaos</h1>
-                    <p className="matchup">
-                      {game.away.displayName} <span>vs</span>{" "}
-                      {game.home.displayName}
-                    </p>
+                    <div
+                      className={`game selected-game${game.status === "final" ? " game-final" : ""}`}
+                    >
+                      <small>
+                        {new Date(game.date).toLocaleDateString([], {
+                          weekday: "short",
+                          month: "short",
+                          day: "numeric",
+                        })}{" "}
+                        ·{" "}
+                        {new Date(game.date).toLocaleTimeString([], {
+                          hour: "numeric",
+                          minute: "2-digit",
+                        })}{" "}
+                        · {game.leagueLabel}
+                      </small>
+                      {[game.away, game.home].map((t, i) => (
+                        <strong key={t.id}>
+                          <span>
+                            <img
+                              className="team-logo"
+                              src={t.brandingUrl}
+                              alt=""
+                            />
+                            {t.displayName}
+                          </span>
+                          {game.status === "final" && (
+                            <b className="game-score">
+                              {(i === 0 ? game.score.away : game.score.home) ??
+                                "–"}
+                            </b>
+                          )}
+                        </strong>
+                      ))}
+                      {game.status === "final" && (
+                        <span className="state">Most recent final</span>
+                      )}
+                      {game.status === "live" && (
+                        <span className="state live">● Live</span>
+                      )}
+                    </div>
                     <p className="rooting">
                       Roasting on behalf of{" "}
                       {team?.displayName ||
                         [game.away, game.home].find((t) => t.id === favorite)
                           ?.displayName}
+                    </p>
+                    <p className="chaos-instruction">
+                      Want to spice it up? You can optionally add a key word and
+                      image to your meme.
                     </p>
                     <label>
                       A word of chaos <span className="optional">Optional</span>
@@ -880,10 +921,10 @@ function App() {
                       )}
                     </div>
                     <p className="privacy">
-                      People, pets, prized possessions. Photos stay private and
-                      are sent to the image provider. Unused photos expire after
-                      24 hours; used photos after 7 days. Upload only photos you
-                      have permission to use; no photos of children.
+                      Photos stay private, are sent to the image generator, and
+                      are then deleted from our storage as soon as your meme is
+                      ready. Upload only photos you have permission to use; no
+                      photos of children or sexual content allowed.
                     </p>
                     {inlineError && errorMessage}
                     <button
