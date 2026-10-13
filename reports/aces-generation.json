@@ -1,0 +1,33 @@
+{
+  "origin": "https://trashtalk.fanlift.ai",
+  "startedAt": "2026-10-13T12:53:16.454Z",
+  "steps": [
+    {
+      "status": "queued",
+      "at": "2026-10-13T12:53:21.243Z"
+    },
+    {
+      "status": "captioning",
+      "at": "2026-10-13T12:53:24.505Z"
+    },
+    {
+      "status": "imaging",
+      "at": "2026-10-13T12:53:40.239Z"
+    },
+    {
+      "status": "complete",
+      "at": "2026-10-13T12:53:55.975Z"
+    }
+  ],
+  "passed": true,
+  "initialTrial": 3,
+  "jobId": "1377e88c-26b7-43ac-9782-ae1c2dac361d",
+  "artwork": {
+    "width": 1024,
+    "height": 1024
+  },
+  "gameId": "wnba:401918300",
+  "favoriteTeamId": "espn:wnba:17",
+  "caption": "Valkyries filed our 77 as a failed tax deduction",
+  "finalTrial": 2
+}
