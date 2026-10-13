@@ -2,9 +2,13 @@ import fs from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { cf } from "./cloudflare";
 const env = process.argv.includes("--production") ? "production" : "preview";
-const records = JSON.parse(
-  await fs.readFile("catalog-cache/records.json", "utf8"),
-);
+const dir =
+  process.argv.find((x) => x.startsWith("--catalog-dir="))?.split("=")[1] ||
+  "catalog-cache";
+const records = JSON.parse(await fs.readFile(`${dir}/records.json`, "utf8"));
+const coverage = JSON.parse(await fs.readFile(`${dir}/coverage.json`, "utf8"));
+if (!coverage.length || coverage.some((row: any) => !row.ready))
+  throw Error("Catalog not ready for publication");
 const report: any[] = [];
 let cursor = 0;
 await Promise.all(
@@ -37,7 +41,7 @@ await Promise.all(
   }),
 );
 await fs.writeFile(
-  `reports/r2-${env}-readback.json`,
+  `${dir}/r2-${env}-readback.json`,
   JSON.stringify(report, null, 2),
 );
 console.log("All assets verified; metadata ready for D1 import");

@@ -3,7 +3,14 @@ import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import sharp from "sharp";
 import { leagues } from "../packages/contracts/src/leagues";
-import { base, espn, participant, getJson } from "../worker/src/providers/espn";
+import {
+  getCatalogTeams,
+  participant,
+  catalogIdentity,
+  catalogTeamDetail,
+  getJson,
+  scoreboardUrl,
+} from "../worker/src/providers/espn";
 const digest = (b: any) => createHash("sha256").update(b).digest("hex");
 const dry = process.argv.includes("--dry-run"),
   local = process.argv.includes("--local"),
@@ -12,14 +19,26 @@ const target =
   process.argv.find((x) => x.startsWith("--env="))?.split("=")[1] || "preview";
 if (remote && target !== "preview" && target !== "production")
   throw Error("Invalid environment");
-const dir = "catalog-cache";
+const selectedIds = process.argv
+  .find((x) => x.startsWith("--leagues="))
+  ?.split("=")[1]
+  .split(",");
+const selected = selectedIds
+  ? leagues.filter((l) => selectedIds.includes(l.id))
+  : leagues;
+if (selectedIds && (selectedIds.length !== selected.length || !selected.length))
+  throw Error("Unknown or duplicate league selection");
+const dir =
+  process.argv.find((x) => x.startsWith("--catalog-dir="))?.split("=")[1] ||
+  "catalog-cache";
 await fs.mkdir(dir, { recursive: true });
 await fs.mkdir("reports", { recursive: true });
 const q = (s: any) => "'" + String(s).replaceAll("'", "''") + "'";
 const results: any[] = [];
 const records = new Map<string, any>();
 const statements: string[] = [];
-for (const l of leagues) {
+for (const l of selected) {
+  const leagueStatements: string[] = [];
   const row: any = {
     league: l.id,
     checkedAt: new Date().toISOString(),
@@ -30,23 +49,27 @@ for (const l of leagues) {
     games: 0,
   };
   try {
-    const teams = await espn.getTeams(l.id);
+    const teams = await getCatalogTeams(l.id);
     row.teams = teams.length;
+    row.selectableTeams = teams.filter((t) => !t.catalogOpponent).length;
+    row.supportingOpponents = teams.filter((t) => t.catalogOpponent).length;
     const dates =
-      l.id === "ucl"
-        ? ["20260916", "20261020"]
-        : l.id === "nfl"
-          ? ["20261011", "20260118"]
-          : l.id === "nba"
-            ? ["20261010", "20260412"]
-            : l.id === "mlb"
-              ? ["20261011", "20260704"]
-              : ["20261011", "20260919"];
+      l.id === "wnba"
+        ? ["20261010", "20260815"]
+        : l.id === "ncaaf"
+          ? ["20261010", "20260919"]
+          : l.id === "ucl"
+            ? ["20260916", "20261020"]
+            : l.id === "nfl"
+              ? ["20261011", "20260118"]
+              : l.id === "nba"
+                ? ["20261010", "20260412"]
+                : l.id === "mlb"
+                  ? ["20261011", "20260704"]
+                  : ["20261011", "20260919"];
     row.feedChecks = [];
     for (const date of dates) {
-      const d = await getJson(
-        `${base}/${l.sport}/${l.path}/scoreboard?dates=${date}&limit=1000`,
-      );
+      const d = await getJson(scoreboardUrl(l, date));
       if (!Array.isArray(d.events)) throw Error("Invalid schedule feed");
       row.games += d.events.length;
       row.feedChecks.push({
@@ -59,10 +82,7 @@ for (const l of leagues) {
       const id = participant(seed, l).id;
       try {
         // Team-detail endpoints expose palettes omitted by some list endpoints.
-        const detail = await getJson(
-          `${base}/${l.sport}/${l.path}/teams/${seed.id}`,
-        );
-        const t = { ...seed, ...detail.team };
+        const t = await catalogTeamDetail(seed, l);
         const color = (v: any) =>
           typeof v === "string" && /^[a-f\d]{6}$/i.test(v)
             ? "#" + v.toUpperCase()
@@ -110,11 +130,10 @@ for (const l of leagues) {
           logoKey = `branding/${id}/${version}.png`,
           originalKey = `originals/${id}/${digest(original)}`;
         const metadata = {
-          ...participant(t, l),
-          aliases: [t.shortDisplayName, t.slug].filter(Boolean),
+          ...catalogIdentity(t, l),
           primary,
           secondary,
-          paletteSource: `${base}/${l.sport}/${l.path}/teams/${t.id}`,
+          paletteSource: t.paletteSource,
           sourceUrl: source,
           sourceHash: digest(original),
           checkedAt: row.checkedAt,
@@ -139,11 +158,14 @@ for (const l of leagues) {
           originalPath: filename,
         });
         if (!dry) {
-          statements.push(
+          leagueStatements.push(
             `INSERT OR IGNORE INTO team_versions VALUES(${[id, version, logoKey, logoHash, paletteHash, JSON.stringify(metadata)].map(q).join(",")});`,
             `INSERT INTO teams VALUES(${q(id)},${q(JSON.stringify(metadata))},${q(version)}) ON CONFLICT(id) DO UPDATE SET metadata=excluded.metadata,active_version=excluded.active_version;`,
-            `INSERT OR IGNORE INTO memberships VALUES(${q(l.id)},${q(id)});`,
           );
+          if (!t.catalogOpponent)
+            leagueStatements.push(
+              `INSERT OR IGNORE INTO memberships VALUES(${q(l.id)},${q(id)});`,
+            );
         }
       } catch (e) {
         row.gaps.push({ team: id, kind: "asset", error: String(e) });
@@ -155,6 +177,7 @@ for (const l of leagues) {
     row.ready = false;
   }
   results.push(row);
+  if (row.ready) statements.push(...leagueStatements);
   console.log(
     JSON.stringify({
       league: row.league,
@@ -169,17 +192,28 @@ for (const l of leagues) {
   statements.push(
     `INSERT INTO leagues VALUES(${q(l.id)},${row.ready ? 1 : 0},${q(row.checkedAt)},${q(JSON.stringify(row))}) ON CONFLICT(id) DO UPDATE SET enabled=excluded.enabled,checked_at=excluded.checked_at,report=excluded.report;`,
   );
-  await fs.writeFile(
-    "reports/catalog-coverage.json",
-    JSON.stringify(results, null, 2),
-  );
 }
+let previous: any[] = [];
+try {
+  previous = JSON.parse(
+    await fs.readFile("reports/catalog-coverage.json", "utf8"),
+  );
+} catch {}
+const coverage = new Map(previous.map((row) => [row.league, row]));
+for (const row of results) coverage.set(row.league, row);
+await fs.writeFile(
+  "reports/catalog-coverage.json",
+  JSON.stringify([...coverage.values()], null, 2),
+);
+await fs.writeFile(`${dir}/coverage.json`, JSON.stringify(results, null, 2));
 await fs.writeFile(
   `${dir}/records.json`,
   JSON.stringify([...records.values()], null, 2),
 );
 await fs.writeFile(`${dir}/catalog.sql`, statements.join("\n"));
 if ((remote || local) && !dry) {
+  if (results.some((row) => !row.ready))
+    throw Error("Catalog not ready for publication");
   const run = (args: string[]) =>
     execFileSync("npx", ["wrangler", ...args, "--env", target], {
       stdio: "pipe",

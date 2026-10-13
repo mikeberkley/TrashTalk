@@ -1,6 +1,10 @@
 import { decode } from "fast-png";
 import { leagues } from "../../packages/contracts/src/leagues";
-import { base, espn, getJson, participant } from "./providers/espn";
+import {
+  getCatalogTeams,
+  catalogTeamDetail,
+  catalogIdentity,
+} from "./providers/espn";
 import { type Env, sql, hash, now } from "./env";
 export async function refreshLeague(env: Env, id: string) {
   const l = leagues.find((l) => l.id === id);
@@ -8,13 +12,11 @@ export async function refreshLeague(env: Env, id: string) {
   const checkedAt = new Date().toISOString(),
     gaps: any[] = [],
     staged: any[] = [];
-  const teams = await espn.getTeams(id);
+  const teams = await getCatalogTeams(id);
   for (const seed of teams) {
     try {
-      const { team: t } = await getJson(
-        `${base}/${l.sport}/${l.path}/teams/${seed.id}`,
-      );
-      const identity = participant(t, l),
+      const t = await catalogTeamDetail(seed, l);
+      const identity = catalogIdentity(t, l),
         primary = hex(t.color),
         secondary = hex(t.alternateColor);
       if (!primary || !secondary) throw Error("Missing verified palette");
@@ -43,7 +45,7 @@ export async function refreshLeague(env: Env, id: string) {
         prior?.sourceHash === sourceHash &&
         prior?.paletteHash === paletteHash
       ) {
-        staged.push({ ...prior, checkedAt });
+        staged.push({ ...prior, ...identity, checkedAt });
         continue;
       }
       const out = await env.IMAGES.input(
@@ -78,10 +80,9 @@ export async function refreshLeague(env: Env, id: string) {
         throw Error("R2 readback mismatch");
       staged.push({
         ...identity,
-        aliases: [t.shortDisplayName, t.slug].filter(Boolean),
         primary,
         secondary,
-        paletteSource: `${base}/${l.sport}/${l.path}/teams/${t.id}`,
+        paletteSource: t.paletteSource,
         sourceUrl,
         sourceHash,
         checkedAt,
@@ -109,6 +110,8 @@ export async function refreshLeague(env: Env, id: string) {
     league: id,
     checkedAt,
     teams: teams.length,
+    selectableTeams: teams.filter((t) => !t.catalogOpponent).length,
+    supportingOpponents: teams.filter((t) => t.catalogOpponent).length,
     logos: staged.length,
     palettes: staged.length,
     gaps,
@@ -145,7 +148,7 @@ export async function refreshLeague(env: Env, id: string) {
         ),
       );
     statements.push(sql(env, "DELETE FROM memberships WHERE league=?", id));
-    for (const m of staged)
+    for (const m of staged.filter((m) => !m.catalogOpponent))
       statements.push(
         sql(env, "INSERT INTO memberships VALUES(?,?)", id, m.id),
       );

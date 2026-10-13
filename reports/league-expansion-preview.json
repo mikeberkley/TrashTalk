@@ -1,0 +1,773 @@
+{
+  "origin": "https://trashtalk-preview.berkleym.workers.dev",
+  "checkedAt": "2026-10-13T12:39:54.096Z",
+  "selectableTeams": 153,
+  "wnbaTeams": 15,
+  "fbsTeams": 138,
+  "conferenceCounts": {
+    "American Conference": 14,
+    "Atlantic Coast Conference": 17,
+    "Big 12 Conference": 16,
+    "Big Ten Conference": 18,
+    "Conference USA": 10,
+    "FBS Independents": 2,
+    "Mid-American Conference": 13,
+    "Mountain West Conference": 10,
+    "Pac-12 Conference": 8,
+    "Southeastern Conference": 16,
+    "Sun Belt Conference": 14
+  },
+  "logoChecks": [
+    {
+      "id": "espn:wnba:20",
+      "verified": true
+    },
+    {
+      "id": "espn:wnba:17",
+      "verified": true
+    },
+    {
+      "id": "espn:wnba:19",
+      "verified": true
+    },
+    {
+      "id": "espn:wnba:18",
+      "verified": true
+    },
+    {
+      "id": "espn:wnba:5",
+      "verified": true
+    },
+    {
+      "id": "espn:wnba:6",
+      "verified": true
+    },
+    {
+      "id": "espn:wnba:3",
+      "verified": true
+    },
+    {
+      "id": "espn:wnba:129689",
+      "verified": true
+    },
+    {
+      "id": "espn:wnba:8",
+      "verified": true
+    },
+    {
+      "id": "espn:wnba:132052",
+      "verified": true
+    },
+    {
+      "id": "espn:wnba:9",
+      "verified": true
+    },
+    {
+      "id": "espn:wnba:11",
+      "verified": true
+    },
+    {
+      "id": "espn:wnba:14",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:235",
+      "verified": true
+    },
+    {
+      "id": "espn:wnba:16",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2226",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:58",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:249",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2636",
+      "verified": true
+    },
+    {
+      "id": "espn:wnba:131935",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:5",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:151",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:349",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:202",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2426",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:218",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2655",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2390",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:242",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2429",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:221",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:154",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2567",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:150",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:228",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:258",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:259",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:25",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:97",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:52",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:153",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:59",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:24",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:103",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:183",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2641",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:152",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:254",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:252",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:248",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:12",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:239",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2132",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2306",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:9",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:197",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2116",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:66",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:277",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:38",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:84",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2628",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:26",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:30",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2305",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2294",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:194",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:275",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:158",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2483",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:77",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:135",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:130",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2509",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:213",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:164",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:356",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:264",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:120",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:127",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:55",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2335",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:48",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:166",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2393",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2229",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:98",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:338",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2534",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2623",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:87",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:195",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2711",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2649",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:41",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2084",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2199",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:113",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2117",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:193",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2050",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:189",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2006",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:16",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2449",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2309",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:167",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2005",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2751",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:23",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2439",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2440",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2638",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2459",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:204",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:62",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:278",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:68",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:36",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:21",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:326",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:61",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:328",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:265",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:333",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:96",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:142",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2633",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:145",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:251",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:344",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:99",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:57",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:201",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:245",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2579",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:238",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:8",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:256",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2247",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2348",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2653",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:6",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2026",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:309",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2032",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:276",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:295",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:324",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2572",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:290",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2433",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2640",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2127",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2771",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:236",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2643",
+      "verified": true
+    },
+    {
+      "id": "espn:college-football:2210",
+      "verified": true
+    }
+  ],
+  "schedules": [
+    {
+      "team": "Indiana Fever",
+      "games": [
+        "wnba:401918022"
+      ],
+      "detailVerified": true
+    },
+    {
+      "team": "Toronto Tempo",
+      "games": [
+        "wnba:401857215"
+      ],
+      "detailVerified": true
+    },
+    {
+      "team": "Alabama Crimson Tide",
+      "games": [
+        "ncaaf:401856712",
+        "ncaaf:401856723",
+        "ncaaf:401856727",
+        "ncaaf:401856740",
+        "ncaaf:401856889",
+        "ncaaf:401856746"
+      ],
+      "detailVerified": true
+    },
+    {
+      "team": "Ohio State Buckeyes",
+      "games": [
+        "ncaaf:401858483",
+        "ncaaf:401858488",
+        "ncaaf:401858509",
+        "ncaaf:401858514",
+        "ncaaf:401858522",
+        "ncaaf:401858531"
+      ],
+      "detailVerified": true
+    },
+    {
+      "team": "Texas Tech Red Raiders",
+      "games": [
+        "ncaaf:401856821",
+        "ncaaf:401856828",
+        "ncaaf:401856840",
+        "ncaaf:401856842",
+        "ncaaf:401856856",
+        "ncaaf:401856863"
+      ],
+      "detailVerified": true
+    },
+    {
+      "team": "Clemson Tigers",
+      "games": [
+        "ncaaf:401858249",
+        "ncaaf:401858261",
+        "ncaaf:401858276",
+        "ncaaf:401858280",
+        "ncaaf:401858285",
+        "ncaaf:401858297"
+      ],
+      "detailVerified": true
+    },
+    {
+      "team": "Notre Dame Fighting Irish",
+      "games": [
+        "ncaaf:401858257",
+        "ncaaf:401856809",
+        "ncaaf:401859185",
+        "ncaaf:401858291",
+        "ncaaf:401858294",
+        "ncaaf:401858307"
+      ],
+      "detailVerified": true
+    },
+    {
+      "team": "Boise State Broncos",
+      "games": [
+        "ncaaf:401860901",
+        "ncaaf:401860907",
+        "ncaaf:401860908",
+        "ncaaf:401860911",
+        "ncaaf:401860914",
+        "ncaaf:401860925"
+      ],
+      "detailVerified": true
+    }
+  ],
+  "browserChecks": [
+    {
+      "width": 390,
+      "team": "Indiana Fever",
+      "generationReady": true,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "team": "Alabama Crimson Tide",
+      "generationReady": true,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "team": "Indiana Fever",
+      "generationReady": true,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "team": "Alabama Crimson Tide",
+      "generationReady": true,
+      "overflow": false
+    }
+  ],
+  "paidGenerationAttempted": false
+}

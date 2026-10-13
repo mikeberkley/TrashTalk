@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import { parse } from "jsonc-parser";
 import { execFileSync } from "node:child_process";
+import { leagues } from "../packages/contracts/src/leagues";
 const config = parse(await fs.readFile("wrangler.jsonc", "utf8"));
 const vars = config.env.production.vars;
 if (
@@ -27,7 +28,9 @@ for (const name of [
 const coverage = JSON.parse(
   await fs.readFile("reports/catalog-coverage.json", "utf8"),
 );
-if (coverage.length !== 12 || coverage.some((l: any) => !l.ready))
+if (
+  leagues.some((l) => !coverage.find((row: any) => row.league === l.id)?.ready)
+)
   throw Error("Catalog coverage incomplete");
 for (const report of [
   "stripe-test-e2e.json",

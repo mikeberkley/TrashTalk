@@ -11,12 +11,31 @@ export const leagues = [
   ["mls", "MLS", "soccer", "usa.1", "America/New_York"],
   ["nwsl", "NWSL", "soccer", "usa.nwsl", "America/New_York"],
   ["ucl", "Champions League", "soccer", "uefa.champions", "Europe/London"],
+  ["wnba", "WNBA", "basketball", "wnba", "America/New_York"],
+  [
+    "ncaaf",
+    "College Football (FBS)",
+    "football",
+    "college-football",
+    "America/New_York",
+  ],
 ].map(([id, label, sport, path, timezone]) => ({
   id,
   label,
   sport,
   path,
   timezone,
+  // Keep existing IDs stable while isolating ESPN's overlapping team numbers.
+  teamNamespace: id === "wnba" || id === "ncaaf" ? path : sport,
+  scoreboardGroup: id === "ncaaf" ? "80" : undefined,
+  periodSeconds:
+    sport === "football"
+      ? 900
+      : sport === "hockey"
+        ? 1200
+        : id === "wnba"
+          ? 600
+          : 720,
 }));
 export type League = (typeof leagues)[number];
 export const leagueById = (id: string) => {

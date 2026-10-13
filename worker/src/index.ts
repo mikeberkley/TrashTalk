@@ -13,7 +13,8 @@ import { Hono } from "hono";
 import { getCookie, setCookie, deleteCookie } from "hono/cookie";
 import { type Env, sql, hash, now, uid } from "./env";
 import { leagues } from "../../packages/contracts/src/leagues";
-import { base, getJson, normalize, espn } from "./providers/espn";
+import { teamSeasonGames, espn } from "./providers/espn";
+import { availableTeamGames } from "./providers/team-games";
 import { newSession, verifyGoogle, linkGoogle } from "./auth";
 import { checkout, webhook } from "./billing";
 import { normalizeUpload } from "./jobs/media";
@@ -271,12 +272,16 @@ app.get("/api/teams", async (c) => {
         displayName: t.displayName,
         abbr: t.abbr,
         aliases: t.aliases,
+        conference: t.conference,
         brandingUrl: `/branding/${t.id.split(":").slice(1).join("/")}/${t.version}`,
         leagueLabels: [],
       });
     teams
       .get(t.id)
-      .leagueLabels.push(leagues.find((l) => l.id === row.league)?.label);
+      .leagueLabels.push(
+        [leagues.find((l) => l.id === row.league)?.label, t.conference?.name]
+          .filter(Boolean).join(" · "),
+      );
   }
   return c.json(
     [...teams.values()].sort((a, b) =>
@@ -318,7 +323,7 @@ app.delete("/api/favorites/:id", async (c) => {
 });
 app.get("/api/teams/:id/games", async (c) => {
   const id = c.req.param("id"),
-    key = "upcoming:" + id;
+    key = "team-games-v3:" + id;
   const membership = await sql(
     c.env,
     "SELECT m.league FROM memberships m JOIN leagues l ON l.id=m.league WHERE m.team_id=? AND l.enabled=1",
@@ -338,32 +343,10 @@ app.get("/api/teams/:id/games", async (c) => {
     const results = await Promise.allSettled(
       membership.results.flatMap((row) => {
         const l = leagues.find((l) => l.id === row.league)!;
-        return [year, year + 1].map(async (season) => {
-          const d = await getJson(
-            `${base}/${l.sport}/${l.path}/teams/${id.split(":").pop()}/schedule?season=${season}`,
-          );
-          if (!Array.isArray(d.events)) throw Error("Schedule unavailable");
-          return d.events.map((e: any) => normalize(e, l));
-        });
+        return [year - 1, year, year + 1].map((season) => teamSeasonGames(l, id.split(":").pop()!, season));
       }),
     );
-    if (results.every((r) => r.status === "rejected"))
-      throw Error("Schedule unavailable. Please try again.");
-    games = [
-      ...new Map(
-        results
-          .flatMap((r) => (r.status === "fulfilled" ? r.value : []))
-          .filter(
-            (g) =>
-              [g.away.id, g.home.id].includes(id) &&
-              (g.status === "live" ||
-                (g.status === "scheduled" && Date.parse(g.date) >= Date.now())),
-          )
-          .map((g) => [g.id, g]),
-      ).values(),
-    ]
-      .sort((a, b) => a.date.localeCompare(b.date))
-      .slice(0, 5);
+    games = availableTeamGames(results, id);
     await sql(
       c.env,
       "INSERT OR REPLACE INTO cache VALUES(?,?,?)",
