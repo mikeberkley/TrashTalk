@@ -57,7 +57,7 @@ describe("source preservation", () => {
           .digest("hex"),
       ).toBe(h);
   });
-  it("caption instructions require supplied scores and prohibit ungrounded game facts", () => {
+  it("caption instructions use supplied game facts and prohibit ungrounded claims", () => {
     expect(captionBase).toContain('If gameContext.status is "upcoming"');
     expect(captionBase).toContain("gameContext.status is live");
     expect(captionBase).toContain("gameContext.status is final");
