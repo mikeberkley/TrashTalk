@@ -18,6 +18,10 @@ import {
 import { captionIncludesWord } from "../../../packages/trash-talk/src/include-word";
 import { loadLogo, loadPinnedTeams } from "./preparation";
 import { GenerationTiming } from "./timing";
+import {
+  jokeDirection,
+  recentThemes,
+} from "../../../packages/trash-talk/src/joke-direction";
 import { recentCaptions } from "./recent-captions";
 import { validateArtwork, dataUrl } from "./media";
 const captionReasoningEffort = "none";
@@ -210,6 +214,7 @@ export async function runJob(env: Env, id: string) {
         id,
       ).run();
       const clean = captionInput(context);
+      const direction = jokeDirection(clean.gameContext, history, id);
       timing.next("captionProvider");
       const d = await openrouter(
         env,
@@ -229,7 +234,8 @@ export async function runJob(env: Env, id: string) {
               role: "user",
               content: JSON.stringify({
                 ...clean,
-                recentCaptions: history,
+                jokeDirection: direction.instruction,
+                recentThemes: recentThemes(history),
               }),
             },
           ],
@@ -240,7 +246,10 @@ export async function runJob(env: Env, id: string) {
         id,
       );
       timing.next("captionValidationAndSave");
-      phrase = phraseSchema.parse(JSON.parse(d.choices[0].message.content));
+      phrase = {
+        ...phraseSchema.parse(JSON.parse(d.choices[0].message.content)),
+        mechanism: direction.id,
+      };
       if (
         input.includeWord &&
         !captionIncludesWord(phrase.text, input.includeWord)

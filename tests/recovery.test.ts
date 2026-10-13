@@ -300,7 +300,10 @@ it.each([
       expect(captionData).not.toHaveProperty(key);
     if (scenario === "live" || scenario === "final") {
       expect(captionData.gameContext.status).toBe(scenario);
-      expect(captionData.gameContext.score).toEqual(source.score);
+      expect(captionData.gameContext).not.toHaveProperty("score");
+      expect(captionData.gameContext.outcome).toBeTruthy();
+      expect(captionData.jokeDirection).toBeTruthy();
+      expect(captionData).not.toHaveProperty("recentCaptions");
       expect(context.gameContext.score).toEqual(source.score);
     } else expect(captionData).not.toHaveProperty("gameContext");
     expect(context.away.version).toBe(pins.away.version);

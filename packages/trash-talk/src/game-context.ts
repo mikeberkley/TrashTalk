@@ -49,6 +49,70 @@ export function scoreContext(game: any, at = Date.now()) {
     };
   return context;
 }
+/** Qualitative facts for caption writing; raw scores remain in stored game context. */
+export function captionSituation(context: any) {
+  const g = context.gameContext;
+  if (!g) return undefined;
+  if (g.status === "upcoming") return { status: "upcoming" };
+  if (!["live", "final"].includes(g.status)) return undefined;
+  const favorite = context.favorite;
+  if (!["home", "away"].includes(favorite)) return undefined;
+  const opponent = favorite === "home" ? "away" : "home";
+  if (
+    ![g.score?.[favorite], g.score?.[opponent]].every(
+      (v) => typeof v === "number" && Number.isFinite(v) && v >= 0,
+    )
+  )
+    return undefined;
+  let difference = g.score[favorite] - g.score[opponent];
+  const shootout =
+    g.status === "final" &&
+    difference === 0 &&
+    context.sport === "soccer" &&
+    [g.penalties?.[favorite], g.penalties?.[opponent]].every(
+      (v) => typeof v === "number" && Number.isFinite(v) && v >= 0,
+    ) &&
+    g.penalties[favorite] !== g.penalties[opponent];
+  if (shootout) difference = g.penalties[favorite] - g.penalties[opponent];
+  const close =
+    (
+      {
+        football: 8,
+        basketball: 5,
+        soccer: 1,
+        baseball: 1,
+        hockey: 1,
+      } as Record<string, number>
+    )[context.sport] || 1;
+  const final = g.status === "final";
+  return {
+    status: g.status,
+    outcome:
+      difference === 0
+        ? final
+          ? "draw"
+          : "tied"
+        : difference > 0
+          ? final
+            ? "won"
+            : "leading"
+          : final
+            ? "lost"
+            : "trailing",
+    ...(difference !== 0
+      ? {
+          margin: shootout
+            ? "penalty shootout"
+            : Math.abs(difference) <= close
+              ? "narrow"
+              : "clear",
+        }
+      : {}),
+    ...(!final
+      ? { period: g.period, clock: g.clock, phase: g.periodDisplay }
+      : {}),
+  };
+}
 /** Allowlist: never pass a feed dump, backstory, plays, stats, or cached research. */
 export function captionInput(context: any) {
   const team = (t: any) => ({
@@ -57,6 +121,7 @@ export function captionInput(context: any) {
     city: t.city,
     abbr: t.abbr,
   });
+  const situation = captionSituation(context);
   return {
     league: context.league,
     leagueLabel: context.leagueLabel,
@@ -64,6 +129,6 @@ export function captionInput(context: any) {
     favorite: context.favorite,
     away: team(context.away),
     home: team(context.home),
-    ...(context.gameContext ? { gameContext: context.gameContext } : {}),
+    ...(situation ? { gameContext: situation } : {}),
   };
 }

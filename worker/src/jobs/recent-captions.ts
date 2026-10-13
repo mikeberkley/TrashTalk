@@ -14,6 +14,9 @@ export async function recentCaptions(env: Env, currentId: string) {
         return [];
       return [
         {
+          ...(typeof value.mechanism === "string"
+            ? { mechanism: value.mechanism.slice(0, 40) }
+            : {}),
           text: value.text.slice(0, 180),
           visual: value.visual.slice(0, 1000),
           ...(typeof value.theme === "string"
