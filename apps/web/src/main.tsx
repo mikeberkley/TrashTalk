@@ -1,3 +1,4 @@
+import { SharedGallery } from "./SharedGallery";
 import { ChefCaption } from "./ChefCaption";
 import { ChaosChef } from "./ChaosChef";
 import { Stats } from "./Stats";
@@ -885,6 +886,7 @@ function App() {
                         )}
                       </>
                     )}
+                    <SharedGallery />
                   </section>
                 ) : (
                   <section className="panel creative">

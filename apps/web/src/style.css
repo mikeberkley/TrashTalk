@@ -1641,3 +1641,44 @@ button.stats-card:focus-visible {
   margin: 0;
   flex-shrink: 0;
 }
+
+.shared-gallery {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #ffffff26;
+}
+.shared-gallery h2 {
+  font-size: 1.25rem;
+  margin: 0 0 16px;
+}
+.shared-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.shared-gallery-grid a {
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #ffffff0a;
+}
+.shared-gallery-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.shared-gallery-grid a:focus-visible {
+  outline: 3px solid #ffcb47;
+  outline-offset: 3px;
+}
+.gallery-more {
+  margin-top: 16px;
+}
+@media (max-width: 700px) {
+  .shared-gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+}

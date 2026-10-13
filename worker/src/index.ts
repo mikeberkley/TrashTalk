@@ -128,6 +128,42 @@ app.post("/api/billing/webhook", async (c) => {
   await webhook(c.env, body, c.req.header("stripe-signature") || "");
   return c.json({ received: true });
 });
+app.get("/api/shared-memes", async (c) => {
+  c.header("Cache-Control", "no-store");
+  let cursor: { createdAt: number; id: string } | null = null;
+  const raw = c.req.query("cursor");
+  if (raw) {
+    try {
+      cursor = JSON.parse(raw);
+      if (
+        !cursor ||
+        !Number.isSafeInteger(cursor.createdAt) ||
+        typeof cursor.id !== "string" ||
+        cursor.id.length > 100
+      )
+        throw Error();
+    } catch {
+      return c.json({ error: "Invalid gallery cursor" }, 400);
+    }
+  }
+  const rows = await sql(
+    c.env,
+    `SELECT j.id,j.created_at,s.token FROM shares s JOIN jobs j ON j.id=s.job_id
+     WHERE s.published=1 AND j.status='complete' AND j.deleted_at IS NULL AND j.artwork IS NOT NULL
+     ${cursor ? "AND (j.created_at<? OR (j.created_at=? AND j.id<?))" : ""}
+     ORDER BY j.created_at DESC,j.id DESC LIMIT 11`,
+    ...(cursor ? [cursor.createdAt, cursor.createdAt, cursor.id] : []),
+  ).all<any>();
+  const items = rows.results.slice(0, 10);
+  const last = items.at(-1);
+  return c.json({
+    items: items.map((j) => ({ token: j.token, createdAt: j.created_at })),
+    nextCursor:
+      rows.results.length > 10 && last
+        ? JSON.stringify({ createdAt: last.created_at, id: last.id })
+        : null,
+  });
+});
 app.use("/api/*", async (c, next) => {
   c.header("Cache-Control", "private, no-store");
   let token = getCookie(c, "tt_session");
@@ -286,7 +322,8 @@ app.get("/api/teams", async (c) => {
       .get(t.id)
       .leagueLabels.push(
         [leagues.find((l) => l.id === row.league)?.label, t.conference?.name]
-          .filter(Boolean).join(" · "),
+          .filter(Boolean)
+          .join(" · "),
       );
   }
   return c.json(
@@ -362,7 +399,9 @@ app.get("/api/teams/:id/games", async (c) => {
     const results = await Promise.allSettled(
       membership.results.flatMap((row) => {
         const l = leagues.find((l) => l.id === row.league)!;
-        return [year - 1, year, year + 1].map((season) => teamSeasonGames(l, id.split(":").pop()!, season));
+        return [year - 1, year, year + 1].map((season) =>
+          teamSeasonGames(l, id.split(":").pop()!, season),
+        );
       }),
     );
     games = availableTeamGames(results, id);
