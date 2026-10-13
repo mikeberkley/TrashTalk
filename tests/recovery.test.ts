@@ -274,6 +274,8 @@ it.each([
       expect(timing.stagesMs[stage]).toBeGreaterThanOrEqual(0);
     }
     expect(timing.models.caption).toBe("x-ai/grok-4.3");
+    expect(timing.models.captionReasoningEffort).toBe("none");
+    expect(calls[0].reasoning).toEqual({ effort: "none" });
     expect(JSON.stringify(timing)).not.toContain("space bananas");
     expect(calls[1].prompt).not.toContain("#ABCDEF");
     expect(calls[1].input_references).toHaveLength(2);

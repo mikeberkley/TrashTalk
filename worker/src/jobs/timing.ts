@@ -17,7 +17,7 @@ export class GenerationTiming {
     env: Env,
     id: string,
     outcome: string,
-    models: { caption: string; image: string },
+    models: { caption: string; image: string; captionReasoningEffort?: string },
   ) {
     this.next("finished");
     const detail = {

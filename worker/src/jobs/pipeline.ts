@@ -20,6 +20,7 @@ import { loadLogo, loadPinnedTeams } from "./preparation";
 import { GenerationTiming } from "./timing";
 import { recentCaptions } from "./recent-captions";
 import { validateArtwork, dataUrl } from "./media";
+const captionReasoningEffort = "none";
 export const phraseSchema = z.object({
   text: z
     .string()
@@ -215,7 +216,7 @@ export async function runJob(env: Env, id: string) {
         "chat/completions",
         {
           model: captionModel,
-          reasoning: { effort: "low" },
+          reasoning: { effort: captionReasoningEffort },
           messages: [
             {
               role: "system",
@@ -322,6 +323,7 @@ export async function runJob(env: Env, id: string) {
   } finally {
     await timing.persist(env, id, outcome, {
       caption: captionModel,
+      captionReasoningEffort,
       image: imageModel,
     });
   }
