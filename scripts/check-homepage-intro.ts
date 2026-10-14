@@ -37,17 +37,37 @@ for (const width of [390, 1440]) {
             }
           : path === "/api/teams"
             ? [team]
-            : path === "/api/shared-memes"
-              ? { items: [], nextCursor: null }
-              : path === "/api/featured-games"
-                ? { games: [], updatedAt: new Date().toISOString() }
-                : path.endsWith("/games")
-                  ? [game]
-                  : path.startsWith("/api/games/")
-                    ? game
-                    : [];
+            : path === "/api/latest-shared-meme"
+              ? {
+                  meme: {
+                    token: "example",
+                    caption: "Example meme",
+                    matchup: "Jaguars vs. Eagles",
+                    rootingFor: "Jaguars",
+                  },
+                }
+              : path === "/api/shared-memes"
+                ? { items: [], nextCursor: null }
+                : path === "/api/featured-games"
+                  ? { games: [], updatedAt: new Date().toISOString() }
+                  : path.endsWith("/games")
+                    ? [game]
+                    : path.startsWith("/api/games/")
+                      ? game
+                      : [];
       return route.fulfill({ json: body });
     });
+  const requests: string[] = [];
+  page.on("request", (request) =>
+    requests.push(new URL(request.url()).pathname),
+  );
+  if (!process.argv.includes("--production"))
+    await page.route("**/m/example/image", (route) =>
+      route.fulfill({
+        path: "reports/preview-e2e-image.jpg",
+        contentType: "image/jpeg",
+      }),
+    );
   await page.goto(origin);
   await expect(
     page.getByRole("heading", {
@@ -60,10 +80,25 @@ for (const width of [390, 1440]) {
   await expect(page.locator(".welcome-trial")).toContainText(
     "No sign-up required.",
   );
-  await expect(page.locator(".welcome-example img")).toHaveJSProperty(
-    "naturalWidth",
-    640,
-  );
+  await expect
+    .poll(() =>
+      page
+        .locator(".welcome-example img")
+        .evaluate((img: HTMLImageElement) => img.naturalWidth),
+    )
+    .toBeGreaterThan(0);
+  await expect(page.locator(".featured-games")).toHaveCount(0);
+  await expect(page.locator(".shared-gallery")).toHaveCount(0);
+  expect(requests).not.toContain("/api/shared-memes");
+  expect(requests).not.toContain("/api/featured-games");
+  if (process.argv.includes("--production")) {
+    const response = await page.request.get(`${origin}/api/latest-shared-meme`);
+    const data = await response.json();
+    await expect(page.locator(".welcome-example img")).toHaveAttribute(
+      "src",
+      `/m/${data.meme.token}/image`,
+    );
+  }
   await page.evaluate(() => document.fonts.ready);
   const search = await page.getByRole("combobox").boundingBox();
   expect(search!.y + search!.height).toBeLessThan(844);
@@ -76,6 +111,11 @@ for (const width of [390, 1440]) {
     path: `reports/homepage-intro-${origin.startsWith("https") ? "production" : "local"}-${width}.png`,
     fullPage: true,
   });
+  await page
+    .getByRole("link", { name: "See the latest TrashTalk memes" })
+    .click();
+  await expect(page.locator(".shared-gallery")).toBeVisible();
+  await expect.poll(() => requests.includes("/api/shared-memes")).toBe(true);
   await page.getByRole("combobox").fill("Patriots");
   await page.getByRole("option").first().waitFor();
   await page.getByRole("combobox").press("Enter");

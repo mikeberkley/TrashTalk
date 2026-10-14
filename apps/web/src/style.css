@@ -1769,3 +1769,21 @@ button.stats-card:focus-visible {
     margin: 0;
   }
 }
+
+.welcome-intro:not(:has(.welcome-example)) {
+  grid-template-columns: 1fr;
+}
+.gallery-discovery {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid #303640;
+}
+.gallery-discovery > a {
+  color: #ff86c9;
+  font-size: 16px;
+  text-underline-offset: 4px;
+}
+.gallery-discovery > a:focus-visible {
+  outline: 2px solid #ccff66;
+  outline-offset: 5px;
+}

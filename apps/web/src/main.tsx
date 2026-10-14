@@ -45,7 +45,8 @@ function App() {
     [suggestion, setSuggestion] = useState(0),
     [query, setQuery] = useState(""),
     [games, setGames] = useState<Game[]>([]),
-    [featured, setFeatured] = useState<any>(null),
+    [latestMeme, setLatestMeme] = useState<any>(null),
+    [galleryOpen, setGalleryOpen] = useState(false),
     [game, setGame] = useState<Game | null>(saved.game || null),
     [favorite, setFavorite] = useState(saved.favorite || ""),
     [word, setWord] = useState(saved.word || ""),
@@ -177,19 +178,15 @@ function App() {
   }, []);
   useEffect(() => {
     let stopped = false;
-    const load = () =>
-      api("/featured-games")
-        .then((data) => {
-          if (!stopped) setFeatured(data);
-        })
-        .catch(() => {
-          if (!stopped) setFeatured({ unavailable: true, games: [] });
-        });
-    load();
-    const timer = setInterval(load, 600_000);
+    api("/latest-shared-meme")
+      .then((data) => {
+        if (!stopped) setLatestMeme(data.meme);
+      })
+      .catch(() => {
+        if (!stopped) setLatestMeme(null);
+      });
     return () => {
       stopped = true;
-      clearInterval(timer);
     };
   }, []);
   useEffect(() => {
@@ -734,20 +731,34 @@ function App() {
                               <span>No sign-up required.</span>
                             </p>
                           </div>
-                          <figure className="welcome-example">
-                            <img
-                              src="/examples/jaguars-eagles.webp"
-                              width="640"
-                              height="640"
-                              alt="A TrashTalk meme showing an Eagles player slipping on banana peels beside a Jaguars banana kicking a field goal. Caption: Eagles lost to a fluke banana field goal."
-                              fetchPriority="high"
-                            />
-                            <figcaption>
-                              <strong>Made with TrashTalk</strong>
-                              <span>Jaguars vs. Eagles</span>
-                              <span>Rooting for the Jaguars</span>
-                            </figcaption>
-                          </figure>
+                          {latestMeme && (
+                            <figure className="welcome-example">
+                              <a
+                                href={`/m/${latestMeme.token}`}
+                                aria-label="Open the latest shared TrashTalk meme"
+                              >
+                                <img
+                                  src={`/m/${latestMeme.token}/image`}
+                                  width="640"
+                                  height="640"
+                                  alt={
+                                    latestMeme.caption ||
+                                    "Latest shared TrashTalk meme"
+                                  }
+                                  fetchPriority="high"
+                                />
+                              </a>
+                              <figcaption>
+                                <strong>Latest shared TrashTalk</strong>
+                                <span>{latestMeme.matchup}</span>
+                                {latestMeme.rootingFor && (
+                                  <span>
+                                    Rooting for {latestMeme.rootingFor}
+                                  </span>
+                                )}
+                              </figcaption>
+                            </figure>
+                          )}
                         </div>
                         <h2 className="team-invitation">Who’s your team?</h2>
                         <label className="search discovery-choice-label">
@@ -846,76 +857,24 @@ function App() {
                               ))}
                           </div>
                         )}
-                        {!query && !!featured?.games?.length && (
-                          <section
-                            className="featured-games"
-                            aria-labelledby="featured-heading"
-                          >
-                            <div className="discovery-or" aria-hidden="true" />
-                            <h2
-                              id="featured-heading"
-                              className="discovery-choice-label"
-                            >
-                              Or jump directly to a live game
-                            </h2>
-                            {featured?.games?.map((g: any) => (
-                              <button
-                                className="featured-game"
-                                key={g.id}
-                                onClick={() => {
-                                  setTeam(null);
-                                  setError("");
-                                  choose(g, "");
-                                }}
-                              >
-                                <span className="featured-matchup">
-                                  <span title={g.away.displayName}>
-                                    <img
-                                      className="team-logo"
-                                      src={g.away.brandingUrl}
-                                      alt=""
-                                    />
-                                    <span>
-                                      {g.away.name || g.away.displayName}
-                                    </span>
-                                  </span>
-                                  <b className="featured-score">
-                                    {g.score.away}–{g.score.home}
-                                  </b>
-                                  <span title={g.home.displayName}>
-                                    <img
-                                      className="team-logo"
-                                      src={g.home.brandingUrl}
-                                      alt=""
-                                    />
-                                    <span>
-                                      {g.home.name || g.home.displayName}
-                                    </span>
-                                  </span>
-                                </span>
-                                <small>
-                                  <span className="live">● Live</span> ·{" "}
-                                  {g.leagueLabel} · {g.periodDisplay}
-                                </small>
-                              </button>
-                            ))}
-                            {!!featured?.games.length && (
-                              <p className="featured-note">
-                                Scores at{" "}
-                                {new Date(
-                                  featured.updatedAt,
-                                ).toLocaleTimeString([], {
-                                  hour: "numeric",
-                                  minute: "2-digit",
-                                })}{" "}
-                                · Updates every 10 minutes
-                              </p>
-                            )}
-                          </section>
-                        )}
                       </>
                     )}
-                    <SharedGallery />
+                    <div className="gallery-discovery">
+                      <a
+                        href="#latest-trashtalk-memes"
+                        aria-expanded={galleryOpen}
+                        aria-controls="latest-trashtalk-memes"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          setGalleryOpen(!galleryOpen);
+                        }}
+                      >
+                        See the latest TrashTalk memes
+                      </a>
+                      <div id="latest-trashtalk-memes">
+                        {galleryOpen && <SharedGallery />}
+                      </div>
+                    </div>
                   </section>
                 ) : (
                   <section className="panel creative">

@@ -36,7 +36,12 @@ for (const width of [390, 1440]) {
       body: "<html><body>Shared meme</body></html>",
     }),
   );
-  await page.goto("http://127.0.0.1:5174");
+  await page.goto("http://127.0.0.1:5178");
+  await expect(page.locator(".shared-gallery")).toHaveCount(0);
+  expect(batches).toBe(0);
+  await page
+    .getByRole("link", { name: "See the latest TrashTalk memes" })
+    .click();
   await expect(page.locator(".shared-gallery-grid a")).toHaveCount(10);
   expect(batches).toBe(1);
   await page.locator(".gallery-more").scrollIntoViewIfNeeded();

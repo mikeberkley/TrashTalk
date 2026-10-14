@@ -135,6 +135,28 @@ app.post("/api/billing/webhook", async (c) => {
   await webhook(c.env, body, c.req.header("stripe-signature") || "");
   return c.json({ received: true });
 });
+app.get("/api/latest-shared-meme", async (c) => {
+  c.header("Cache-Control", "no-store");
+  const row = await sql(
+    c.env,
+    `SELECT s.token,j.caption,j.context FROM shares s JOIN jobs j ON j.id=s.job_id
+     WHERE s.published=1 AND j.status='complete' AND j.deleted_at IS NULL AND j.artwork IS NOT NULL
+     ORDER BY s.created_at DESC,s.token DESC LIMIT 1`,
+  ).first<any>();
+  if (!row) return c.json({ meme: null });
+  const context = JSON.parse(row.context || "{}");
+  const caption = JSON.parse(row.caption || "null");
+  return c.json({
+    meme: {
+      token: row.token,
+      caption: caption?.text || "",
+      matchup: [context.away?.displayName, context.home?.displayName]
+        .filter(Boolean)
+        .join(" vs. "),
+      rootingFor: context[context.favorite]?.displayName || "",
+    },
+  });
+});
 app.get("/api/shared-memes", async (c) => {
   c.header("Cache-Control", "no-store");
   let cursor: { createdAt: number; id: string } | null = null;
@@ -678,7 +700,7 @@ app.post("/api/generations/:id/share", async (c) => {
     return c.notFound();
   await sql(
     c.env,
-    "INSERT INTO shares(token,job_id,created_at,published) VALUES(?,?,?,1) ON CONFLICT(job_id) DO UPDATE SET published=1",
+    "INSERT INTO shares(token,job_id,created_at,published) VALUES(?,?,?,1) ON CONFLICT(job_id) DO UPDATE SET created_at=CASE WHEN shares.published=0 THEN excluded.created_at ELSE shares.created_at END,published=1",
     uid().replaceAll("-", ""),
     id,
     now(),

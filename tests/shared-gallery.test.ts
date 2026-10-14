@@ -57,3 +57,63 @@ it("paginates public memes by creation date with stable ties and excludes privat
     ).status,
   ).toBe(400);
 });
+
+it("uses sharing time for the homepage example and exposes only public display fields", async () => {
+  const { env, db } = testEnv();
+  for (const [id, generated, shared, published, deleted, status] of [
+    ["older-generated", 1, 50, 1, null, "complete"],
+    ["newer-generated", 20, 30, 1, null, "complete"],
+    ["private", 25, 60, 0, null, "complete"],
+    ["deleted", 25, 70, 1, 1, "complete"],
+    ["failed", 25, 80, 1, null, "failed"],
+  ] as const) {
+    db.prepare(
+      "INSERT INTO jobs(id,owner,idempotency,input_hash,input,status,created_at,updated_at,artwork,deleted_at,caption,context) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+    ).run(
+      id,
+      "private-owner",
+      id,
+      "hash",
+      "{}",
+      status,
+      generated,
+      0,
+      "private-key",
+      deleted,
+      JSON.stringify({ text: "The roast", visual: "Private prompt" }),
+      JSON.stringify({
+        away: { displayName: "Jaguars" },
+        home: { displayName: "Eagles" },
+        favorite: "away",
+        identity: "private",
+      }),
+    );
+    db.prepare("INSERT INTO shares VALUES(?,?,?,?)").run(
+      id,
+      id,
+      shared,
+      published,
+    );
+  }
+  const response = await worker.fetch(
+    new Request("http://localhost/api/latest-shared-meme"),
+    env,
+    {} as any,
+  );
+  expect(response.headers.get("Cache-Control")).toBe("no-store");
+  expect(await response.json()).toEqual({
+    meme: {
+      token: "older-generated",
+      caption: "The roast",
+      matchup: "Jaguars vs. Eagles",
+      rootingFor: "Jaguars",
+    },
+  });
+  db.prepare("UPDATE shares SET published=0").run();
+  const empty = await worker.fetch(
+    new Request("http://localhost/api/latest-shared-meme"),
+    env,
+    {} as any,
+  );
+  expect(await empty.json()).toEqual({ meme: null });
+});
