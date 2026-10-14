@@ -1,0 +1,19 @@
+{
+  "origin": "http://127.0.0.1:5178",
+  "results": [
+    {
+      "width": 390,
+      "searchBottom": 688.9375,
+      "exampleLoaded": true,
+      "creationEnabledWithoutPhotoOrWord": true,
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "searchBottom": 597.390625,
+      "exampleLoaded": true,
+      "creationEnabledWithoutPhotoOrWord": true,
+      "errors": []
+    }
+  ]
+}

@@ -11,7 +11,7 @@ for (const width of [390, 1440]) {
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("https://trashtalk.fanlift.ai");
   await expect(
-    page.getByRole("heading", { name: "Step 1: Pick a team" }),
+    page.getByRole("heading", { name: "Who’s your team?" }),
   ).toBeVisible();
   await expect(page.locator(".creative")).toHaveCount(0);
   await page.getByRole("combobox").fill("Patriots");

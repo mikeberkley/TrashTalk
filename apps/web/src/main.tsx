@@ -716,11 +716,40 @@ function App() {
                       </>
                     ) : (
                       <>
-                        <p className="app-description">
-                          Your team. Their humiliation. Turn real matchups into
-                          gloriously unhinged memes.
-                        </p>
-                        <h1>Step 1: Pick a team</h1>
+                        <div className="welcome-intro">
+                          <div className="welcome-copy">
+                            <p className="welcome-tagline">
+                              Your team. Their humiliation.
+                            </p>
+                            <h1>
+                              Turn your sports rivalry into a hilarious meme.
+                            </h1>
+                            <p className="welcome-description">
+                              Pick your team and a game. TrashTalk creates an
+                              AI-generated meme image roasting your
+                              opponent—ready to drop in the group chat.
+                            </p>
+                            <p className="welcome-trial">
+                              <strong>Your first 5 memes are free.</strong>
+                              <span>No sign-up required.</span>
+                            </p>
+                          </div>
+                          <figure className="welcome-example">
+                            <img
+                              src="/examples/jaguars-eagles.webp"
+                              width="640"
+                              height="640"
+                              alt="A TrashTalk meme showing an Eagles player slipping on banana peels beside a Jaguars banana kicking a field goal. Caption: Eagles lost to a fluke banana field goal."
+                              fetchPriority="high"
+                            />
+                            <figcaption>
+                              <strong>Made with TrashTalk</strong>
+                              <span>Jaguars vs. Eagles</span>
+                              <span>Rooting for the Jaguars</span>
+                            </figcaption>
+                          </figure>
+                        </div>
+                        <h2 className="team-invitation">Who’s your team?</h2>
                         <label className="search discovery-choice-label">
                           Search by team (all pro sports &amp; college football)
                           <input
@@ -964,8 +993,8 @@ function App() {
                           ?.displayName}
                     </p>
                     <p className="chaos-instruction">
-                      Want to spice it up? You can optionally add a key word and
-                      image to your meme.
+                      No joke to write. No photo needed. We’ll take care of the
+                      roast—or add a word or photo to make it your own.
                     </p>
                     <label>
                       A word of chaos <span className="optional">Optional</span>
@@ -991,6 +1020,10 @@ function App() {
                       A photo for the madness{" "}
                       <span className="optional">Optional · 1 photo</span>
                     </div>
+                    <p className="photo-hint">
+                      Want to put yourself—or a rival fan—in the meme? Add a
+                      photo.
+                    </p>
                     {refs.length > 1 && (
                       <p role="alert">
                         TrashTalk now supports one reference photo. Remove a

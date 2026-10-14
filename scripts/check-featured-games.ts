@@ -19,19 +19,21 @@ for (const width of [390, 1440]) {
     const body =
       path === "/api/me"
         ? { csrf: "test", authenticated: false }
-        : path === "/api/featured-games"
-          ? { games: [game], updatedAt: new Date().toISOString() }
-          : path === "/api/teams"
-            ? [
-                {
-                  id: game.away.id,
-                  displayName: game.away.displayName,
-                  leagueLabels: ["NFL"],
-                },
-              ]
-            : path.startsWith("/api/games/")
-              ? game
-              : [];
+        : path === "/api/shared-memes"
+          ? { items: [], nextCursor: null }
+          : path === "/api/featured-games"
+            ? { games: [game], updatedAt: new Date().toISOString() }
+            : path === "/api/teams"
+              ? [
+                  {
+                    id: game.away.id,
+                    displayName: game.away.displayName,
+                    leagueLabels: ["NFL"],
+                  },
+                ]
+              : path.startsWith("/api/games/")
+                ? game
+                : [];
     await route.fulfill({ json: body });
   });
   await page.addInitScript(
