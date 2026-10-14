@@ -18,10 +18,10 @@ export const generationInputSchema = z
   .strict();
 export type GenerationInput = z.infer<typeof generationInputSchema>;
 export const offer = {
-  pack: "four-v1",
+  pack: "ten-v1",
   currency: "usd",
-  priceCents: 99,
-  credits: 4,
+  priceCents: 199,
+  credits: 10,
   trial: 3,
 } as const;
 

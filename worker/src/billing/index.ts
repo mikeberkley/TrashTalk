@@ -97,11 +97,13 @@ export async function webhook(
     const pack =
       session.metadata?.pack === offer.pack
         ? offer
-        : session.metadata?.pack === "five-v2"
-          ? { priceCents: 99, credits: 5 }
-          : session.metadata?.pack === "five-v1"
-            ? { priceCents: 100, credits: 5 }
-            : null;
+        : session.metadata?.pack === "four-v1"
+          ? { priceCents: 99, credits: 4 }
+          : session.metadata?.pack === "five-v2"
+            ? { priceCents: 99, credits: 5 }
+            : session.metadata?.pack === "five-v1"
+              ? { priceCents: 100, credits: 5 }
+              : null;
     if (session.payment_status !== "paid") return;
     if (
       !owner ||

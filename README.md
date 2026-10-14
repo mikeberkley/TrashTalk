@@ -86,7 +86,7 @@ Stripe sandbox checks completed: $0.99/four-credit purchase, cancellation withou
 
 Evidence and limitations: `reports/production-launch.json`, `reports/production-deployments.json`, `reports/deployment-triggers-check.json`, and `IMPLEMENTATION_STATUS.md`. Cloudflare intermittently returned 504 errors while reapplying triggers; independent readback verifies both schedules and the queue consumer. A naturally scheduled daily branding refresh and generation during an actual in-progress game remain unobserved. ESPN feed availability/use and team-mark commercial rights are external dependencies identified by the plan; source metadata does not grant a license.
 
-Public policies: https://trashtalk.fanlift.ai/privacy and https://trashtalk.fanlift.ai/terms. Operator: Mike Berkley; contact: mike@earthly.art. New packs are $0.99 for four credits; earlier five-credit packs retain their original entitlement and refund accounting.
+Public policies: https://trashtalk.fanlift.ai/privacy and https://trashtalk.fanlift.ai/terms. Operator: Mike Berkley; contact: mike@earthly.art. New packs are $1.99 for 10 credits (`ten-v1`); earlier four- and five-credit packs retain their original prices, entitlements, and refund accounting.
 
 ## Private app stats
 

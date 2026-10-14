@@ -36,7 +36,7 @@ for (const width of [390, 1440]) {
       .locator("dd"),
   ).toHaveText("8");
   await expect(
-    page.getByRole("button", { name: "Buy 4 credits — $0.99" }),
+    page.getByRole("button", { name: "Buy 10 credits — $1.99" }),
   ).toBeVisible();
   expect(await page.locator(".account").innerText()).not.toMatch(/images/i);
   expect(

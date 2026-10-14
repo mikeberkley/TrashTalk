@@ -14,10 +14,10 @@ function fixture() {
     id: "cs_test_1",
     payment_status: "paid",
     mode: "payment",
-    amount_total: 99,
+    amount_total: 199,
     currency: "usd",
     client_reference_id: "a",
-    metadata: { pack: "four-v1", owner: "a" },
+    metadata: { pack: "ten-v1", owner: "a" },
     line_items: { data: [{ quantity: 1 }] },
     payment_intent: "pi_1",
   };
@@ -37,7 +37,7 @@ async function deliver(
   });
   return webhook(f.env, body, sig, f.api);
 }
-it("signed duplicate and concurrent payment events credit exactly four", async () => {
+it("signed duplicate and concurrent payment events credit exactly ten", async () => {
   const f = fixture();
   await deliver(f, "evt1");
   await deliver(f, "evt1");
@@ -48,7 +48,7 @@ it("signed duplicate and concurrent payment events credit exactly four", async (
         .prepare("SELECT SUM(amount) n FROM ledger WHERE pool='paid'")
         .get() as any
     ).n,
-  ).toBe(4);
+  ).toBe(10);
   expect(
     (f.db.prepare("SELECT COUNT(*) n FROM webhook_events").get() as any).n,
   ).toBe(2);
@@ -93,12 +93,12 @@ it("repeat packs use distinct business keys", async () => {
   await deliver(f, "evt2", "checkout.session.completed", { id: "cs_test_2" });
   expect(
     (f.db.prepare("SELECT SUM(amount) n FROM ledger").get() as any).n,
-  ).toBe(8);
+  ).toBe(20);
 });
 it("a disputed spent pack does not reverse another pack", async () => {
   const f = fixture();
   await deliver(f, "evt1");
-  for (let i = 0; i < 4; i++)
+  for (let i = 0; i < 10; i++)
     f.db.exec(
       `INSERT INTO reservations VALUES('j${i}','a','paid','reserved');UPDATE reservations SET state='captured' WHERE job_id='j${i}'`,
     );
@@ -110,14 +110,14 @@ it("a disputed spent pack does not reverse another pack", async () => {
   });
   expect(
     (f.db.prepare("SELECT SUM(amount) n FROM ledger").get() as any).n,
-  ).toBe(4);
+  ).toBe(10);
   expect(
     (f.db.prepare("SELECT review FROM principals WHERE id='a'").get() as any)
       .review,
   ).toBe(1);
 });
 
-it("checkout charges 99 cents and records a four-credit pending purchase", async () => {
+it("checkout charges 199 cents and records a ten-credit pending purchase", async () => {
   const f = fixture();
   const create = vi.spyOn(f.api.checkout.sessions, "create").mockResolvedValue({
     id: "cs_test_new",
@@ -130,14 +130,14 @@ it("checkout charges 99 cents and records a four-credit pending purchase", async
     mode: "payment",
     success_url:
       f.env.ORIGIN + "/?checkout=success&session_id={CHECKOUT_SESSION_ID}",
-    metadata: { pack: "four-v1", owner: "a" },
+    metadata: { pack: "ten-v1", owner: "a" },
     line_items: [
-      { quantity: 1, price_data: { currency: "usd", unit_amount: 99 } },
+      { quantity: 1, price_data: { currency: "usd", unit_amount: 199 } },
     ],
   });
   expect(
     f.db.prepare("SELECT amount,credits,status FROM purchases").get(),
-  ).toMatchObject({ amount: 99, credits: 4, status: "pending" });
+  ).toMatchObject({ amount: 199, credits: 10, status: "pending" });
 });
 it("existing one-dollar checkout sessions retain their original price", async () => {
   const f = fixture();
@@ -150,13 +150,14 @@ it("existing one-dollar checkout sessions retain their original price", async ()
 });
 it("new offer rejects the old price", async () => {
   const f = fixture();
-  f.session.amount_total = 100;
+  f.session.amount_total = 99;
   await expect(deliver(f, "wrong-price")).rejects.toThrow("Unexpected payment");
 });
 
 it("previous 99-cent packs still grant five and refund only their own credits", async () => {
   const f = fixture();
   f.session.metadata.pack = "five-v2";
+  f.session.amount_total = 99;
   await deliver(f, "old-pack");
   expect(
     f.db.prepare("SELECT amount,credits FROM purchases").get(),
@@ -165,6 +166,26 @@ it("previous 99-cent packs still grant five and refund only their own credits", 
     (f.db.prepare("SELECT SUM(amount) n FROM ledger").get() as any).n,
   ).toBe(5);
   await deliver(f, "refund-old", "charge.refunded", { payment_intent: "pi_1" });
+  expect(
+    (f.db.prepare("SELECT SUM(amount) n FROM ledger").get() as any).n,
+  ).toBe(0);
+});
+
+it("previous four-credit packs retain their price, grant and refund amount", async () => {
+  const f = fixture();
+  f.session.metadata.pack = "four-v1";
+  f.session.amount_total = 99;
+  await deliver(f, "old-four");
+  await deliver(f, "old-four-replay");
+  expect(
+    f.db.prepare("SELECT amount,credits FROM purchases").get(),
+  ).toMatchObject({ amount: 99, credits: 4 });
+  expect(
+    (f.db.prepare("SELECT SUM(amount) n FROM ledger").get() as any).n,
+  ).toBe(4);
+  await deliver(f, "refund-four", "charge.refunded", {
+    payment_intent: "pi_1",
+  });
   expect(
     (f.db.prepare("SELECT SUM(amount) n FROM ledger").get() as any).n,
   ).toBe(0);
