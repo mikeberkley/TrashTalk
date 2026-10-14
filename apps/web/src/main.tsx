@@ -1248,7 +1248,7 @@ function App() {
                 </dl>
                 <p>One credit creates one meme.</p>
                 <h2>
-                  {offerPrice}. {offer.credits} credits. Your call.
+                  {offerPrice} for {offer.credits} credits. Your call.
                 </h2>
                 <p>No subscription. Credits do not expire.</p>
               </>
