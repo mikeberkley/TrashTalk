@@ -11,7 +11,7 @@ for (const width of [390, 1440]) {
         ? {
             csrf: "fixture",
             trial: 5,
-            paid: paid ? 8 : 4,
+            paid: paid ? 14 : 4,
             authenticated: true,
             environment: "production",
           }
@@ -19,8 +19,8 @@ for (const width of [390, 1440]) {
           ? {
               status: paid ? "paid" : "pending",
               credited: paid ? 1 : 0,
-              amount: 99,
-              credits: 4,
+              amount: 199,
+              credits: 10,
             }
           : [];
     return r.fulfill({ json });
@@ -37,9 +37,9 @@ for (const width of [390, 1440]) {
     page.getByRole("heading", { name: "You’re all set!" }),
   ).toBeVisible();
   await expect(
-    page.getByText("4 image credits purchased for $0.99."),
+    page.getByText("10 image credits purchased for $1.99."),
   ).toBeVisible();
-  await expect(page.getByText("You now have")).toContainText("8 paid credits");
+  await expect(page.getByText("You now have")).toContainText("14 paid credits");
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,
@@ -49,7 +49,7 @@ for (const width of [390, 1440]) {
   await page.getByRole("button", { name: "Make a meme", exact: true }).click();
   expect(new URL(page.url()).search).toBe("");
   await expect(
-    page.getByRole("heading", { name: "Step 1: Pick a team" }),
+    page.getByRole("heading", { name: "Who’s your team?" }),
   ).toBeVisible();
   await page.goto(origin + "/?checkout=success");
   await expect(
