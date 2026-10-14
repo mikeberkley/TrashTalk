@@ -1,7 +1,7 @@
 {
-  "checkedAt": "2026-10-13T12:53:53.297Z",
+  "checkedAt": "2026-10-14T21:07:05.207Z",
   "deployment": {
-    "id": "6cc20ab4-cfcf-4aac-bfae-e23a97b041f1",
+    "id": "e8af58f8-498c-4f53-bb41-fef207e86fc1",
     "source": "wrangler",
     "strategy": "percentage",
     "author_email": "berkleym@gmail.com",
@@ -10,10 +10,10 @@
     },
     "versions": [
       {
-        "version_id": "eccd6d10-5722-4aa4-ba17-f9cb9b5fa39f",
+        "version_id": "45916d41-4c43-4bca-90c2-9ae70df68c3a",
         "percentage": 100
       }
     ],
-    "created_on": "2026-10-13T12:53:08.818002Z"
+    "created_on": "2026-10-14T21:06:46.041352Z"
   }
 }

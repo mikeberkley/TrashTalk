@@ -1,0 +1,40 @@
+{
+  "checkedAt": "2026-10-14T21:07:05.207Z",
+  "sourceCommit": "a6565d07a4e7c251926c263f9c20a8fd432e82bf",
+  "deployment": {
+    "id": "e8af58f8-498c-4f53-bb41-fef207e86fc1",
+    "source": "wrangler",
+    "strategy": "percentage",
+    "author_email": "berkleym@gmail.com",
+    "annotations": {
+      "workers/triggered_by": "deployment"
+    },
+    "versions": [
+      {
+        "version_id": "45916d41-4c43-4bca-90c2-9ae70df68c3a",
+        "percentage": 100
+      }
+    ],
+    "created_on": "2026-10-14T21:06:46.041352Z"
+  },
+  "liveAssetMatchesBuild": true,
+  "asset": "/assets/index-C6VEUomv.js",
+  "liveWorkerOffer": {
+    "pack": "ten-v1",
+    "priceCents": 199,
+    "credits": 10
+  },
+  "approvedBackgroundPromptLive": true,
+  "termsCorrect": true,
+  "browserChecks": {
+    "creditsHeading": "$1.99 for 10 credits. Your call.",
+    "buyButton": "Buy 10 credits — $1.99",
+    "stripeCheckout": "TrashTalk — 10 image credits / $1.99",
+    "responsiveWidths": [
+      390,
+      1440
+    ],
+    "paymentSubmitted": false
+  },
+  "historicalPurchaseAmountsPreserved": true
+}
