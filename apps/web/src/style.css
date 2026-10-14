@@ -1683,10 +1683,10 @@ button.stats-card:focus-visible {
   }
 }
 
-/* Show the payoff while keeping the first action within easy reach. */
+/* Keep the introduction compact above team search. */
 .welcome-intro {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 220px;
+  grid-template-columns: 1fr;
   gap: 24px;
   align-items: center;
   margin-bottom: 28px;
@@ -1707,40 +1707,6 @@ button.stats-card:focus-visible {
   line-height: 1.45;
   margin: 0;
 }
-.welcome-trial {
-  margin: 16px 0 0;
-  font-size: 15px;
-  line-height: 1.5;
-}
-.welcome-trial strong {
-  display: block;
-  color: #ccff66;
-}
-.welcome-trial span {
-  color: #e1e4e8;
-}
-.welcome-example {
-  margin: 0;
-}
-.welcome-example img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  border: 1px solid #ff66bb66;
-}
-.welcome-example figcaption {
-  display: grid;
-  gap: 3px;
-  margin-top: 10px;
-  font-size: 12px;
-  color: #aeb6c2;
-  line-height: 1.35;
-}
-.welcome-example figcaption strong {
-  color: #ff86c9;
-  font-size: 14px;
-}
 .team-invitation {
   margin: 0 0 14px;
   font-size: 32px;
@@ -1759,20 +1725,8 @@ button.stats-card:focus-visible {
   .welcome-copy h1 {
     font-size: 36px;
   }
-  .welcome-example {
-    display: grid;
-    grid-template-columns: 112px minmax(0, 1fr);
-    gap: 14px;
-    align-items: center;
-  }
-  .welcome-example figcaption {
-    margin: 0;
-  }
 }
 
-.welcome-intro:not(:has(.welcome-example)) {
-  grid-template-columns: 1fr;
-}
 .gallery-discovery {
   margin-top: 32px;
   padding-top: 20px;

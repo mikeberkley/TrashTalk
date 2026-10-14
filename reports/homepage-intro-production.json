@@ -3,15 +3,15 @@
   "results": [
     {
       "width": 390,
-      "searchBottom": 688.9375,
-      "exampleLoaded": true,
+      "searchBottom": 499.9375,
+      "exampleRemoved": true,
       "creationEnabledWithoutPhotoOrWord": true,
       "errors": []
     },
     {
       "width": 1440,
-      "searchBottom": 597.390625,
-      "exampleLoaded": true,
+      "searchBottom": 466.390625,
+      "exampleRemoved": true,
       "creationEnabledWithoutPhotoOrWord": true,
       "errors": []
     }

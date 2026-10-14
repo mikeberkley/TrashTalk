@@ -112,6 +112,6 @@ All date/time columns appear on the left of detail tables, with last visit/last 
 
 ## Homepage discovery
 
-The homepage prioritizes team search. Its example is the most recently shared, completed, undeleted meme from `/api/latest-shared-meme`; clicking the image opens its public share page. The endpoint returns only public display fields. First publication records sharing time; legacy shares retain their previously recorded timestamp. Empty or unavailable results leave the introduction and search usable without an example.
+The homepage prioritizes team search with a compact introduction and the label “Search for teams across major pro sports & college football”. It does not show trial messaging or a shared-meme example, and does not fetch the example endpoint.
 
 “See the latest TrashTalk memes” reveals the paginated shared gallery on demand. No gallery batch or live-game list is fetched before that action. Featured-game backend ranking remains available, but the homepage no longer renders those cards or polls the endpoint. Browser checks: `scripts/check-homepage-intro.ts` (add `--production` for live verification) and `scripts/check-shared-gallery.ts`; local checks use Vite port 5178.

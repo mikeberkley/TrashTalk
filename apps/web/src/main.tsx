@@ -45,7 +45,6 @@ function App() {
     [suggestion, setSuggestion] = useState(0),
     [query, setQuery] = useState(""),
     [games, setGames] = useState<Game[]>([]),
-    [latestMeme, setLatestMeme] = useState<any>(null),
     [galleryOpen, setGalleryOpen] = useState(false),
     [game, setGame] = useState<Game | null>(saved.game || null),
     [favorite, setFavorite] = useState(saved.favorite || ""),
@@ -175,19 +174,6 @@ function App() {
       api("/generations/" + id)
         .then(setJob)
         .catch(() => {});
-  }, []);
-  useEffect(() => {
-    let stopped = false;
-    api("/latest-shared-meme")
-      .then((data) => {
-        if (!stopped) setLatestMeme(data.meme);
-      })
-      .catch(() => {
-        if (!stopped) setLatestMeme(null);
-      });
-    return () => {
-      stopped = true;
-    };
   }, []);
   useEffect(() => {
     sessionStorage.setItem(
@@ -726,43 +712,12 @@ function App() {
                               AI-generated meme image roasting your
                               opponent—ready to drop in the group chat.
                             </p>
-                            <p className="welcome-trial">
-                              <strong>Your first 5 memes are free.</strong>
-                              <span>No sign-up required.</span>
-                            </p>
                           </div>
-                          {latestMeme && (
-                            <figure className="welcome-example">
-                              <a
-                                href={`/m/${latestMeme.token}`}
-                                aria-label="Open the latest shared TrashTalk meme"
-                              >
-                                <img
-                                  src={`/m/${latestMeme.token}/image`}
-                                  width="640"
-                                  height="640"
-                                  alt={
-                                    latestMeme.caption ||
-                                    "Latest shared TrashTalk meme"
-                                  }
-                                  fetchPriority="high"
-                                />
-                              </a>
-                              <figcaption>
-                                <strong>Latest shared TrashTalk</strong>
-                                <span>{latestMeme.matchup}</span>
-                                {latestMeme.rootingFor && (
-                                  <span>
-                                    Rooting for {latestMeme.rootingFor}
-                                  </span>
-                                )}
-                              </figcaption>
-                            </figure>
-                          )}
                         </div>
                         <h2 className="team-invitation">Who’s your team?</h2>
                         <label className="search discovery-choice-label">
-                          Search by team (all pro sports &amp; college football)
+                          Search for teams across major pro sports &amp; college
+                          football
                           <input
                             type="search"
                             role="combobox"
