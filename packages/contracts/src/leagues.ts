@@ -25,6 +25,7 @@ export const leagues = [
   sport,
   path,
   timezone,
+  isWomensLeague: id === "wnba" || id === "nwsl",
   // Keep existing IDs stable while isolating ESPN's overlapping team numbers.
   teamNamespace: id === "wnba" || id === "ncaaf" ? path : sport,
   scoreboardGroup: id === "ncaaf" ? "80" : undefined,

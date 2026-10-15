@@ -76,6 +76,25 @@ describe("source preservation", () => {
     expect(prompt).not.toContain("No identifiable players");
     expect(imageRequest(c, phrase, []).prompt).toBe(prompt + logoInstruction);
   });
+  it.each(leagues)("uses deterministic gender guidance for $id", (league) => {
+    const prompt = imageRequest(
+      { ...c, league: league.id, leagueLabel: league.label },
+      phrase,
+      [],
+    ).prompt;
+    expect(prompt.includes("Show mostly women in the image.")).toBe(
+      ["wnba", "nwsl"].includes(league.id),
+    );
+    expect(prompt).not.toContain("is a women's sport");
+  });
+  it.each([undefined, "unknown", "nba"])(
+    "does not infer a women's league from the display label (%s)",
+    (league) => {
+      expect(
+        originalImagePrompt({ ...c, league, leagueLabel: "WNBA" }, phrase),
+      ).not.toContain("Show mostly women in the image.");
+    },
+  );
   it("preserves model settings and reference order", () => {
     const r = imageRequest(c, phrase, ["person"]);
     expect(r).toMatchObject({

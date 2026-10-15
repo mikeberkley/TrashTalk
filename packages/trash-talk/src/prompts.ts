@@ -1,8 +1,9 @@
+import { leagues } from "../../contracts/src/leagues";
 import {
   backgroundInstruction,
   selectBackgroundCharacter,
 } from "./background-character";
-export const PROMPT_VERSION = "standalone-v31-background-characters";
+export const PROMPT_VERSION = "standalone-v32-womens-league";
 export const captionBase = `Write a brutally funny sports roast from the favorite team's perspective: 8–12 words, maximum 15.
 
 Follow jokeDirection. Make the caption funny on its own, then invent a visual that escalates the same joke. Use petty swagger, confident nonsense, and one oddly specific detail. Make the stakes ludicrously huge while keeping the joke instantly understandable. Avoid generic slogans and turning opponents into objects.
@@ -20,6 +21,10 @@ export function originalImagePrompt(
   c: any,
   phrase: { text: string; visual: string },
 ) {
+  const womensLeagueInstruction = leagues.find((league) => league.id === c.league)
+    ?.isWomensLeague
+    ? " Show mostly women in the image."
+    : "";
   return `Create a square 1:1 full-bleed outrageously absurd trash-talk meme for this ${c.leagueLabel} game. It must be over-the-top, hilarious visual comedy, with premium punchy artwork, instantly readable on a phone.
 
 The trash-talker’s favorite team: ${c[c.favorite].city} ${c[c.favorite].name}; the evil opposing team: ${c[c.favorite === "home" ? "away" : "home"].name}. Faithfully use the supplied team logo references and colors (${c.away.abbr}: ${c.away.color}; ${c.home.abbr}: ${c.home.color}).
@@ -32,7 +37,7 @@ ${backgroundInstruction(c.backgroundCharacter || selectBackgroundCharacter([], c
 
 The image’s artistic style must be exaggerated cartoon style. Every image must have an absurdly explosive vibe. Stage the main joke as an outrageous blockbuster climax: colossal scale, extreme expressions, dramatic perspective, explosive motion, flying fireballs and lightning, shockwaves, and cinematic lighting.
 
-No nudity or sexual references allowed. Find a smart balance between white and black people. If the ${c.leagueLabel} is a women's sport, show mostly women in the image. Players on the teams can look like the actual real-life players, with correct jersey numbers (but still in a cartoon style).
+No nudity or sexual references allowed. Find a smart balance between white and black people.${womensLeagueInstruction} Players on the teams can look like the actual real-life players, with correct jersey numbers (but still in a cartoon style).
 
 Keep all caption letters inside generous 10% safe margins. Use bold typography with high contrast and natural line breaks. PNG output.`;
 }
