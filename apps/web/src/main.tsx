@@ -996,10 +996,8 @@ function App() {
                       )}
                     </div>
                     <p className="privacy">
-                      Photos stay private, are sent to the image generator, and
-                      are then deleted from our storage as soon as your meme is
-                      ready. Upload only photos you have permission to use; no
-                      photos of children or sexual content allowed.
+                      Photos are deleted from our storage as soon as your meme is
+                      ready. No photos of children or sexual content allowed.
                     </p>
                     {inlineError && errorMessage}
                     <button
