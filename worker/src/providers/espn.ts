@@ -1,3 +1,4 @@
+import { extractCaptionFacts } from "./caption-facts";
 import {
   leagueById,
   type Game,
@@ -128,6 +129,7 @@ export function normalize(event: any, l: League, summary?: any): Game {
         }
       : null,
     statistics: summary?.boxscore?.teams || [],
+    captionFacts: extractCaptionFacts(summary, l.sport, status),
     revision: "",
   };
   g.revision = JSON.stringify([

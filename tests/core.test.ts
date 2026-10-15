@@ -58,9 +58,9 @@ describe("source preservation", () => {
       ).toBe(h);
   });
   it("caption instructions use supplied game facts and prohibit ungrounded claims", () => {
-    expect(captionBase).toContain('If gameContext.status is "upcoming"');
-    expect(captionBase).toContain("gameContext.status is live");
-    expect(captionBase).toContain("gameContext.status is final");
+    expect(captionBase).toContain("Upcoming: future bluster");
+    expect(captionBase).toContain("live: react without declaring a result");
+    expect(captionBase).toContain("final: roast the outcome");
     expect(captionBase).not.toContain("latest supplied briefing");
     expect(captionBase).not.toContain("recent big play");
   });

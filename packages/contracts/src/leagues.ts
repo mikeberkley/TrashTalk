@@ -63,6 +63,11 @@ export interface Game {
   penalties: { home: number | null; away: number | null };
   capturedAt: string;
   source: string;
+  captionFacts?: {
+    players: { side: string; name: string; detail: string }[];
+    teams: string[];
+    moments: string[];
+  };
   recentMoment: any;
   statistics: any[];
   revision: string;

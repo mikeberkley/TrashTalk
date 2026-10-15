@@ -113,7 +113,34 @@ export function captionSituation(context: any) {
       : {}),
   };
 }
-/** Allowlist: never pass a feed dump, backstory, plays, stats, or cached research. */
+/** Compact, bounded ESPN evidence. Keep complete facts, never truncate a claim. */
+export function compactFacts(facts: any, limit = 420) {
+  if (!facts || !Array.isArray(facts.players)) return undefined;
+  const players = ["home", "away"].map((side) =>
+    facts.players.filter((p: any) => p.side === side),
+  );
+  const candidates: string[] = [];
+  for (let i = 0; i < 2; i++)
+    for (const group of players) {
+      const p = group[i];
+      if (p && typeof p.name === "string" && typeof p.detail === "string")
+        candidates.push(`${p.side}: ${p.name} (${p.detail})`);
+    }
+  candidates.push(
+    ...(Array.isArray(facts.moments)
+      ? facts.moments.slice(-1).map((m: string) => `Game play: ${m}`)
+      : []),
+  );
+  candidates.push(...(Array.isArray(facts.teams) ? facts.teams : []));
+  const selected: string[] = [];
+  for (const fact of candidates) {
+    if (typeof fact !== "string") continue;
+    if (JSON.stringify([...selected, fact]).length <= limit)
+      selected.push(fact);
+  }
+  return selected.length ? selected : undefined;
+}
+/** Allowlist: only fresh, normalized ESPN evidence, never a raw feed or research dump. */
 export function captionInput(context: any) {
   const team = (t: any) => ({
     name: t.name,
@@ -122,6 +149,7 @@ export function captionInput(context: any) {
     abbr: t.abbr,
   });
   const situation = captionSituation(context);
+  const facts = situation ? compactFacts(context.captionFacts) : undefined;
   return {
     league: context.league,
     leagueLabel: context.leagueLabel,
@@ -129,6 +157,8 @@ export function captionInput(context: any) {
     favorite: context.favorite,
     away: team(context.away),
     home: team(context.home),
-    ...(situation ? { gameContext: situation } : {}),
+    ...(situation
+      ? { gameContext: { ...situation, ...(facts ? { facts } : {}) } }
+      : {}),
   };
 }

@@ -127,6 +127,7 @@ it("refunded grant cannot be replenished by releasing reserved work", async () =
 });
 it.each([
   "scheduled",
+  "upcoming",
   "live",
   "outside-window",
   "final",
@@ -140,10 +141,26 @@ it.each([
     const source = JSON.parse(
       fs.readFileSync("reports/probe-game.json", "utf8"),
     );
+    source.captionFacts = {
+      players: [
+        {
+          side: "home",
+          name: "Home Star",
+          detail: "ESPN featured leader; game participation unconfirmed",
+        },
+        {
+          side: "away",
+          name: "Away Star",
+          detail: "ESPN featured leader; game participation unconfirmed",
+        },
+      ],
+      teams: [],
+      moments: [],
+    };
     source.status =
       scenario === "final"
         ? "final"
-        : scenario === "scheduled"
+        : scenario === "scheduled" || scenario === "upcoming"
           ? "scheduled"
           : "live";
     source.date = new Date(
@@ -151,6 +168,8 @@ it.each([
         (scenario === "outside-window" || scenario === "final" ? 5 : 1) *
           3600000,
     ).toISOString();
+    if (scenario === "upcoming")
+      source.date = new Date(Date.now() + 3600000).toISOString();
     source.capturedAt = new Date(
       Date.now() - (scenario === "stale" ? 60000 : 0),
     ).toISOString();
@@ -303,6 +322,10 @@ it.each([
       "briefing",
     ])
       expect(captionData).not.toHaveProperty(key);
+    if (["upcoming", "live", "final"].includes(scenario)) {
+      expect(captionData.gameContext.facts.join(" ")).toContain("Home Star");
+      expect(captionData.gameContext.facts.join(" ")).toContain("Away Star");
+    }
     if (scenario === "live" || scenario === "final") {
       expect(captionData.gameContext.status).toBe(scenario);
       expect(captionData.gameContext).not.toHaveProperty("score");
@@ -310,7 +333,9 @@ it.each([
       expect(captionData.jokeDirection).toBeTruthy();
       expect(captionData).not.toHaveProperty("recentCaptions");
       expect(context.gameContext.score).toEqual(source.score);
-    } else expect(captionData).not.toHaveProperty("gameContext");
+    } else if (scenario === "upcoming")
+      expect(captionData.gameContext.status).toBe("upcoming");
+    else expect(captionData).not.toHaveProperty("gameContext");
     expect(context.away.version).toBe(pins.away.version);
     expect(
       (db.prepare("SELECT published FROM shares").get() as any).published,
