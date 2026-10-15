@@ -906,12 +906,11 @@ function App() {
                         [game.away, game.home].find((t) => t.id === favorite)
                           ?.displayName}
                     </p>
-                    <p className="chaos-instruction">
-                      No joke to write. No photo needed. We’ll take care of the
-                      roast—or add a word or photo to make it your own.
-                    </p>
                     <label>
                       A word of chaos <span className="optional">Optional</span>
+                      <span className="chaos-instruction" id="word-hint">
+                        If you want, insert a required word to appear.
+                      </span>
                       <input
                         placeholder="e.g. banana. Yes, banana."
                         maxLength={30}
@@ -921,7 +920,9 @@ function App() {
                           setWordError("");
                         }}
                         aria-invalid={!!wordError}
-                        aria-describedby={wordError ? "word-error" : undefined}
+                        aria-describedby={
+                          wordError ? "word-hint word-error" : "word-hint"
+                        }
                         disabled={active}
                       />
                     </label>
@@ -935,8 +936,7 @@ function App() {
                       <span className="optional">Optional · 1 photo</span>
                     </div>
                     <p className="photo-hint">
-                      Want to put yourself—or a rival fan—in the meme? Add a
-                      photo.
+                      Add a selfie or photo of your friend in it.
                     </p>
                     {refs.length > 1 && (
                       <p role="alert">
