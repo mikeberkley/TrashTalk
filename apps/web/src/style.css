@@ -1744,3 +1744,74 @@ button.stats-card:focus-visible {
   outline: 2px solid #ccff66;
   outline-offset: 5px;
 }
+
+/* Compact game summaries keep the optional Step 2 inputs within easy reach. */
+.game {
+  padding: 12px 16px;
+}
+.game small {
+  margin-bottom: 6px;
+}
+.game strong {
+  line-height: 1.4;
+  min-height: 28px;
+}
+.game-final strong {
+  grid-template-columns: minmax(0, 1fr) 44px;
+  gap: 8px;
+  min-height: 32px;
+}
+.game strong .game-score {
+  font-size: 26px;
+}
+.game-final .state {
+  margin-top: 6px;
+}
+@media (max-width: 700px) {
+  .flow:has(.creative) {
+    margin-top: 8px;
+  }
+  .creative h1 {
+    margin: 10px 0;
+  }
+  .selected-game {
+    margin: 12px 0 10px;
+  }
+  .creative .rooting {
+    margin-bottom: 10px;
+  }
+  .creative > label {
+    margin-top: 12px;
+  }
+  .creative .photo-heading {
+    margin: 14px 0 6px;
+  }
+  .creative .photo-hint {
+    margin: 6px 0 10px;
+  }
+  .creative .upload,
+  .creative .photo {
+    height: 72px;
+  }
+}
+@media (max-width: 700px) and (max-height: 740px) {
+  .flow:has(.creative) {
+    margin-top: 0;
+  }
+  .creative h1 {
+    margin: 8px 0;
+  }
+  .selected-game {
+    margin-top: 8px;
+  }
+  .creative .upload,
+  .creative .photo {
+    height: 64px;
+  }
+  .creative .privacy {
+    margin: 8px 0;
+  }
+  .creative .generate {
+    margin-top: 8px;
+  }
+}
