@@ -283,6 +283,11 @@ it.each([
       (db.prepare("SELECT context FROM jobs WHERE id='pinned'").get() as any)
         .context,
     );
+    expect(context.backgroundCharacter).toBeTruthy();
+    expect(calls[1].prompt).toContain(
+      context.backgroundCharacter.toLowerCase(),
+    );
+    expect(calls[1].prompt).toContain("exactly one small background cameo");
     expect(factRequests).toEqual([{ id: source.id, fresh: true }]);
     const captionData = JSON.parse(calls[0].messages[1].content);
     for (const key of [

@@ -1,3 +1,4 @@
+import { chooseBackgroundCharacter } from "./background-character";
 import {
   captionInput,
   scoreContext,
@@ -147,6 +148,7 @@ export async function runJob(env: Env, id: string) {
       return;
     }
     let context = lock.context ? JSON.parse(lock.context) : null;
+    const savedBackgroundCharacter = context?.backgroundCharacter;
     let phrase = lock.caption ? JSON.parse(lock.caption) : null;
     if (context?.promptVersion !== PROMPT_VERSION || !phrase) {
       context = null;
@@ -259,6 +261,17 @@ export async function runJob(env: Env, id: string) {
         env,
         "UPDATE jobs SET caption=?,call_started=NULL WHERE id=?",
         JSON.stringify(phrase),
+        id,
+      ).run();
+    }
+    if (!context.backgroundCharacter) {
+      context.backgroundCharacter =
+        savedBackgroundCharacter ||
+        (await chooseBackgroundCharacter(env, id, lock.retry_of));
+      await sql(
+        env,
+        "UPDATE jobs SET context=? WHERE id=?",
+        JSON.stringify(context),
         id,
       ).run();
     }

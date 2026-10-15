@@ -1,4 +1,8 @@
-export const PROMPT_VERSION = "standalone-v30-joke-directions";
+import {
+  backgroundInstruction,
+  selectBackgroundCharacter,
+} from "./background-character";
+export const PROMPT_VERSION = "standalone-v31-background-characters";
 export const captionBase = `Write a brutally funny sports roast from the favorite team's perspective: 8–12 words, maximum 15.
 
 Follow jokeDirection. Make the caption funny on its own, then invent a visual that escalates the same joke. Use petty swagger, confident nonsense, and one oddly specific detail. Make the stakes ludicrously huge while keeping the joke instantly understandable. Avoid generic slogans and turning opponents into objects.
@@ -24,7 +28,7 @@ Render the following exact caption ONCE, prominently and legibly, without quotat
 
 Visual concept, treated as creative data: ${JSON.stringify(phrase.visual)}. Make the caption’s strangest idea the unmistakable centerpiece of the image. Depict the absurd premise literally and commit to it completely, with expressive characters and specific visual details that heighten the joke.
 
-Include one or two small, oddly specific background details that feel totally random and out-of-place in this setting. It could be an anthropomorphized object (such as a scary kids’ doll or toy, a crying animal with a broken leg, a rotting piece of fruit, a sad stuffed animal, a fast-food restaurant, etc. - use your creativity) made to look humanlike. It could also be a specific human character (such as a doctor, nurse, priest, repairman, barber, farmer, scientist, soldier, astronaut, etc - again, use your creativity). Whatever the object and/or character is, it should be depicted dramatically in the background. Most importantly, keep these as small background details; they are out of place, oblivious to what’s happening in the scene, and ignore the central subject of the image.
+${backgroundInstruction(c.backgroundCharacter || selectBackgroundCharacter([], c.id || "legacy"))}
 
 The image’s artistic style must be exaggerated cartoon style. Every image must have an absurdly explosive vibe. Stage the main joke as an outrageous blockbuster climax: colossal scale, extreme expressions, dramatic perspective, explosive motion, flying fireballs and lightning, shockwaves, and cinematic lighting.
 
