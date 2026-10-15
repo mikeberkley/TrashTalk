@@ -309,6 +309,8 @@ it.each([
     expect(calls[1].prompt).toContain("exactly one small background cameo");
     expect(factRequests).toEqual([{ id: source.id, fresh: true }]);
     const captionData = JSON.parse(calls[0].messages[1].content);
+    expect(captionData.forbiddenPremises).toBeInstanceOf(Array);
+    expect(captionData).not.toHaveProperty("recentThemes");
     for (const key of [
       "date",
       "status",

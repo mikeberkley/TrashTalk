@@ -237,7 +237,7 @@ export async function runJob(env: Env, id: string) {
               content: JSON.stringify({
                 ...clean,
                 jokeDirection: direction.instruction,
-                recentThemes: recentThemes(history),
+                forbiddenPremises: recentThemes(history),
               }),
             },
           ],
